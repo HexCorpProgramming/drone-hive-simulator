@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim1.png" type="Texture" id=2]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=3]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=4]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/DroneFace.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/kitty.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/numbersheethuge.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "WalkRight",
+"speed": 5.0
+} ]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.14105, 3.18944, 0.440836 )
+
+[node name="PlayerDrone" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="Body" type="AnimatedSprite3D" parent="."]
+frames = SubResource( 1 )
+animation = "WalkRight"
+
+[node name="Face" type="Spatial" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2, 0.1 )
+script = ExtResource( 6 )
+
+[node name="Emotion" type="Sprite3D" parent="Body/Face"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="ID" type="Spatial" parent="Body/Face"]
+editor/display_folded = true
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 1, -0.098505, 0, 0 )
+
+[node name="Digit1" type="Sprite3D" parent="Body/Face/ID"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, -0.626956, 0, 0 )
+texture = ExtResource( 8 )
+hframes = 10
+
+[node name="Digit2" type="Sprite3D" parent="Body/Face/ID"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, -0.200949, 0, 0 )
+texture = ExtResource( 8 )
+hframes = 10
+
+[node name="Digit3" type="Sprite3D" parent="Body/Face/ID"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, 0.215227, 0, 0 )
+texture = ExtResource( 8 )
+hframes = 10
+
+[node name="Digit4" type="Sprite3D" parent="Body/Face/ID"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, 0.634424, 0, 0 )
+texture = ExtResource( 8 )
+hframes = 10
+
+[node name="PlayerCollision" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="CameraTarget" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 10, 16 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+light_color = Color( 1, 0.4, 1, 1 )
+light_energy = 2.16
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 6, 0 )
+light_color = Color( 1, 0.4, 1, 1 )
+light_energy = 0.22
+light_indirect_energy = 0.0
+light_specular = 0.1
+light_bake_mode = 0

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/MenuButton.gd" type="Script" id=1]
+[ext_resource path="res://Font/BloodDroneFont.tres" type="DynamicFont" id=2]
+
+[node name="Main Menu" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+margin_left = 247.465
+margin_top = 230.648
+margin_right = 390.465
+margin_bottom = 289.648
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 1.39246
+margin_top = 72.2924
+margin_right = 1005.39
+margin_bottom = 203.292
+size_flags_vertical = 1
+size_flags_stretch_ratio = 38.49
+custom_fonts/font = ExtResource( 2 )
+text = "Drone Hive Simulator!
+by hex and 5890 and all those other cutie drones"
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
