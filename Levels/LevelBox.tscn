@@ -74,11 +74,10 @@ script = ExtResource( 3 )
 [node name="PlayerDrone" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
-[node name="Body" parent="PlayerDrone" index="0"]
-editor/display_folded = true
+[node name="Body" parent="PlayerDrone" index="1"]
 frame = 1
 
-[node name="PlayerPickup" type="Area" parent="PlayerDrone/Body" index="1"]
+[node name="PlayerPickup" type="Area" parent="PlayerDrone/Body" index="0"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 
@@ -86,10 +85,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 1 )
 
-[node name="CubeTarget" type="Spatial" parent="PlayerDrone/Body" index="2"]
+[node name="CubeTarget" type="Spatial" parent="PlayerDrone/Body" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 
-[node name="CubeDropTarget" type="Spatial" parent="PlayerDrone/Body" index="3"]
+[node name="CubeDropTarget" type="Spatial" parent="PlayerDrone/Body" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0 )
 
 [node name="PickupCube" type="RigidBody" parent="."]
