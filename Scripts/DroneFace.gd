@@ -1,14 +1,14 @@
 extends Spatial
 export var headBob = 0.1
-onready var droneBody = get_node("../../Body")
+onready var droneBody = get_node("../Body")
 
 func _ready():
 	
 	match(get_owner().get_parent().get_name()):
 		"LevelBox":
 			print("Current level is LevelBox.")
-			var IDToggle = get_node("../../../UI/IDToggle")
-			var IDAssign = get_node("../../../UI/IDAssign")
+			var IDToggle = get_node("../../UI/IDToggle")
+			var IDAssign = get_node("../../UI/IDAssign")
 			IDToggle.connect("toggled",self,"on_button_Toggled")
 			IDAssign.connect("text_changed",self,"assign_id")
 			print("LevelBox UI elements assigned to PlayerDrone's face.")

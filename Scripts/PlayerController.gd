@@ -9,7 +9,7 @@ export var droneID = "6"
 func _ready():
 	$Body.playing = false
 	$Body.frame = 0
-	get_node("Body/Face").assign_id(droneID)
+	get_node("Face").assign_id(droneID)
 	print("Debug: Player drone _ready function complete.")
 
 func _physics_process(delta):
@@ -56,9 +56,13 @@ func update_vertical_velocity():
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED
 		$Body.rotation_degrees.y = 0
+		$Face.translation = Vector3(0.4, 2, 0.1)
+		$Face/ID.translation = Vector3(-0.099, 0, 0)
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
 		$Body.rotation_degrees.y = 180 
+		$Face.translation = Vector3(-0.4, 2, 0.1)
+		$Face/ID.translation = Vector3(0.099, 0, 0)
 	if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
 		velocity.x = 0
 		#If left and right are pressed at the same time, the drone won't move in either direction.
