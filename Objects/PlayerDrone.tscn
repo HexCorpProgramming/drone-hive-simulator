@@ -69,7 +69,7 @@ light_color = Color( 1, 0.4, 1, 1 )
 light_energy = 2.16
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 6, 0 )
 light_color = Color( 1, 0.4, 1, 1 )
 light_energy = 0.22
 light_indirect_energy = 0.0

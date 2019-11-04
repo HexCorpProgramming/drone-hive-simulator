@@ -1,11 +1,12 @@
 extends Spatial
 export var headBob = 0.1
 onready var droneBody = get_node("../Body")
+onready var sceneControl = get_node("/root/Level/SceneControl/")
 
 func _ready():
 	
-	match(get_owner().get_parent().get_name()):
-		"LevelBox":
+	match(sceneControl.level):
+		0: #LevelBox
 			print("Current level is LevelBox.")
 			var IDToggle = get_node("../../UI/IDToggle")
 			var IDAssign = get_node("../../UI/IDAssign")
@@ -13,7 +14,7 @@ func _ready():
 			IDAssign.connect("text_changed",self,"assign_id")
 			print("LevelBox UI elements assigned to PlayerDrone's face.")
 			
-		_:
+		_: #Default
 			print("The PlayerDrone is in an unfamiliar level. Failed to associate UI elements.")
 			print(get_owner().get_parent().get_name())
 
