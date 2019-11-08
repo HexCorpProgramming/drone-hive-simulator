@@ -1,10 +1,6 @@
 
 # Godot-specific ignores
 .import/
-*.import
-*.md5
-Blender/*.import
-Blender/*.md5
 export.cfg
 export_presets.cfg
 
