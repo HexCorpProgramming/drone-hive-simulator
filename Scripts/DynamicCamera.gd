@@ -3,7 +3,7 @@ extends Camera
 onready var playerDrone = get_node("/root/Level/PlayerDrone/")
 onready var space_state = get_world().direct_space_state
 
-var MIN_OFFSET_HEIGHT = 0
+export var MIN_OFFSET_HEIGHT = 0
 export var MAX_OFFSET_HEIGHT = 4
 export var DISTANCE_FROM_DRONE = 10
 
