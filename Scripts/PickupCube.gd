@@ -2,6 +2,11 @@ extends RigidBody
 
 var inCollider = false
 var pickedUp = false
+onready var playerPickup = get_node("/root/Level/PlayerDrone/Body/PlayerPickup")
+
+func _ready():
+	playerPickup.connect("body_entered",self,"_on_PlayerPickup_body_entered")
+	playerPickup.connect("body_exited",self,"_on_PlayerPickup_body_exited")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept") && inCollider:
