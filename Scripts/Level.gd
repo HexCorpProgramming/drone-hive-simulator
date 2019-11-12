@@ -111,7 +111,9 @@ func add_wall_to_tile(tile, direction):
 			wall.set_name("South")
 			wall.translation = Vector3(0,4.3,2.3)
 			wall.scale = northSouthScale
+			wall.get_child(0).get_child(0).visible = false; #make the mesh invisible.
 			tile.add_child(wall)
+			
 		"NONE":
 			print("Error. add_wall_to_tile requires a direction (NORTH, SOUTH, EAST, WEST).")
 			return false
