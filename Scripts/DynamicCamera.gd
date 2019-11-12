@@ -7,10 +7,12 @@ export var MIN_OFFSET_HEIGHT = 0
 export var MAX_OFFSET_HEIGHT = 4
 export var DISTANCE_FROM_DRONE = 10
 
-var offset = Vector3(0,0,DISTANCE_FROM_DRONE)
+var offset = Vector3(0,0,0)
 var raycastResult
 
 func _process(delta):
+	
+	offset = Vector3(0,0,DISTANCE_FROM_DRONE)
 	
 	#Set the camera position to the drone's position with an offset.
 	translation = playerDrone.translation + offset
