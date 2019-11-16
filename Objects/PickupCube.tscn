@@ -32,7 +32,9 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[node name="PickupCube" type="RigidBody"]
+[node name="PickupCube" type="RigidBody" groups=[
+"Cubes",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0 )
 can_sleep = false
 script = ExtResource( 1 )

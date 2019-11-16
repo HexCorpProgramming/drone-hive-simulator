@@ -19,6 +19,12 @@ func _physics_process(delta):
 	obey()
 	good_drone()
 	
+	if Input.is_action_pressed("ui_accept"):
+		velocity.y = 1
+	
+	if Input.is_action_pressed("ui_cancel"):
+		velocity.y = FALLINGSPEED
+	
 	#Actual important functions that do stuff.
 	handle_inputs()
 
@@ -87,3 +93,5 @@ func obey():
 func good_drone():
 	#Deeper and deeper.
 	pass
+	
+	

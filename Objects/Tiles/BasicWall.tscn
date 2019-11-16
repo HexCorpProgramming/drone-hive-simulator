@@ -18,8 +18,9 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[node name="North" type="StaticBody"]
-editor/display_folded = true
+[node name="North" type="StaticBody" groups=[
+"Tile",
+]]
 transform = Transform( 2, 0, 0, 0, 4, 0, 0, 0, 0.3, 0, 4.3, -2.3 )
 
 [node name="NorthCollision" type="CollisionShape" parent="."]

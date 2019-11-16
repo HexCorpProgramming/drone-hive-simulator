@@ -5,10 +5,11 @@ var pickedUp = false
 onready var playerPickup = get_node("/root/Level/PlayerDrone/Body/PlayerPickup")
 
 func _ready():
+	set_meta("beingPushedBy",null)
 	playerPickup.connect("body_entered",self,"_on_PlayerPickup_body_entered")
 	playerPickup.connect("body_exited",self,"_on_PlayerPickup_body_exited")
 
-func _process(delta):
+func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") && inCollider:
 		if pickedUp == false:
 			print("Cube pickup triggered. (Cube is in collider and space bar has been pressed).") #debug message
@@ -25,8 +26,6 @@ func _process(delta):
 		gravity_scale = 2.5
 		linear_damp = 0
 
-
-
 func _on_PlayerPickup_body_entered(body):
 	if body.get_name() == get_name():
 		print("Cube has entered player pickup collision.")
@@ -39,4 +38,4 @@ func _on_PlayerPickup_body_exited(body):
 		print("Cube has left player pickup collision.")
 		$OmniLight.light_energy = 0
 		inCollider = false
-	
+		

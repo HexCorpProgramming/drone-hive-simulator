@@ -44,6 +44,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0 )
 
 [node name="PickupCube" parent="." instance=ExtResource( 5 )]
 
+[node name="PickupCube2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7.29101, 5.32186 )
+
 [node name="UI" type="Node" parent="."]
 editor/display_folded = true
 
@@ -73,8 +76,17 @@ margin_bottom = 89.0
 icon = ExtResource( 7 )
 
 [node name="Conveyer" parent="." instance=ExtResource( 8 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 8, 2, 0 )
+editor/display_folded = true
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 2, 0 )
+
+[node name="Conveyer2" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+transform = Transform( -8.74228e-008, 0, -2, 0, 2, 0, 2, 0, -8.74228e-008, 14.5, 1, 0 )
 
 [editable path="SceneControl"]
 
 [editable path="PlayerDrone"]
+
+[editable path="Conveyer"]
+
+[editable path="Conveyer2"]

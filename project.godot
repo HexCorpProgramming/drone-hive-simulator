@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 [debug]
 
+gdscript/warnings/enable=false
 settings/max_remote_stdout_chars_per_second=1874919424
 
 [rendering]
