@@ -1,8 +1,12 @@
 extends KinematicBody
 
-var velocity = Vector3(0,FALLINGSPEED,0) #Velocity is speed in a given direction.
+var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
+var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
+var jump_counter = 0
 const SPEED = 6
-const FALLINGSPEED = -6
+const GRAVITY = 981
+const JUMP_FORCE = GRAVITY/2
+const JUMP_LIMIT = 2
 export var droneID = "6"
 
 
@@ -10,30 +14,51 @@ func _ready():
 	$Body.playing = false
 	$Body.frame = 0
 	get_node("Face").assign_id(droneID)
+	jump_counter = JUMP_LIMIT
 	print("Debug: Player drone _ready function complete.")
 
+
 func _physics_process(delta):
+	
+	#Actual important functions that do stuff.
+	handle_inputs(delta)
+	
+	print(jump_counter)
+	print(velocity.x)
+	print(velocity.y)
+	print(velocity.z)
 	
 	#I just thought it'd be funny to have an "obey" function called *constantly*. These don't actually do anything.
 	#It's thematically appropriate!
 	obey()
 	good_drone()
-	
-	if Input.is_action_pressed("ui_accept"):
-		velocity.y = 1
-	
-	if Input.is_action_pressed("ui_cancel"):
-		velocity.y = FALLINGSPEED
-	
-	#Actual important functions that do stuff.
-	handle_inputs()
 
-func handle_inputs():
+
+func jump():
+	if Input.is_action_just_pressed("Jump") and jump_counter > 0:
+		acceleration.y = -JUMP_FORCE
+		jump_counter -= 1
+	pass
+
+
+func process_movement(delta):
+	acceleration.y += GRAVITY * delta
+	velocity.y = -acceleration.y * delta
 	
+	# TODO: Should be floor
+	if is_on_wall():
+		jump_counter = JUMP_LIMIT
+		velocity.y = 0
+
+
+func handle_inputs(delta):
 	set_animation()
+	jump()
 	update_vertical_velocity()
 	update_horizontal_velocity()
+	process_movement(delta)
 	move_and_slide(velocity) #Applies a given vector3 to an object.
+
 
 func set_animation():
 	
