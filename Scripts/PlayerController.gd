@@ -2,7 +2,7 @@ extends KinematicBody
 
 var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
 var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
-var jump_counter = 0
+var jumpCounter = 0
 const SPEED = 6
 const MAX_SPEED = 4.8
 const GRAVITY = 981
@@ -15,7 +15,7 @@ func _ready():
 	$Body.playing = false
 	$Body.frame = 0
 	get_node("Face").assign_id(droneID)
-	jump_counter = JUMP_LIMIT
+	jumpCounter = JUMP_LIMIT
 	print("Debug: Player drone _ready function complete.")
 
 
@@ -24,7 +24,7 @@ func _physics_process(delta):
 	#Actual important functions that do stuff.
 	handle_inputs(delta)
 	
-	print(jump_counter)
+	print(jumpCounter)
 	print(velocity.x)
 	print(velocity.y)
 	print(velocity.z)
@@ -38,9 +38,9 @@ func _physics_process(delta):
 
 
 func jump():
-	if Input.is_action_just_pressed("Jump") and jump_counter > 0:
+	if Input.is_action_just_pressed("Jump") and jumpCounter > 0:
 		acceleration.y = -JUMP_FORCE
-		jump_counter -= 1
+		jumpCounter -= 1
 	pass
 
 
@@ -50,8 +50,18 @@ func process_movement(delta):
 	
 	# TODO: Should be floor
 	if is_on_wall():
-		jump_counter = JUMP_LIMIT
+		jumpCounter = JUMP_LIMIT
 		velocity.y = 0
+
+
+func limit_speed():
+	if (abs(velocity.x) + abs(velocity.z)) > MAX_SPEED+0.2:
+		velocity.y = 0 
+		# ^ Something buggy is happening with the Y axis and needs resetting for the calculation
+		# This also breaks jumping unless the vertical MAX_SPEED is slightly higher than horizontal MAX_SPEED
+		# Also, if you press an X and Z movement key just once the drone keeps moving, not sure if related
+		var direction = velocity.normalized()
+		velocity = direction * MAX_SPEED
 
 
 func handle_inputs(delta):
@@ -60,6 +70,7 @@ func handle_inputs(delta):
 	update_vertical_velocity()
 	update_horizontal_velocity()
 	process_movement(delta)
+	limit_speed()
 	move_and_slide(velocity) #Applies a given vector3 to an object.
 
 
@@ -110,5 +121,3 @@ func obey():
 func good_drone():
 	#Deeper and deeper.
 	pass
-	
-	
