@@ -4,6 +4,7 @@ var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
 var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
 var jump_counter = 0
 const SPEED = 6
+const MAX_SPEED = 4.8
 const GRAVITY = 981
 const JUMP_FORCE = GRAVITY/2
 const JUMP_LIMIT = 2
@@ -27,6 +28,8 @@ func _physics_process(delta):
 	print(velocity.x)
 	print(velocity.y)
 	print(velocity.z)
+	print($Body.frame)
+	
 	
 	#I just thought it'd be funny to have an "obey" function called *constantly*. These don't actually do anything.
 	#It's thematically appropriate!
@@ -61,27 +64,13 @@ func handle_inputs(delta):
 
 
 func set_animation():
-	
-	#Use: This function sets the drone's walk animation based on whether or not any keys are pressed.
-	
-	if any_movement_key_just_pressed() and $Body.frame == 0:
-		#This makes the drone immediately start walking by skipping the first animation frame (which is them standing still).
-		$Body.frame = 1
-	if any_movement_key_currently_pressed():
-		#If any of the directional keys are pressed, the drone will start to animate.
-		$Body.playing = true
-	
-	else:
-		if $Body.frame == 0 or $Body.frame == 2: 
-			#This lets the drone "wind down" and animate until it lands on a standing frame, upon which the drone will stop animating.
+	#Use: This function sets the drone's walk animation based on whether or not it has any speed.
+	if $Body.frame == 0 or $Body.frame == 2:
+		if abs(velocity.x) > 1 or abs(velocity.z) > 1:
+			$Body.playing = true
+		else:
 			$Body.playing = false
-			$Body.frame = 0
 
-func any_movement_key_just_pressed():
-	return Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down")
-
-func any_movement_key_currently_pressed():
-	return Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")
 
 func update_vertical_velocity():
 	if Input.is_action_pressed("ui_right"):
@@ -100,6 +89,7 @@ func update_vertical_velocity():
 	else:
 		velocity.x = lerp(velocity.x,0,0.2)
 
+
 func update_horizontal_velocity():
 	if Input.is_action_pressed("ui_up"):
 		velocity.z = -SPEED
@@ -111,9 +101,11 @@ func update_horizontal_velocity():
 	else:
 		velocity.z = lerp(velocity.z,0,0.2)
 
+
 func obey():
 	#Good drone.
 	pass
+
 
 func good_drone():
 	#Deeper and deeper.
