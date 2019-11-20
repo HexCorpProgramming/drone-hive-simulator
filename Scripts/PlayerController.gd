@@ -2,6 +2,8 @@ extends ControllableObject
 
 export var droneID = "6"
 
+enum Rotation {LEFT, RIGHT}
+
 
 #Override
 func _ready():
@@ -40,8 +42,14 @@ func toggle_animation_play(velocity : Vector3):
 
 func toggle_animation_orientation(velocity : Vector3):
 	var direction = velocity.normalized()
-	
 	if direction.x > 0:
+		rotate_sprite(Rotation.RIGHT)
+	else:
+		rotate_sprite(Rotation.LEFT)
+
+
+func rotate_sprite(rotation):
+	if rotation == Rotation.RIGHT:
 		$Body.rotation_degrees.y = 0
 		$Face.translation = Vector3(0.4, 2, 0.1)
 		$Face/ID.translation = Vector3(-0.099, 0, 0)
