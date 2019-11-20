@@ -34,7 +34,7 @@ func handle_animation(velocity : Vector3):
 func toggle_animation_play(velocity : Vector3):
 	#Use: This function sets the drone's walk animation based on whether or not it has any speed.
 	if $Body.frame == 0 or $Body.frame == 2:
-		if abs(velocity.x) > 1 or abs(velocity.z) > 1:
+		if (abs(velocity.x) + abs(velocity.z)) > 0.5:
 			$Body.playing = true
 		else:
 			$Body.playing = false

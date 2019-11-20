@@ -17,7 +17,6 @@ func _ready():
 
 
 func _physics_process(delta : float):
-	#Actual important functions that do stuff.
 	velocity = handle_inputs(delta)
 	handle_animation(velocity)
 	
@@ -81,12 +80,7 @@ func process_jump(delta : float, velocity : Vector3):
 
 
 func limit_speed(velocity : Vector3):
-	if (abs(velocity.x) + abs(velocity.z)) > MAX_SPEED+0.2:
-		velocity.y = 0 
-		# ^ Something buggy is happening with the Y axis and needs resetting for the calculation
-		# This also breaks jumping unless the vertical MAX_SPEED is slightly higher than horizontal MAX_SPEED
-		# Also, if you press an X and Z movement key just once the drone keeps moving, not sure if related
-		# Turns out if the drone jumps and does the above it stays at that height without falling
+	if (abs(velocity.x) + abs(velocity.z)) > MAX_SPEED:
 		var direction = velocity.normalized()
 		velocity = direction * MAX_SPEED
 		
