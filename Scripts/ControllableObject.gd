@@ -1,14 +1,15 @@
 extends KinematicBody
 class_name ControllableObject
 
-var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
-var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
-var jumpCounter = 0
-const SPEED = 6
-const MAX_SPEED = 4.8
+const MAX_VELOCITY = 5
 const GRAVITY = 800
+const DRAG_AND_FRICTION = 0.2 #TODO: Should be defined by the material/s
+const AGILITY = 300 
 const JUMP_FORCE = GRAVITY/2
 const JUMP_LIMIT = 2
+
+var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
+var jumpCounter = 0
 
 onready var ground_ray = get_node("GroundRay")
 
@@ -19,13 +20,15 @@ func _ready():
 
 func _physics_process(delta : float):
 	
-	velocity = generate_velocity(generate_direction(), delta)
+	var direction = generate_direction()
+	#acceleration = generate_acceleration(direction, delta)
+	var velocity = generate_velocity(direction, delta)
 	
 	handle_animation(velocity)
 	
+	print(acceleration)
 	print(velocity)
-	print(velocity.normalized())
-	#print(acceleration)
+	print(direction)
 	
 	move_and_slide(velocity) #Applies a given Vector3 to an object.
 
@@ -61,16 +64,35 @@ func _updateAxisDirection(directionAxis : int, positiveDirection : bool, negativ
 	return directionAxis
 
 
+func generate_acceleration(direction : Vector3, delta : float):
+	
+	if ground_ray.is_colliding():
+		acceleration = direction * AGILITY
+			
+	acceleration.x -= DRAG_AND_FRICTION * delta
+	acceleration.z -= DRAG_AND_FRICTION * delta
+	
+	return acceleration
+
+
+func _handleJumping(acceleration : Vector3, delta : float):
+	if ground_ray.is_colliding():
+		acceleration.y = 0
+		if Input.is_action_just_pressed("Jump"):
+			acceleration.y = JUMP_FORCE
+	else:
+		acceleration.y -= GRAVITY * delta
+	
+	return acceleration
+
+
 func generate_velocity(direction : Vector3, delta : float):
-	var velocity = Vector3(0,0,0)
+	var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
 	
 	if direction.is_normalized():
-		velocity = direction * MAX_SPEED
-			
-	if Input.is_action_just_pressed("Jump") and ground_ray.is_colliding():
-		acceleration.y = JUMP_FORCE
-
-	acceleration.y -= GRAVITY * delta
+		velocity = direction * MAX_VELOCITY
 	
+	acceleration = _handleJumping(acceleration, delta)
+
 	velocity.y += acceleration.y * delta
 	return velocity
