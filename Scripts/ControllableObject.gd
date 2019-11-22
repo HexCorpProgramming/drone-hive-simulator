@@ -43,21 +43,22 @@ func generate_direction():
 	var go_west = Input.is_action_pressed("ui_left")
 	var go_east = Input.is_action_pressed("ui_right")
 	
-	if go_north:
-		direction.z += -1
-	elif go_south:
-		direction.z += 1
-	elif go_north and go_south:
-		direction.z = 0
-		
-	if go_west:
-		direction.x += -1
-	elif go_east:
-		direction.x += 1
-	if go_west and go_east:
-		direction.x = 0
+	direction.z = _updateAxisDirection(direction.z, go_south, go_north)
+	direction.x = _updateAxisDirection(direction.x, go_east, go_west)	
 		
 	return direction.normalized()
+
+
+func _updateAxisDirection(directionAxis : int, positiveDirection : bool, negativeDirection : bool):
+	
+	if negativeDirection:
+		directionAxis += -1
+	elif positiveDirection:
+		directionAxis += 1
+	elif positiveDirection and negativeDirection:
+		directionAxis = 0
+		
+	return directionAxis
 
 
 func generate_velocity(direction : Vector3, delta : float):

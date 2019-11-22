@@ -44,8 +44,10 @@ func toggle_animation_orientation(velocity : Vector3):
 	var direction = velocity.normalized()
 	if direction.x > 0:
 		rotate_sprite(Rotation.RIGHT)
-	else:
+	elif direction.x < 0:
 		rotate_sprite(Rotation.LEFT)
+	#else:
+		#Direction stays in the last position
 
 
 func rotate_sprite(rotation):
