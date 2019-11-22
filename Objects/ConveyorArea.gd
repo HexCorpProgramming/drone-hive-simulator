@@ -13,8 +13,7 @@ func _ready():
 
 func _on_ConveyerArea_body_entered(body):
 	
-	print("body entered!")
-	
+	print("%s entered!" % body.get_name())
 	if body.get_name() != conveyerParent.get_name() and (!body.is_in_group("Tile")) and (!body.is_in_group("Conveyer")):
 		thereIsAnObjectInsideMe = true
 		currentObject = body
@@ -22,7 +21,7 @@ func _on_ConveyerArea_body_entered(body):
 
 func _on_ConveyerArea_body_exited(body):
 	
-	print("body exited!")
+	print("%s exited!" % body.get_name())
 	
 	thereIsAnObjectInsideMe = false
 	
