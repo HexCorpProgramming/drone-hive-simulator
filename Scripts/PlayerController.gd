@@ -25,8 +25,8 @@ func _physics_process(delta : float):
 
 
 #Override
-func handle_animation(velocity : Vector3):
-	.handle_animation(velocity)
+func _handle_animation(velocity : Vector3):
+	._handle_animation(velocity)
 	toggle_animation_orientation(velocity)
 	toggle_animation_play(velocity)
 

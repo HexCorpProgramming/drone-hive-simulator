@@ -3,8 +3,8 @@ class_name ControllableObject
 
 const MAX_VELOCITY = 5
 const GRAVITY = 800
-const DRAG_AND_FRICTION = 0.2 #TODO: Should be defined by the material/s
-const AGILITY = 300 
+const DRAG_AND_FRICTION = 1.2 #TODO: Should be defined by the material/s
+const AGILITY = 300
 const JUMP_FORCE = GRAVITY/2
 const JUMP_LIMIT = 2
 
@@ -19,63 +19,50 @@ func _ready():
 
 
 func _physics_process(delta : float):
+	acceleration = _generate_acceleration(delta)
+	var velocity = _generate_velocity(acceleration, delta)
 	
-	var direction = generate_direction()
-	#acceleration = generate_acceleration(direction, delta)
-	var velocity = generate_velocity(direction, delta)
-	
-	handle_animation(velocity)
-	
-	print(acceleration)
-	print(velocity)
-	print(direction)
+	_handle_animation(velocity)
 	
 	move_and_slide(velocity) #Applies a given Vector3 to an object.
 
 
-func handle_animation(velocity : Vector3):
+func _handle_animation(velocity : Vector3):
 	#Interface function
 	return
 
 
-func generate_direction():
-	var direction = Vector3(0,0,0) #Direction of movement
+func _generate_acceleration(delta : float):
 	
 	var go_north = Input.is_action_pressed("ui_up")
 	var go_south = Input.is_action_pressed("ui_down")
 	var go_west = Input.is_action_pressed("ui_left")
 	var go_east = Input.is_action_pressed("ui_right")
 	
-	direction.z = _updateAxisDirection(direction.z, go_south, go_north)
-	direction.x = _updateAxisDirection(direction.x, go_east, go_west)	
-		
-	return direction.normalized()
-
-
-func _updateAxisDirection(directionAxis : int, positiveDirection : bool, negativeDirection : bool):
-	
-	if negativeDirection:
-		directionAxis += -1
-	elif positiveDirection:
-		directionAxis += 1
-	elif positiveDirection and negativeDirection:
-		directionAxis = 0
-		
-	return directionAxis
-
-
-func generate_acceleration(direction : Vector3, delta : float):
-	
 	if ground_ray.is_colliding():
-		acceleration = direction * AGILITY
-			
-	acceleration.x -= DRAG_AND_FRICTION * delta
-	acceleration.z -= DRAG_AND_FRICTION * delta
+		acceleration.x = _update_acceleration(acceleration.x, go_east, go_west, delta)
+		acceleration.x -= acceleration.x * DRAG_AND_FRICTION * delta
+		acceleration.z = _update_acceleration(acceleration.z, go_south, go_north, delta)
+		acceleration.z -= acceleration.z * DRAG_AND_FRICTION * delta
+	
+	acceleration = _handle_jumping(acceleration, delta)
 	
 	return acceleration
 
 
-func _handleJumping(acceleration : Vector3, delta : float):
+func _update_acceleration(accelerationAxis : int, positiveForce : bool, negativeForce : bool, delta : float):
+	
+	if negativeForce:
+		accelerationAxis += -AGILITY
+	elif positiveForce:
+		accelerationAxis += AGILITY
+	elif positiveForce and negativeForce:
+		accelerationAxis = 0
+	
+	return clamp(accelerationAxis, -AGILITY, AGILITY)
+
+
+func _handle_jumping(acceleration : Vector3, delta : float):
 	if ground_ray.is_colliding():
 		acceleration.y = 0
 		if Input.is_action_just_pressed("Jump"):
@@ -86,13 +73,18 @@ func _handleJumping(acceleration : Vector3, delta : float):
 	return acceleration
 
 
-func generate_velocity(direction : Vector3, delta : float):
+func _generate_velocity(acceleration : Vector3, delta : float):
 	var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
-	
-	if direction.is_normalized():
-		velocity = direction * MAX_VELOCITY
-	
-	acceleration = _handleJumping(acceleration, delta)
-
-	velocity.y += acceleration.y * delta
+	velocity += acceleration * delta
+	velocity = _clamp_vector(velocity, MAX_VELOCITY)
 	return velocity
+
+
+#Maths
+func _clamp_vector(vector : Vector3, maxLength : float):
+	var length_squared = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
+	if length_squared > 0:
+		if length_squared > (maxLength * maxLength):
+			var length = sqrt(length_squared)
+			vector *= (maxLength/length)
+	return vector
