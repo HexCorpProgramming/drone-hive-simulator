@@ -7,7 +7,7 @@ var jumpCounter = 0
 const SPEED = 6
 const MAX_SPEED = 4.8
 const GRAVITY = 800
-const JUMP_FORCE = GRAVITY/5
+const JUMP_FORCE = GRAVITY/2
 const JUMP_LIMIT = 2
 
 onready var ground_ray = get_node("GroundRay")
@@ -68,8 +68,9 @@ func generate_velocity(direction : Vector3, delta : float):
 		velocity = direction * MAX_SPEED
 			
 	if Input.is_action_just_pressed("Jump") and ground_ray.is_colliding():
-		velocity.y = JUMP_FORCE
-		
-	velocity.y -= delta * GRAVITY			
-			
+		acceleration.y = JUMP_FORCE
+
+	acceleration.y -= GRAVITY * delta
+	
+	velocity.y += acceleration.y * delta
 	return velocity
