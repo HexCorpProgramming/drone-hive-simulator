@@ -6,6 +6,7 @@ var pickedUp = false
 onready var playerPickup = get_node("/root/Level/PlayerDrone/Body/PlayerPickup")
 
 
+#TODO: Tell, don't ask. Cube shouldn't be checking if drone is nearby.
 func _ready():
 	set_meta("beingPushedBy",null)
 	playerPickup.connect("body_entered",self,"_on_PlayerPickup_body_entered")

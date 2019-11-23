@@ -1,6 +1,6 @@
 extends ControllableObject
 
-export var droneID = "6"
+export var droneID = "HexDrone#0006"
 
 enum Rotation {LEFT, RIGHT}
 
