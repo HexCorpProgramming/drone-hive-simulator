@@ -9,6 +9,7 @@ const JUMP_FORCE = GRAVITY/2
 const JUMP_LIMIT = 2
 
 var acceleration = Vector3(0,0,0) #Acceleration is the change in speed in a given direction.
+var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
 var jumpCounter = 0
 
 onready var ground_ray = get_node("GroundRay")
@@ -19,17 +20,22 @@ func _ready():
 
 
 func _physics_process(delta : float):
-	var input = _handle_input(delta)
+	var input = _handle_input()
+	
+	#Adds arguments to array
+	input.push_front(acceleration)
+	input.push_back(delta)
+	
 	acceleration = callv("_handle_acceleration", input)
-	var velocity = _handle_velocity(acceleration, delta)
+	velocity = _handle_velocity(acceleration, delta)
 	_handle_animation(velocity)
 	
 	move_and_slide(velocity) #Applies a given Vector3 to an object.
 
 
-func _handle_input(delta : float):
+func _handle_input():
 	#Interface function
-	return [false, false, false, false, false, delta]
+	return [false, false, false, false, false]
 
 
 func _handle_animation(velocity : Vector3):
@@ -37,7 +43,8 @@ func _handle_animation(velocity : Vector3):
 	return
 
 
-func _handle_acceleration(goNorth : bool, goSouth : bool, goEast : bool, goWest : bool, goJump : bool, delta : float):
+func _handle_acceleration(acceleration : Vector3, goNorth : bool, goSouth : bool, goEast : bool, goWest : bool, goJump : bool, delta : float):
+	
 	if ground_ray.is_colliding():
 		acceleration.x = _update_acceleration(acceleration.x, goEast, goWest, delta)
 		acceleration.x -= acceleration.x * DRAG_AND_FRICTION * delta
