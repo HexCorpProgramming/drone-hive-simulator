@@ -1,6 +1,7 @@
 extends ControllableObject
+class_name Drone
 
-export var droneID = "HexDrone#0006"
+export var droneID = "0006"
 
 enum Rotation {LEFT, RIGHT}
 
@@ -22,17 +23,6 @@ func _physics_process(delta : float):
 	#It's thematically appropriate!
 	obey()
 	good_drone()
-
-
-#Override
-func _handle_input():
-	var goNorth = Input.is_action_pressed("ui_up")
-	var goSouth = Input.is_action_pressed("ui_down")
-	var goEast = Input.is_action_pressed("ui_right")
-	var goWest = Input.is_action_pressed("ui_left")
-	var goJump = Input.is_action_just_pressed("Jump")
-	
-	return [goNorth, goSouth, goEast, goWest, goJump]
 
 
 #Override
@@ -69,6 +59,11 @@ func rotate_sprite(rotation):
 		$Body.rotation_degrees.y = 180 
 		$Face.translation = Vector3(-0.4, 2, 0.1)
 		$Face/ID.translation = Vector3(0.099, 0, 0)
+
+
+func _change_ID(ID : String):
+	droneID = ID
+	return true
 
 
 func obey():
