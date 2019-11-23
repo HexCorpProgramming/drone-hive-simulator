@@ -14,6 +14,7 @@ var jumpCounter = 0
 
 onready var ground_ray = get_node("GroundRay")
 
+
 func _ready():
 	jumpCounter = JUMP_LIMIT
 	print("Debug: ControllableObject _ready function complete.")
@@ -51,7 +52,7 @@ func _handle_acceleration(acceleration : Vector3, goNorth : bool, goSouth : bool
 		acceleration.z = _update_acceleration(acceleration.z, goSouth, goNorth, delta)
 		acceleration.z -= acceleration.z * DRAG_AND_FRICTION * delta
 	
-	acceleration = _handle_jumping(acceleration, goJump, delta)
+	acceleration.y = _handle_jumping(acceleration.y, goJump, delta)
 	
 	return acceleration
 
@@ -68,19 +69,19 @@ func _update_acceleration(accelerationAxis : int, positiveForce : bool, negative
 	return clamp(accelerationAxis, -AGILITY, AGILITY)
 
 
-func _handle_jumping(acceleration : Vector3, goJump : bool, delta : float):
+func _handle_jumping(upwardsAcceleration : float, goJump : bool, delta : float):
 	
 	if ground_ray.is_colliding():
-		acceleration.y = 0
+		upwardsAcceleration = 0
 		jumpCounter = JUMP_LIMIT
 	else:
-		acceleration.y -= GRAVITY * delta
+		upwardsAcceleration -= GRAVITY * delta
 		
 	if goJump and jumpCounter > 0:
-		acceleration.y = JUMP_FORCE
+		upwardsAcceleration = JUMP_FORCE
 		jumpCounter -= 1
 	
-	return acceleration
+	return upwardsAcceleration
 
 
 func _handle_velocity(acceleration : Vector3, delta : float):
@@ -90,7 +91,7 @@ func _handle_velocity(acceleration : Vector3, delta : float):
 	return velocity
 
 
-#Maths
+#Maths, will be incorporated in Godot 4.0
 func _clamp_vector(vector : Vector3, maxLength : float):
 	var length_squared = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 	if length_squared > 0:
