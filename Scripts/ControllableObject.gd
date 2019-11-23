@@ -69,12 +69,16 @@ func _update_acceleration(accelerationAxis : int, positiveForce : bool, negative
 
 
 func _handle_jumping(acceleration : Vector3, goJump : bool, delta : float):
+	
 	if ground_ray.is_colliding():
 		acceleration.y = 0
-		if goJump:
-			acceleration.y = JUMP_FORCE
+		jumpCounter = JUMP_LIMIT
 	else:
 		acceleration.y -= GRAVITY * delta
+		
+	if goJump and jumpCounter > 0:
+		acceleration.y = JUMP_FORCE
+		jumpCounter -= 1
 	
 	return acceleration
 
