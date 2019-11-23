@@ -19,12 +19,17 @@ func _ready():
 
 
 func _physics_process(delta : float):
-	acceleration = _generate_acceleration(delta)
-	var velocity = _generate_velocity(acceleration, delta)
-	
+	var input = _handle_input(delta)
+	acceleration = callv("_handle_acceleration", input)
+	var velocity = _handle_velocity(acceleration, delta)
 	_handle_animation(velocity)
 	
 	move_and_slide(velocity) #Applies a given Vector3 to an object.
+
+
+func _handle_input(delta : float):
+	#Interface function
+	return [false, false, false, false, false, delta]
 
 
 func _handle_animation(velocity : Vector3):
@@ -32,20 +37,14 @@ func _handle_animation(velocity : Vector3):
 	return
 
 
-func _generate_acceleration(delta : float):
-	
-	var go_north = Input.is_action_pressed("ui_up")
-	var go_south = Input.is_action_pressed("ui_down")
-	var go_west = Input.is_action_pressed("ui_left")
-	var go_east = Input.is_action_pressed("ui_right")
-	
+func _handle_acceleration(goNorth : bool, goSouth : bool, goEast : bool, goWest : bool, goJump : bool, delta : float):
 	if ground_ray.is_colliding():
-		acceleration.x = _update_acceleration(acceleration.x, go_east, go_west, delta)
+		acceleration.x = _update_acceleration(acceleration.x, goEast, goWest, delta)
 		acceleration.x -= acceleration.x * DRAG_AND_FRICTION * delta
-		acceleration.z = _update_acceleration(acceleration.z, go_south, go_north, delta)
+		acceleration.z = _update_acceleration(acceleration.z, goSouth, goNorth, delta)
 		acceleration.z -= acceleration.z * DRAG_AND_FRICTION * delta
 	
-	acceleration = _handle_jumping(acceleration, delta)
+	acceleration = _handle_jumping(acceleration, goJump, delta)
 	
 	return acceleration
 
@@ -62,10 +61,10 @@ func _update_acceleration(accelerationAxis : int, positiveForce : bool, negative
 	return clamp(accelerationAxis, -AGILITY, AGILITY)
 
 
-func _handle_jumping(acceleration : Vector3, delta : float):
+func _handle_jumping(acceleration : Vector3, goJump : bool, delta : float):
 	if ground_ray.is_colliding():
 		acceleration.y = 0
-		if Input.is_action_just_pressed("Jump"):
+		if goJump:
 			acceleration.y = JUMP_FORCE
 	else:
 		acceleration.y -= GRAVITY * delta
@@ -73,7 +72,7 @@ func _handle_jumping(acceleration : Vector3, delta : float):
 	return acceleration
 
 
-func _generate_velocity(acceleration : Vector3, delta : float):
+func _handle_velocity(acceleration : Vector3, delta : float):
 	var velocity = Vector3(0,0,0) #Velocity is speed in a given direction.
 	velocity += acceleration * delta
 	velocity = _clamp_vector(velocity, MAX_VELOCITY)

@@ -25,8 +25,18 @@ func _physics_process(delta : float):
 
 
 #Override
+func _handle_input(delta : float):
+	var goNorth = Input.is_action_pressed("ui_up")
+	var goSouth = Input.is_action_pressed("ui_down")
+	var goEast = Input.is_action_pressed("ui_right")
+	var goWest = Input.is_action_pressed("ui_left")
+	var goJump = Input.is_action_just_pressed("Jump")
+	
+	return [goNorth, goSouth, goEast, goWest, goJump, delta]
+
+
+#Override
 func _handle_animation(velocity : Vector3):
-	._handle_animation(velocity)
 	toggle_animation_orientation(velocity)
 	toggle_animation_play(velocity)
 
