@@ -15,7 +15,7 @@ func _ready():
 	$Body.playing = false
 	$Body.frame = 0
 	get_node("Face").assign_id(droneID)
-	print("Debug: Player drone _ready function complete.")
+	print("Debug: Drone %s _ready function complete.", droneID)
 
 
 func _physics_process(delta : float):	

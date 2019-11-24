@@ -1,7 +1,7 @@
 extends Spatial
 class_name ControllableObject
 
-const MAX_VELOCITY = 5
+const MAX_VELOCITY = 5 #TODO: Max velocity doesn't work properly over 6
 const GRAVITY = 1000
 const DRAG_AND_FRICTION = 4 #TODO: Should be defined by the material/s
 const AGILITY = 400
