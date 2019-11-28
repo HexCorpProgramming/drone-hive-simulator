@@ -11,3 +11,4 @@ export_presets.cfg
 *.csproj
 *.sln
 .vscode/
+Properties/AssemblyInfo.cs

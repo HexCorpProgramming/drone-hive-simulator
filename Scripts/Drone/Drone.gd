@@ -6,16 +6,17 @@ export var droneID = "0006"
 var kinematicBody = self
 
 
-enum Rotation {LEFT, RIGHT}
+enum Rotation {LEFT, RIGHT, FRONT, BACK}
 
 
 #Override
 func _ready():
 	._ready()
 	$Body.playing = false
+	$Body.play("WalkSouth")
 	$Body.frame = 0
 	get_node("Face").assign_id(droneID)
-	print("Debug: Drone %s _ready function complete.", droneID)
+	print("Debug: Drone %s _ready function complete." % droneID)
 
 
 func _physics_process(delta : float):	
@@ -39,7 +40,7 @@ func _handle_animation(acceleration : Vector3):
 
 func toggle_animation_play(acceleration : Vector3):
 	#Use: This function sets the drone's walk animation based on whether or not it has any speed.
-	if $Body.frame == 0 or $Body.frame == 2:
+	if $Body.frame % 2 == 0:
 		if abs(acceleration.x) >= AGILITY*0.7 or abs(acceleration.z) >= AGILITY*0.7:
 			$Body.playing = true
 		else:
@@ -54,7 +55,13 @@ func toggle_animation_orientation(acceleration : Vector3):
 		rotate_sprite(Rotation.LEFT)
 	#else:
 		#Direction stays in the last position
-
+		
+	if direction.z > 0:
+		$Body.play("WalkSouth")
+	elif direction.z < 0:
+		$Body.play("WalkNorth")
+	#else:
+		#Direction stays in the last position
 
 func rotate_sprite(rotation):
 	if rotation == Rotation.RIGHT:
