@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Drone/PlayerDrone.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/DroneFace.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/kitty.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/numbersheethuge.png" type="Texture" id=4]
@@ -75,3 +75,7 @@ light_energy = 0.22
 light_indirect_energy = 0.0
 light_specular = 0.1
 light_bake_mode = 0
+
+[node name="GroundRay" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -3.4, 0 )
