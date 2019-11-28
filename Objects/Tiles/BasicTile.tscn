@@ -18,7 +18,9 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[node name="Tile" type="Spatial"]
+[node name="Tile" type="Spatial" groups=[
+"Tile",
+]]
 
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( 2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0 )
