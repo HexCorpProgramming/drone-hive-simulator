@@ -1,10 +1,7 @@
 extends StaticBody
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var speed = 0.01
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	var foo = $Collision/Mesh.mesh.surface_get_material(1);
 	var bar = $Collision/Mesh.mesh.surface_get_material(1);
@@ -13,7 +10,5 @@ func _ready():
 
 func _process(delta):
 	var foo = $Collision/Mesh.mesh.surface_get_material(1);
-	foo.uv1_offset.y += 0.01
-	foo.uv2_offset.y += 0.01
-	#var bar = $Collision/Mesh.mesh.surface_get_material(0);
-	#bar.uv1_offset.y += 0.1
+	foo.uv1_offset.y += speed
+	foo.uv2_offset.y += speed

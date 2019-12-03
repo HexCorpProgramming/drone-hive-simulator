@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "ControllableObject",
+"language": "GDScript",
+"path": "res://Scripts/ControllableObject.gd"
+}, {
+"base": "ControllableObject",
+"class": "Drone",
+"language": "GDScript",
+"path": "res://Scripts/Drone/Drone.gd"
+} ]
 _global_script_class_icons={
-
+"ControllableObject": "",
+"Drone": ""
 }
 
 [application]
@@ -21,8 +32,18 @@ config/icon="res://icon.png"
 
 [debug]
 
+gdscript/warnings/enable=false
 settings/max_remote_stdout_chars_per_second=1874919424
+
+[input]
+
+Jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 
+environment/default_clear_color=Color( 0.317647, 0.215686, 0.376471, 1 )
 environment/default_environment="res://default_env.tres"

@@ -1,7 +1,16 @@
 extends RigidBody
 
+
 var inCollider = false
 var pickedUp = false
+onready var playerPickup = get_node("/root/Level/PlayerDrone/Body/PlayerPickup")
+
+
+#TODO: Tell, don't ask. Cube shouldn't be checking if drone is nearby.
+func _ready():
+	set_meta("beingPushedBy",null)
+	playerPickup.connect("body_entered",self,"_on_PlayerPickup_body_entered")
+	playerPickup.connect("body_exited",self,"_on_PlayerPickup_body_exited")
 
 func _process(delta):
 	var dropPlayer = get_node("../SceneControl/SFXDrop")
@@ -27,7 +36,7 @@ func _process(delta):
 		linear_damp = 0
 
 
-
+#TODO: If multiple cubes are close enough the drone can pick up both at the same time
 func _on_PlayerPickup_body_entered(body):
 	if body.get_name() == get_name():
 		print("Cube has entered player pickup collision.")
@@ -40,4 +49,4 @@ func _on_PlayerPickup_body_exited(body):
 		print("Cube has left player pickup collision.")
 		$OmniLight.light_energy = 0
 		inCollider = false
-	
+		
