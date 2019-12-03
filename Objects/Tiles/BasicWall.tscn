@@ -18,7 +18,9 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[node name="Wall" type="StaticBody"]
+[node name="Wall" type="StaticBody" groups=[
+"Tile",
+]]
 transform = Transform( 2, 0, 0, 0, 4, 0, 0, 0, 0.3, 0, 4.3, -2.3 )
 
 [node name="Collision" type="CollisionShape" parent="."]
