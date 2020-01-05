@@ -14,7 +14,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_accept") and inCollider:
+	if Input.is_action_just_pressed("ui_page_up") and inCollider:
 		if pickedUp == false:
 			print("Cube pickup triggered. (Cube is in collider and space bar has been pressed).") #debug message
 			pickedUp = true
