@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim1.png" type="Texture" id=1]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=2]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=3]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/DummyDrone.gd" type="Script" id=5]
+
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "WalkRight",
+"speed": 5.0
+} ]
+
+[node name="Body" type="AnimatedSprite3D"]
+frames = SubResource( 1 )
+animation = "WalkRight"
+frame = 3
+playing = true
+script = ExtResource( 5 )

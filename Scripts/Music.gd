@@ -7,5 +7,7 @@ func _ready():
 func toggle_music():
 	if self.is_playing():
 		self.stop()
+		DragDrop.visible = false
 	else:
 		self.play()
+		DragDrop.visible = true
