@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="Drone Hive Simulator"
 run/main_scene="res://Levels/MenuMain.tscn"
-config/icon="res://icon.png"
+config/icon="res://Sprites/hexlogo.png"
 
 [autoload]
 
