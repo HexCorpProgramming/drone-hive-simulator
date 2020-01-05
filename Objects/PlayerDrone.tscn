@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Drone/PlayerDrone.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/DroneFace.gd" type="Script" id=2]
@@ -8,12 +8,21 @@
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=6]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=7]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=8]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim5.png" type="Texture" id=9]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim6.png" type="Texture" id=10]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim7.png" type="Texture" id=11]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim8.png" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "WalkRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "WalkUp",
 "speed": 5.0
 } ]
 

@@ -48,12 +48,20 @@ func toggle_animation_play(acceleration : Vector3):
 
 func toggle_animation_orientation(acceleration : Vector3):
 	var direction = acceleration.normalized()
+		
 	if direction.x > 0:
 		rotate_sprite(Rotation.RIGHT)
 	elif direction.x < 0:
 		rotate_sprite(Rotation.LEFT)
 	#else:
 		#Direction stays in the last position
+	
+	if direction.z > 0:
+		$Body.animation = "WalkRight"
+		$Face.visible = true
+	elif direction.z < 0:
+		$Body.animation = "WalkUp"
+		$Face.visible = false
 
 
 func rotate_sprite(rotation):
