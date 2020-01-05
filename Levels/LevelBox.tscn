@@ -22,15 +22,12 @@ stream = ExtResource( 2 )
 volume_db = -15.0
 script = ExtResource( 3 )
 
-[node name="Camera" parent="SceneControl" index="4"]
-MIN_OFFSET_HEIGHT = 8
-MAX_OFFSET_HEIGHT = 10
-DISTANCE_FROM_DRONE = 14
-
 [node name="PlayerDrone" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="Body" parent="PlayerDrone" index="1"]
+editor/display_folded = true
 frame = 1
 
 [node name="PlayerPickup" type="Area" parent="PlayerDrone/Body" index="0"]
@@ -60,7 +57,6 @@ script = ExtResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7.29101, 5.32186 )
 
 [node name="UI" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="IDToggle" type="CheckBox" parent="UI"]
 margin_left = 710.0
