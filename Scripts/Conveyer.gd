@@ -1,14 +1,15 @@
 extends StaticBody
 
-export var speed = 0.01
+var speed = 0.01
+onready var thisMesh = get_node("Collision/Mesh")
+onready var thisMat = thisMesh.mesh.surface_get_material(1)
 
 func _ready():
-	var foo = $Collision/Mesh.mesh.surface_get_material(1);
-	var bar = $Collision/Mesh.mesh.surface_get_material(1);
-	var heck = $Collision/Mesh.mesh.surface_get_material(2);
-	foo.flags_vertex_lighting = true;
+	thisMesh.mesh.surface_set_material(1, thisMat.duplicate())
+	print(thisMat)
+	print(thisMesh.mesh.surface_get_material(1))
+	
+	print(thisMesh.mesh.surface_get_material(1).uv1_offset)
 
-func _process(delta):
-	var foo = $Collision/Mesh.mesh.surface_get_material(1);
-	foo.uv1_offset.y += speed
-	foo.uv2_offset.y += speed
+func _physics_process(delta):
+	thisMesh.mesh.surface_get_material(1).uv1_offset.y += self.speed

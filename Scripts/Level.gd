@@ -89,25 +89,21 @@ func add_wall_to_tile(tile, direction):
 	
 	match direction:
 		"EAST":
-			print("adding eastern wall.")
 			wall.set_name("East")
 			wall.translation = Vector3(2.3,4.3,0)
 			wall.scale = eastWestScale
 			tile.add_child(wall)
 		"WEST":
-			print("adding western wall.")
 			wall.set_name("West")
 			wall.translation = Vector3(-2.3,4.3,0)
 			wall.scale = eastWestScale
 			tile.add_child(wall)
 		"NORTH":
-			print("adding northern wall.")
 			wall.set_name("North")
 			wall.translation = Vector3(0,4.3,-2.3)
 			wall.scale = northSouthScale
 			tile.add_child(wall)
 		"SOUTH":
-			print("adding southern wall.")
 			wall.set_name("South")
 			wall.translation = Vector3(0,4.3,2.3)
 			wall.scale = northSouthScale

@@ -35,8 +35,8 @@ margin_right = 259.0
 margin_bottom = 97.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer"]
-margin_right = 331.0
-margin_bottom = 325.0
+margin_right = 252.0
+margin_bottom = 106.0
 size_flags_horizontal = 3
 
 [node name="Button" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
