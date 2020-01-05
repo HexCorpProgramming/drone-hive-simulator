@@ -9,6 +9,7 @@
 [sub_resource type="Theme" id=1]
 
 [node name="Drag-and-Drop" type="Control"]
+visible = false
 margin_left = 300.0
 margin_right = 300.0
 theme = SubResource( 1 )

@@ -8,3 +8,6 @@ extends Control
 func add_button():
 	var button = load("res://Objects/DragDropButton.tscn").instance()
 	$PanelContainer/ScrollContainer/HBoxContainer.add_child(button)
+	
+func _ready():
+	visible = false
