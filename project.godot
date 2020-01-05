@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 DragDrop="*res://Objects/UI/DragDrop/DragDropUI.tscn"
+PlayerSettings="*res://Scripts/PlayerSettings.gd"
 
 [debug]
 

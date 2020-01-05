@@ -3,7 +3,7 @@ extends Drone
 #Override
 func _ready():
 	._ready()
-	_change_ID("1211")
+	_change_ID(PlayerSettings.droneID)
 	print("Debug: Player drone ready.")
 
 
