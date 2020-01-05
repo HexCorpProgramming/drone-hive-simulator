@@ -40,6 +40,7 @@ extents = Vector3( 1.25, 0.1, 1 )
 [node name="Conveyer" type="StaticBody" groups=[
 "Conveyer",
 ]]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="Collision" type="CollisionShape" parent="."]
