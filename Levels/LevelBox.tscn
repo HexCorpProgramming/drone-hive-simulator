@@ -22,6 +22,11 @@ stream = ExtResource( 2 )
 volume_db = -15.0
 script = ExtResource( 3 )
 
+[node name="Camera" parent="SceneControl" index="4"]
+MIN_OFFSET_HEIGHT = 8
+MAX_OFFSET_HEIGHT = 10
+DISTANCE_FROM_DRONE = 14
+
 [node name="PlayerDrone" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
