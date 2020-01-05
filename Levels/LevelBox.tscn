@@ -23,9 +23,11 @@ volume_db = -15.0
 script = ExtResource( 3 )
 
 [node name="PlayerDrone" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="Body" parent="PlayerDrone" index="1"]
+editor/display_folded = true
 frame = 1
 
 [node name="PlayerPickup" type="Area" parent="PlayerDrone/Body" index="0"]
