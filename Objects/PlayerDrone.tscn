@@ -79,3 +79,7 @@ light_bake_mode = 0
 [node name="GroundRay" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, -3.4, 0 )
+
+[node name="InteractionRay" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 5, -4, 0 )

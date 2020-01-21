@@ -11,7 +11,6 @@ enum Rotation {LEFT, RIGHT}
 
 #Override
 func _ready():
-	._ready()
 	$Body.playing = false
 	$Body.frame = 0
 	get_node("Face").assign_id(droneID)
