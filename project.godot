@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Drone/Drone.gd"
 }, {
-"base": "Node",
+"base": "Spatial",
 "class": "InteractableObject",
 "language": "GDScript",
 "path": "res://Scripts/Abstract/InteractableObject.gd"

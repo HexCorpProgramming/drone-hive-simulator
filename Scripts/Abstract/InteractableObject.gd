@@ -1,4 +1,4 @@
-extends Node
+extends Spatial
 class_name InteractableObject
 
 var currentUser = null
