@@ -78,15 +78,13 @@ func _change_ID(ID : String):
 	return true
 	
 func handle_interaction():
-	print("This drone is interacting.")
 	if inventory:
-		print("Dropping my item like a good drone!")
 		inventory.interact(self)
 		inventory = null
 	else:
 		print($InteractionZone.get_overlapping_bodies())
 		for object in $InteractionZone.get_overlapping_bodies():
-			if object.has_method("interact"):
+			if object is InteractableObject:
 				object.interact(self)
 				if object is PickupableObject:
 					inventory = object
