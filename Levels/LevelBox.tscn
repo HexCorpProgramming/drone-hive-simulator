@@ -64,7 +64,6 @@ margin_bottom = 89.0
 icon = ExtResource( 7 )
 
 [node name="MockPickupable" type="KinematicBody" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.71669, 3.53141, 0 )
 script = ExtResource( 8 )
 

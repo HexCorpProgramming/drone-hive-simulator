@@ -84,17 +84,13 @@ func handle_interaction():
 		inventory.interact(self)
 		inventory = null
 	else:
-		print("Beep boop. This drone is casting a ray!")
 		print($InteractionZone.get_overlapping_bodies())
 		for object in $InteractionZone.get_overlapping_bodies():
 			if object.has_method("interact"):
-				inventory = object
+				object.interact(self)
+				if object is PickupableObject:
+					inventory = object
 				break
-		if inventory:
-			print("Hey you, ", inventory, " interact with me!")
-			inventory.interact(self)
-		else:
-			print("I didn't find anything!")
 
 func obey():
 	#Good drone.
