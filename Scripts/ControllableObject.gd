@@ -16,13 +16,13 @@ onready var ground_ray = get_node("GroundRay")
 
 func _handle_input() -> Array:
 	#Interface function
-	return [false, false, false, false, false]
+	return [false, false, false, false, false, false]
+	#North, south, east, west, jump, interact.
 
 
 func _handle_animation(velocity : Vector3) -> void:
 	#Interface function
 	return
-
 
 func _handle_acceleration(acceleration : Vector3, input : Array, time : float) -> Vector3:
 	
