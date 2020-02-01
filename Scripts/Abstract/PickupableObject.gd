@@ -1,6 +1,7 @@
 extends InteractableObject
 class_name PickupableObject
 
+var currentUser = null
 var beingUsed = false
 var FALLING_SPEED = 0.2
 
