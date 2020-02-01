@@ -8,5 +8,5 @@ extends InteractableObject
 func _ready():
 	pass # Replace with function body.
 
-func interact(interacter):
+func interact(interacter = null):
 	print("AAAA im being interacted with")
