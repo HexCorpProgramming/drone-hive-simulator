@@ -3,7 +3,7 @@ extends RigidBody
 
 var inCollider = false
 var pickedUp = false
-onready var playerPickup = get_node("/root/Level/PlayerDrone/Body/PlayerPickup")
+onready var playerPickup = get_node("../PlayerDrone/Body/PlayerPickup")
 
 
 #TODO: Tell, don't ask. Cube shouldn't be checking if drone is nearby.
