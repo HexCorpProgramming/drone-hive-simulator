@@ -56,15 +56,8 @@ func instance_tile_array(tileArray, mapHeight, mapWidth):
 			tile.set_name("tile " + str(y) + "," + (str(x)))
 			add_child(tile)
 			var currentTile = get_node("tile " + str(y) + "," + (str(x)))
-			var currentTileFloor = get_node("tile " + str(y) + "," + (str(x))+"/Floor")
-			currentTile.translation.x = OFFSET.x + (currentTile.scale.x*currentTileFloor.scale.x*2*x)
-			currentTile.translation.z = OFFSET.z + (currentTile.scale.z*currentTileFloor.scale.z*2*y)
-			#The above formula sets the tile spacing based on what the scale of the tile object currently is (determined by the Spatial parent).
-			#currentTile.scale.x/z = 1 (at time of writing). The X/Y/Z values can be altered without issue to create larger tiles.
-			#currentTileFloor.scale.x/z = 2 (This should always be 2. Scale should be set using the Spatial parent).
-			#Multiplication by 2 is needed because scale is essentially the radius, and it needs to be multiplied by 2 to get the "diameter".
-			#x/y = The current iteration of the for loop. This is what allows the tiles to be tiled.
-			pass
+			currentTile.translation.x = OFFSET.x + (currentTile.scale.x*x*2)
+			currentTile.translation.z = OFFSET.z + (currentTile.scale.z*y*2)
 
 func assign_object_positions():
 	pass
@@ -84,35 +77,25 @@ func add_wall_to_tile(tile, direction):
 	
 	var wall = load("res://Objects/Tiles/BasicWall.tscn").instance()
 	
-	var eastWestScale = Vector3(0.3,4,2)
-	var northSouthScale = Vector3(2,4,0.3)
-	
 	match direction:
 		"EAST":
 			wall.set_name("East")
-			wall.translation = Vector3(2.3,4.3,0)
-			wall.scale = eastWestScale
-			tile.add_child(wall)
+			wall.translation = tile.translation + Vector3(2.3,4,0)
+			wall.rotation_degrees.y = 180
+			add_child(wall)
 		"WEST":
 			wall.set_name("West")
-			wall.translation = Vector3(-2.3,4.3,0)
-			wall.scale = eastWestScale
-			tile.add_child(wall)
+			wall.translation = tile.translation + Vector3(-2.3,4,0)
+			wall.rotation_degrees.y = 180
+			add_child(wall)
 		"NORTH":
 			wall.set_name("North")
-			wall.translation = Vector3(0,4.3,-2.3)
-			wall.scale = northSouthScale
-			tile.add_child(wall)
+			wall.translation = tile.translation + Vector3(0,4,-2.3)
+			add_child(wall)
 		"SOUTH":
 			wall.set_name("South")
-			wall.translation = Vector3(0,4.3,2.3)
-			wall.scale = northSouthScale
 			wall.get_child(0).get_child(0).visible = false; #make the mesh invisible.
-			tile.add_child(wall)
-			
-		"NONE":
-			print("Error. add_wall_to_tile requires a direction (NORTH, SOUTH, EAST, WEST).")
-			return false
+			wall.translation = tile.translation + Vector3(0,4,2.3)
 		_:
 			print("Invalid direction. Check your function calls for typos.")
 			return false
