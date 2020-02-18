@@ -14,5 +14,6 @@ func _handle_input():
 	var goEast = true
 	var goWest = false
 	var goJump = false
+	var interact = false
 	
-	return [goNorth, goSouth, goEast, goWest, goJump]
+	return [goNorth, goSouth, goEast, goWest, goJump, interact]

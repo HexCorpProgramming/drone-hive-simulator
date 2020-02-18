@@ -11,3 +11,6 @@ export_presets.cfg
 *.csproj
 *.sln
 .vscode/
+
+# MacOS-specific ignores
+.DS-store

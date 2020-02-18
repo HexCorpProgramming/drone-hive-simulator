@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Drone",
 "language": "GDScript",
 "path": "res://Scripts/Drone/Drone.gd"
+}, {
+"base": "Spatial",
+"class": "InteractableObject",
+"language": "GDScript",
+"path": "res://Scripts/Abstract/InteractableObject.gd"
+}, {
+"base": "InteractableObject",
+"class": "PickupableObject",
+"language": "GDScript",
+"path": "res://Scripts/Abstract/PickupableObject.gd"
 } ]
 _global_script_class_icons={
 "ControllableObject": "",
-"Drone": ""
+"Drone": "",
+"InteractableObject": "",
+"PickupableObject": ""
 }
 
 [application]
@@ -33,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 DragDrop="*res://Objects/UI/DragDrop/DragDropUI.tscn"
+PlayerSettings="*res://Scripts/PlayerSettings.gd"
 
 [debug]
 

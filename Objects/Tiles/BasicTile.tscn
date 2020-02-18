@@ -22,16 +22,12 @@ surfaces/0 = {
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 2 )
 
-[node name="Tile" type="Spatial" groups=[
-"Tile",
-]]
-
-[node name="Floor" type="StaticBody" parent="."]
+[node name="Floor" type="StaticBody"]
 transform = Transform( 2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0 )
 
-[node name="FloorCollision" type="CollisionShape" parent="Floor"]
+[node name="FloorCollision" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="FloorMesh" type="MeshInstance" parent="Floor/FloorCollision"]
+[node name="FloorMesh" type="MeshInstance" parent="FloorCollision"]
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
