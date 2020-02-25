@@ -14,7 +14,7 @@ func _handle_input():
 	Input.is_action_pressed("ui_down"),
 	Input.is_action_pressed("ui_right"),
 	Input.is_action_pressed("ui_left"),
-	Input.is_action_just_pressed("Jump"),
+	Input.is_action_just_pressed("ui_jump"),
 	Input.is_action_just_pressed("ui_accept")
 	]
 	
