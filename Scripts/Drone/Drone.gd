@@ -82,8 +82,7 @@ func rotate_sprite(rotation):
 
 
 func _change_ID(ID : String):
-	get_node("Face").assign_id(droneID)
-	return true
+	get_node("Face").assign_id(ID)
 	
 func handle_interaction():
 	if inventory:
