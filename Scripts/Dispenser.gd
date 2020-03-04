@@ -69,3 +69,4 @@ func _physics_process(delta):
 		else:
 			spawned_item.translation = lerp(spawned_item.translation, offscreen, 0.05)
 			drop_target.visible = false
+			
