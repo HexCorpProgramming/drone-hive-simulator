@@ -26,8 +26,15 @@ func _on_pressed():
 	
 func _on_button_up():
 	print("Button released!")
-	spawned_item = null
 	drop_target.visible = false
+	var found_floor = space_state.intersect_ray(spawned_item.translation, spawned_item.translation - Vector3(0,50,0))
+	if found_floor:
+		var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size.y
+		print("item size: ", item_size)
+		spawned_item.translation = found_floor.collider.translation + Vector3(0, item_size * 2, 0)
+	else:
+		spawned_item.queue_free()
+	spawned_item = null
 
 func _process(delta):
 	if spawned_item:
@@ -62,3 +69,4 @@ func _physics_process(delta):
 		else:
 			spawned_item.translation = lerp(spawned_item.translation, offscreen, 0.05)
 			drop_target.visible = false
+			
