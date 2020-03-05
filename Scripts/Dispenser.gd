@@ -29,7 +29,7 @@ func _on_button_up():
 	drop_target.visible = false
 	var found_floor = space_state.intersect_ray(spawned_item.translation, spawned_item.translation - Vector3(0,50,0))
 	if found_floor:
-		var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size
+		var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size.y
 		print("item size: ", item_size)
 		spawned_item.translation = found_floor.collider.translation + Vector3(0, item_size * 2, 0)
 	else:
