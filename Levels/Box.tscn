@@ -27,6 +27,7 @@ ambient_light_sky_contribution = 0.0
 [node name="Level" type="Spatial"]
 
 [node name="SceneControl" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
 
 [node name="Music" parent="SceneControl" index="0"]
 stream = ExtResource( 2 )
