@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Drone1anim2.png-9272c51f10afe0bc86e70f557ee980ce.s3tc.stex"
-path.etc2="res://.import/Drone1anim2.png-9272c51f10afe0bc86e70f557ee980ce.etc2.stex"
+path.s3tc="res://.import/floortile.png-2ebf6122a92ede541d0ad55d2f208152.s3tc.stex"
+path.etc2="res://.import/floortile.png-2ebf6122a92ede541d0ad55d2f208152.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Animation/Drone/Walk/Drone1anim2.png"
-dest_files=[ "res://.import/Drone1anim2.png-9272c51f10afe0bc86e70f557ee980ce.s3tc.stex", "res://.import/Drone1anim2.png-9272c51f10afe0bc86e70f557ee980ce.etc2.stex" ]
+source_file="res://Textures/floortile.png"
+dest_files=[ "res://.import/floortile.png-2ebf6122a92ede541d0ad55d2f208152.s3tc.stex", "res://.import/floortile.png-2ebf6122a92ede541d0ad55d2f208152.etc2.stex" ]
 
 [params]
 

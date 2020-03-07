@@ -3,7 +3,7 @@ extends Button
 onready var dronename = get_node("../NameBox")
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://Levels/LevelBox.tscn")
+	get_tree().change_scene("res://Levels/Box.tscn")
 	if !dronename.text.empty():
 		PlayerSettings.change_id(dronename.text)
 	else:
