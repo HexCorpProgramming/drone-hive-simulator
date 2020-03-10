@@ -1,6 +1,6 @@
 # Drone Hive Simulator
 
-<div style="display: inline">
+<div style="display:none">
 <img width="100" height="100" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/HexCorpLogo.png">
 <p>Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)</p>
 <img height="100" width="auto" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif">
