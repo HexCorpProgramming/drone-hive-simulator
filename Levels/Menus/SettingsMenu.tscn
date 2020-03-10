@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/MainMenu/SettingsButton.gd" type="Script" id=1]
+[ext_resource path="res://Font/HEXgon.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Sprites/hexcorp-logo.png" type="Texture" id=3]
+
+
+[node name="Background" type="Node2D"]
+
+[node name="Main Menu" type="Node2D" parent="."]
+z_index = 1
+
+[node name="StarGameButton" type="Button" parent="Main Menu"]
+margin_left = 430.0
+margin_top = 398.0
+margin_right = 570.0
+margin_bottom = 458.0
+text = "Enter Level"
+script = ExtResource( 1 )
+
+[node name="Title" type="Label" parent="Main Menu"]
+margin_left = 10.0
+margin_top = 200.0
+margin_right = 1015.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.4, 1, 1 )
+text = "Drone Hive Simulator!
+by HexLatex and 5890 and all those other cutie drones"
+align = 1
+
+[node name="NameLabel" type="Label" parent="Main Menu"]
+margin_left = -1.0
+margin_top = 294.0
+margin_right = 1004.0
+margin_bottom = 318.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.4, 1, 1 )
+text = "Enter Name"
+align = 1
+
+[node name="Logo" type="Sprite" parent="Main Menu"]
+position = Vector2( 500, 100 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="NameBox" type="TextEdit" parent="Main Menu"]
+margin_left = 425.0
+margin_top = 334.0
+margin_right = 573.0
+margin_bottom = 374.0
+[connection signal="pressed" from="Main Menu/StarGameButton" to="Main Menu/StarGameButton" method="_on_Button_pressed"]

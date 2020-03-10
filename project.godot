@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "ControllableObject",
 "language": "GDScript",
-"path": "res://Scripts/ControllableObject.gd"
+"path": "res://Scripts/Abstract/ControllableObject.gd"
 }, {
 "base": "ControllableObject",
 "class": "Drone",
@@ -39,13 +39,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Drone Hive Simulator"
-run/main_scene="res://Levels/MenuMain.tscn"
+run/main_scene="res://Levels/Menus/MenuMain.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 DragDrop="*res://Objects/UI/DragDrop/DragDropUI.tscn"
-PlayerSettings="*res://Scripts/PlayerSettings.gd"
+PlayerSettings="*res://Objects/Scene/PlayerSettings.gd"
 
 [debug]
 
