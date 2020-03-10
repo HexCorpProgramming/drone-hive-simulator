@@ -6,4 +6,7 @@ Drone Hive Simulator is a "management simulator" game being created by obedient 
 
 You will need [Godot](https://godotengine.org/) (3.2.1+) to play this game. 
 
-To play this game, clone the repository and import the `project.godot` file in the repository root with Godot.
+Clone this repository and import the `project.godot` file in the repository root with Godot's project manager.
+
+![Project Manager Picture](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/ProjectManager.png)
+
