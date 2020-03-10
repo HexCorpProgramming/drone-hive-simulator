@@ -1,4 +1,4 @@
-### Contributing
+# Contributing
 
 We're delighted that you want to contribute your mental labor to this project.
 
