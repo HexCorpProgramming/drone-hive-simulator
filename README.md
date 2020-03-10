@@ -1,6 +1,6 @@
 # Drone Hive Simulator
 
-This is a [test](https://godotengine.org)
+Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)
 
 ## Getting Started
 
