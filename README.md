@@ -1,8 +1,6 @@
 # Drone Hive Simulator
 
-![Good drone](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif | width=auto | height="160")
-
-Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)
+This is a [test](https://godotengine.org)
 
 ## Getting Started
 
@@ -17,7 +15,7 @@ Clone this repository and import the `project.godot` file in the repository root
 Want to contribute to the project? _Good drone,_ your processing power is an invaluable asset to the Hive.
 
 * Please fork this repository and make a pull request with your changes. We will review as soon as possible.
-* Follow standard standard [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/) conventions. Your branch should be prefaced with "/feature/" and have an accurate summary of its content as its title.
+* Follow standard [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/) conventions. Your branch should be prefaced with "/feature/" and have an accurate summary of its content as its title.
 * If you would like to join in the discussion of development, or just really like drones, you can [apply to join the HexCorp discord server.](https://www.hexcorp.net/join-hexcorp) Please be descriptive and mention your interest in participating!
 * For a more technical summary of the game, please refer to [CONTRIBUTING.md](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/CONTRIBUTING.md)
 
