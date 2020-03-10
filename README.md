@@ -21,17 +21,18 @@ Want to contribute to the project? _Good drone,_ your processing power is an inv
 * If you would like to join in the discussion of development, or just really like drones, you can [apply to join the HexCorp discord server.](https://www.hexcorp.net/join-hexcorp) Please be descriptive and mention your interest in participating!
 * For a more technical summary of the game, please refer to [CONTRIBUTING.md](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/CONTRIBUTING.md)
 
+
+## Credits and Acknowledgements
+
+* Hive Mxtress, Product Owner, "Product Owner" - [Hex](https://twitter.com/HexLatex)
+* Art - [Blood Machine](https://twitter.com/Fleshsqueeze)
+* Music - ⬡-Drone #7025
+* Programming - ⬡-Drone #1211
+
 ## License
 
 This repository is provided under the MIT license.
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 Copyright 2020 © [HexLatex](https://twitter.com/HexLatex) 
-
-## Credits
-
-Hive Mxtress, Product Owner, "Product Owner" - [Hex](https://twitter.com/HexLatex)
-Art - [Blood Machine](https://twitter.com/Fleshsqueeze)
-Music - ⬡-Drone #7025
-Programming - ⬡-Drone #1211
 
