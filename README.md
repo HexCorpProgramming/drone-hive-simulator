@@ -1,12 +1,10 @@
 # Drone Hive Simulator
 
-<img align="left" width="100" height="100" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/HexCorpLogo.png">
-<img align="right" height="100" width="auto" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif">
-<br>
-<br>
-<br>
-
-Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)
+<div style="display: inline">
+<img width="100" height="100" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/HexCorpLogo.png">
+<p>Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)</p>
+<img height="100" width="auto" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif">
+</div>
 
 ## Getting Started
 
