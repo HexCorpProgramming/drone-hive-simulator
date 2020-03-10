@@ -44,7 +44,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DragDrop="*res://Objects/UI/DragDrop/DragDropUI.tscn"
+ClickSelect="*res://Objects/UI/ClickSelect/ClickSelectUI.tscn"
 PlayerSettings="*res://Objects/Scene/PlayerSettings.gd"
 
 [debug]
