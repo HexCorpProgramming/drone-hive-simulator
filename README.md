@@ -1,6 +1,6 @@
 # Drone Hive Simulator
 
-<img alt="A good drone." height="160" width="auto" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/Documentation/README/Drone.gif">
+<img alt="A good drone." height="160" width="auto" src="./Documentation/README/Drone.gif">
 
 Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)
 
@@ -10,7 +10,7 @@ You will need [Godot](https://godotengine.org/) (3.2.1+) to play this game.
 
 Clone this repository and import the `project.godot` file in the repository root with Godot's project manager.
 
-![Project Manager Picture](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/Documentation/README/ProjectManager.png)
+![Project Manager Picture](./Documentation/README/ProjectManager.png)
 
 ## Contributing (HexCorp Community Outsourcing)
 
