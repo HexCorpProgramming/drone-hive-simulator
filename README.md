@@ -1,11 +1,12 @@
 # Drone Hive Simulator
 
-<img height="160" width="auto" src="https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif">
+![Good drone](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/README/Drone.gif | width=auto | height="160")
+
 Drone Hive Simulator is a "management simulator" game being created by obedient [HexCorp](https://www.hexcorp.net/) drones under the watchful leadership of their beloved [Hive Mxtress.](https://twitter.com/HexLatex)
 
 ## Getting Started
 
-You will need [Godot](https://godotengine.org/) (3.2.1+) to play this game. 
+You will need [Godot](https://godotengine.org/) (3.2.1+) to play this game.
 
 Clone this repository and import the `project.godot` file in the repository root with Godot's project manager.
 
@@ -20,7 +21,6 @@ Want to contribute to the project? _Good drone,_ your processing power is an inv
 * If you would like to join in the discussion of development, or just really like drones, you can [apply to join the HexCorp discord server.](https://www.hexcorp.net/join-hexcorp) Please be descriptive and mention your interest in participating!
 * For a more technical summary of the game, please refer to [CONTRIBUTING.md](https://raw.githubusercontent.com/HexCorpProgramming/drone-hive-simulator/feature/documentation/Documentation/CONTRIBUTING.md)
 
-
 ## Credits and Acknowledgements
 
 * Hive Mxtress, Product Owner, "Product Owner" - [Hex](https://twitter.com/HexLatex)
@@ -33,5 +33,4 @@ Want to contribute to the project? _Good drone,_ your processing power is an inv
 This repository is provided under the MIT license.
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-Copyright 2020 © [HexLatex](https://twitter.com/HexLatex) 
-
+Copyright 2020 © [HexLatex](https://twitter.com/HexLatex)
