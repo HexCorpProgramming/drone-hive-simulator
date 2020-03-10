@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Objects/Scene/SceneControl.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Scene/Music.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Scene/FloorSpawner.gd" type="Script" id=3]
+[ext_resource path="res://Objects/Scene/DynamicCamera.gd" type="Script" id=4]
+
+[sub_resource type="AudioStreamSample" id=1]
+
+[node name="SceneControl" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+volume_db = -20.0
+script = ExtResource( 2 )
+
+[node name="FloorSpawner" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+script = ExtResource( 4 )

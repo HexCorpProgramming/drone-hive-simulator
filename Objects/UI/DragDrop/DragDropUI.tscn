@@ -1,16 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Drag-and-Drop.gd" type="Script" id=1]
+[ext_resource path="res://Objects/UI/DragDrop/Drag-and-Drop.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/DropTarget.gd" type="Script" id=3]
+[ext_resource path="res://Objects/UI/DragDrop/DropTarget.gd" type="Script" id=3]
 [ext_resource path="res://Objects/UI/DragDrop/DragDropButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/kitty.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Drones/DummyDrone.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Constructibles/Conveyor/Conveyer.tscn" type="PackedScene" id=7]
-
-
-
-
+[ext_resource path="res://Objects/Constructibles/Conveyor/Conveyer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 
@@ -44,9 +38,4 @@ margin_bottom = 106.0
 size_flags_horizontal = 3
 
 [node name="Button" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
-icon = ExtResource( 5 )
-item_source = ExtResource( 6 )
-
-[node name="Button2" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
-icon = ExtResource( 5 )
-item_source = ExtResource( 7 )
+item_source = ExtResource( 5 )
