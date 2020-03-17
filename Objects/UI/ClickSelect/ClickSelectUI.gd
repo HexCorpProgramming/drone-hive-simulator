@@ -30,7 +30,14 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
 		print("Mouse clicked!")
-		#Cast a ray down from the item preview to find the floor and spawn an item there.
+		var found_floor = $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0))
+		if found_floor:
+			print("floor found.")
+			var spawned_item = picked_item.instance()
+			add_child(spawned_item)
+			var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size.y
+			spawned_item.translation = found_floor.collider.translation + Vector3(0, item_size * 2, 0)
+
 		
 func raycast_from_camera_to_mouse():
 	var mouse_position = get_viewport().get_mouse_position()
