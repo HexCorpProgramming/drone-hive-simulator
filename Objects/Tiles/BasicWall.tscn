@@ -19,6 +19,7 @@ surfaces/0 = {
 }
 
 [node name="Wall" type="StaticBody" groups=[
+"Wall",
 "Tile",
 ]]
 transform = Transform( 7.64274e-015, 8.74228e-009, 2, 4, -8.74228e-009, 0, 1.74846e-007, 0.2, -8.74228e-008, 0, 0, 0 )

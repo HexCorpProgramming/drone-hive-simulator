@@ -3,6 +3,11 @@ extends Control
 var picked_item = null
 var item_preview = null
 
+var vertical_offset = Vector3(0,7,0)
+var last_known_location = Vector3(0,50,0)
+
+const floor_tile = preload("res://Objects/Tiles/BasicTile.tscn")
+
 func add_button():
 	var button = load("res://Objects/UI/ClickSelect/ClickSelectButton.tscn").instance()
 	$PanelContainer/ScrollContainer/HBoxContainer.add_child(button)
@@ -16,6 +21,8 @@ func set_item(item):
 	if item:
 		item_preview = picked_item.instance()
 		add_child(item_preview)
+		item_preview.visible = false
+		item_preview.translation = Vector3(0,50,0)
 		item_preview.get_child(0).disabled = true
 	
 func _ready():
@@ -24,14 +31,15 @@ func _ready():
 func _process(delta):
 	if picked_item: #If we have an item ready to place, we should have a copy of it follow the mouse.
 		var result = raycast_from_camera_to_mouse()
-		if result:
-			item_preview.translation = result.collider.translation + Vector3(0,7,0)
+		if result and !result.collider.is_in_group("Wall"):
+			item_preview.visible = true
+			item_preview.translation = lerp(item_preview.translation, result.collider.translation + vertical_offset, 0.1)
 		
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
 		print("Mouse clicked!")
 		var found_floor = $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0))
-		if found_floor:
+		if found_floor and found_floor.collider.is_in_group("Floor"): 
 			print("floor found.")
 			var spawned_item = picked_item.instance()
 			add_child(spawned_item)
