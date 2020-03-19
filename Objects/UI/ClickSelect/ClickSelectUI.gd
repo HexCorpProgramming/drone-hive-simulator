@@ -31,7 +31,7 @@ func _ready():
 func _process(delta):
 	if picked_item: #If we have an item ready to place, we should have a copy of it follow the mouse.
 		var result = raycast_from_camera_to_mouse()
-		if result and !result.collider.is_in_group("Wall"):
+		if result:
 			item_preview.visible = true
 			item_preview.translation = lerp(item_preview.translation, result.collider.translation + vertical_offset, 0.1)
 		
