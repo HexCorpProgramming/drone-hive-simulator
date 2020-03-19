@@ -45,7 +45,9 @@ func _input(event):
 			add_child(spawned_item)
 			var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size.y
 			spawned_item.translation = found_floor.collider.translation + Vector3(0, item_size * 2, 0)
-
+	if Input.is_action_just_pressed("clickdrop_cancel_item"):
+		set_item(null)
+		
 		
 func raycast_from_camera_to_mouse():
 	var mouse_position = get_viewport().get_mouse_position()
