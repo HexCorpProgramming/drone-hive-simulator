@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Chamber.png-fbab05a8ce581e0e3176e13a66c3b78c.s3tc.stex"
-path.etc2="res://.import/Chamber.png-fbab05a8ce581e0e3176e13a66c3b78c.etc2.stex"
+path.s3tc="res://.import/Deposition.png-1c08aef86cedab356d0e529c16a1d4a2.s3tc.stex"
+path.etc2="res://.import/Deposition.png-1c08aef86cedab356d0e529c16a1d4a2.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://External/Blender/DronificationChamber/Chamber.png"
-dest_files=[ "res://.import/Chamber.png-fbab05a8ce581e0e3176e13a66c3b78c.s3tc.stex", "res://.import/Chamber.png-fbab05a8ce581e0e3176e13a66c3b78c.etc2.stex" ]
+source_file="res://Objects/Constructibles/Pod/Deposition.png"
+dest_files=[ "res://.import/Deposition.png-1c08aef86cedab356d0e529c16a1d4a2.s3tc.stex", "res://.import/Deposition.png-1c08aef86cedab356d0e529c16a1d4a2.etc2.stex" ]
 
 [params]
 
