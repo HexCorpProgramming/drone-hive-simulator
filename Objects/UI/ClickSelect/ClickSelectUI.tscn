@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/play.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Theme" id=1]
 
@@ -35,7 +36,7 @@ margin_right = 259.0
 margin_bottom = 97.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer"]
-margin_right = 240.0
+margin_right = 309.0
 margin_bottom = 106.0
 size_flags_horizontal = 3
 
@@ -49,5 +50,11 @@ margin_left = 81.0
 margin_right = 193.0
 margin_bottom = 106.0
 item_source = ExtResource( 6 )
+
+[node name="ChamberButton" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_left = 197.0
+margin_right = 309.0
+margin_bottom = 106.0
+item_source = ExtResource( 7 )
 
 [node name="WorldGetter" type="Spatial" parent="."]

@@ -6,7 +6,6 @@ var item_preview = null
 onready var PlayerDrone = load("res://Objects/Drones/PlayerDrone/PlayerDrone.tscn")
 
 var vertical_offset = Vector3(0,7,0)
-var last_known_location = Vector3(0,50,0)
 
 const floor_tile = preload("res://Objects/Tiles/BasicTile.tscn")
 
@@ -32,9 +31,8 @@ func _ready():
 	
 func _process(delta):
 	if picked_item:
-		handle_drop_target()
 		handle_item_preview()
-	
+		handle_drop_target()
 		
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
@@ -46,8 +44,8 @@ func _input(event):
 			print("floor found.")
 			print(found_floor.collider.translation)
 			var spawned_item = picked_item.instance()
-			spawned_item.translation = found_floor.collider.translation
 			add_child(spawned_item)
+			spawned_item.translation = found_floor.collider.translation
 	if Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 		
@@ -70,16 +68,18 @@ func handle_drop_target():
 func handle_item_preview():
 	var result = raycast_from_camera_to_mouse()
 	if result:
+		print(result.collider.translation)
+		print(result.collider.get_global_transform().origin)
 		$DropTarget.visible = true
 		item_preview.visible = true
-		item_preview.translation = lerp(item_preview.translation, result.collider.translation + vertical_offset, 0.1)
+		item_preview.translation = lerp(item_preview.translation, result.collider.get_global_transform().origin + vertical_offset, 0.1)
 		
 func raycast_from_camera_to_mouse():
 	var mouse_position = get_viewport().get_mouse_position()
 	var from = get_viewport().get_camera().project_ray_origin(mouse_position)
 	var normal = get_viewport().get_camera().project_ray_normal(mouse_position)
 	var to = from + normal * 100
-	return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to, [item_preview])
+	return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to)
 	
 func raycast_from_object_to_ground(object, avoid = null):
 	 return $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0), [avoid], 1)

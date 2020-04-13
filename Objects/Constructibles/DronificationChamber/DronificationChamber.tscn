@@ -42,8 +42,10 @@ tracks/0/enabled = true
 tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 0.013806, 0, 0, 0, 1, 1, 1, 1, 0.125, 1, 0, 0, 0.0536489, 0, 0, 0, 1, 1, 1, 1, 0.166667, 1, 0, 0, 0.11716, 0, 0, 0, 1, 1, 1, 1, 0.208333, 1, 0, 0, 0.201974, 0, 0, 0, 1, 1, 1, 1, 2.08333, 1, 0, 0, 2.72665, 0, 0, 0, 1, 1, 1, 1 )
 
 [node name="Dronification Chamber" type="Spatial"]
+transform = Transform( 1.885, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 
 [node name="ChamberArmature" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="ChamberArmature"]
 bones_in_world_transform = true

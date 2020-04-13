@@ -27,7 +27,8 @@ stream = ExtResource( 2 )
 volume_db = -15.0
 
 [node name="PlayerDrone" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+editor/display_folded = true
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 4, 0 )
 
 [node name="Body" parent="PlayerDrone" index="1"]
 frame = 1
