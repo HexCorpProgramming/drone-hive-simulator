@@ -5,7 +5,7 @@
 [ext_resource path="res://Objects/UI/ClickSelect/DropTarget.gd" type="Script" id=3]
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/play.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Constructibles/Conveyor/Conveyer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Theme" id=1]
 

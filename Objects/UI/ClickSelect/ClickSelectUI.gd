@@ -26,7 +26,6 @@ func set_item(item):
 		add_child(item_preview)
 		item_preview.visible = false
 		item_preview.translation = Vector3(0,50,0)
-		item_preview.get_child(0).disabled = true
 	
 func _ready():
 	visible = false
@@ -45,10 +44,10 @@ func _input(event):
 			print(found_floor.collider)
 		if found_floor and found_floor.collider.is_in_group("Floor"): 
 			print("floor found.")
+			print(found_floor.collider.translation)
 			var spawned_item = picked_item.instance()
+			spawned_item.translation = found_floor.collider.translation
 			add_child(spawned_item)
-			var item_size = spawned_item.get_child(0).get_child(0).get_aabb().size.y
-			spawned_item.translation = found_floor.collider.translation + Vector3(0, item_size * 2, 0)
 	if Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 		
