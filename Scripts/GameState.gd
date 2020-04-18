@@ -32,6 +32,7 @@ func handle_state_change(current_state):
 		1:
 			print("EDITING mode active.")
 			#Set current camera
+			SceneTools.get_editcamera().translation = SceneTools.get_editcamera().init_translation
 			SceneTools.get_editcamera().current = true
 			#Show edit tools
 			ClickSelect.visible = true
