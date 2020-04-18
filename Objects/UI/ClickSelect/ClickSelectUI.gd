@@ -18,7 +18,7 @@ func set_item(item):
 	if item_preview:
 		item_preview.queue_free()
 		item_preview = null
-	print("Item is", item)
+	print("Click select item update to: ", item)
 	picked_item = item
 	if item:
 		item_preview = picked_item.instance()
@@ -37,12 +37,16 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
 		print("Mouse clicked!")
+		var mouse_over_geometry = raycast_from_camera_to_mouse()
+		if not mouse_over_geometry:
+			print("But the mouse isn't over the floor so we won't spawn an item.")
+			set_item(null)
+			return
 		var found_floor = raycast_from_object_to_ground(item_preview)
 		if found_floor:
 			print(found_floor.collider)
 		if found_floor and found_floor.collider.is_in_group("Floor"): 
 			print("floor found.")
-			print(found_floor.collider.translation)
 			var spawned_item = picked_item.instance()
 			add_child(spawned_item)
 			spawned_item.translation = found_floor.collider.translation

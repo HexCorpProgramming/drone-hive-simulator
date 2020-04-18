@@ -3,7 +3,7 @@
 [ext_resource path="res://Objects/Scene/SceneControl.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Scene/Music.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Scene/FloorSpawner.gd" type="Script" id=3]
-[ext_resource path="res://Objects/Scene/DynamicCamera.gd" type="Script" id=4]
+[ext_resource path="res://Objects/Scene/PlayerCamera.gd" type="Script" id=4]
 
 [sub_resource type="AudioStreamSample" id=1]
 
@@ -18,6 +18,10 @@ script = ExtResource( 2 )
 [node name="FloorSpawner" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="PlayerCamera" type="Camera" parent="."]
+size = 0.1
+script = ExtResource( 4 )
+
+[node name="EditCamera" type="Camera" parent="."]
 size = 0.1
 script = ExtResource( 4 )

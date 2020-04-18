@@ -15,4 +15,16 @@ func _ready():
 	set_state("WALKING")
 	
 func handle_state_change(selected):
+	
+	#Here is where we should handle everything required for a state change.
+	
 	print("Selected state is " + str(selected))
+	match selected:
+		0:
+			print("WALKING mode active.")
+			ClickSelect.set_item(null)
+			
+		1:
+			print("EDITING mode active.")
+			#
+			
