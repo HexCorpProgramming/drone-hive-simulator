@@ -7,6 +7,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_pause"):
 		get_tree().paused = !get_tree().paused
 		visible = !visible

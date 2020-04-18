@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Objects/UI/ClickSelect/ClickSelectUI.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=2]
+[ext_resource path="res://Objects/UI/ClickSelect/DropTarget.gd" type="Script" id=3]
+[ext_resource path="res://Objects/UI/ClickSelect/ClickSelectButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/play.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Constructibles/StoragePod/StoragePod.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Theme" id=1]
+
+[node name="ClickSelect" type="Control"]
+margin_left = 300.0
+margin_right = 300.0
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="DropTarget" type="Sprite3D" parent="."]
+transform = Transform( 1.8, 0, 0, 0, 1, 0, 0, 0, 1.8, 0, 1, 0 )
+visible = false
+modulate = Color( 1, 0.0235294, 0.0235294, 1 )
+axis = 1
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+NEUTRAL_COLOR = Color( 0.745098, 0.745098, 0.745098, 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 266.0
+margin_bottom = 104.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 259.0
+margin_bottom = 97.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer"]
+margin_right = 425.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+
+[node name="NullButton" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_right = 77.0
+margin_bottom = 106.0
+icon = ExtResource( 5 )
+
+[node name="ConveyorButton" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_left = 81.0
+margin_right = 193.0
+margin_bottom = 106.0
+item_source = ExtResource( 6 )
+
+[node name="ChamberButton" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_left = 197.0
+margin_right = 309.0
+margin_bottom = 106.0
+item_source = ExtResource( 7 )
+
+[node name="PodButton" parent="PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 4 )]
+margin_left = 313.0
+margin_right = 425.0
+margin_bottom = 106.0
+item_source = ExtResource( 8 )
+
+[node name="WorldGetter" type="Spatial" parent="."]

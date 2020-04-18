@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Drone1anim1.png-ce04d1cc5ce488630e7fae085dcffa58.stex"
+path="res://.import/Deposition.png-dfc06b3839fd3e918ba9b9924afb35b3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Animation/Drone/Walk/Drone1anim1.png"
-dest_files=[ "res://.import/Drone1anim1.png-ce04d1cc5ce488630e7fae085dcffa58.stex" ]
+source_file="res://Objects/Constructibles/StoragePod/Deposition.png"
+dest_files=[ "res://.import/Deposition.png-dfc06b3839fd3e918ba9b9924afb35b3.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=1
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=true
 process/invert_color=false

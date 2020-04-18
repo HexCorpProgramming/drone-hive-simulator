@@ -4,7 +4,6 @@
 [ext_resource path="res://Font/HEXgon.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Sprites/hexcorp-logo.png" type="Texture" id=3]
 
-
 [node name="Background" type="Node2D"]
 
 [node name="Main Menu" type="Node2D" parent="."]

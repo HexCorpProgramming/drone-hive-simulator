@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Deposition-export.png-15b8364215f78461bc0c5443c460c801.stex"
+path="res://.import/Deposition.png-85c17a8ee81cdb0ae58bd1738785da02.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://External/Blender/StoragePod/Deposition-export.png"
-dest_files=[ "res://.import/Deposition-export.png-15b8364215f78461bc0c5443c460c801.stex" ]
+source_file="res://External/Blender/StoragePod/Deposition.png"
+dest_files=[ "res://.import/Deposition.png-85c17a8ee81cdb0ae58bd1738785da02.stex" ]
 
 [params]
 
@@ -20,15 +20,15 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
-process/HDR_as_SRGB=false
+process/HDR_as_SRGB=true
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

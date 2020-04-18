@@ -1,28 +1,27 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Drone/DroneFace.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/kitty.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/numbersheethuge.png" type="Texture" id=4]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim1.png" type="Texture" id=5]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=6]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=7]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=8]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim5.png" type="Texture" id=9]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim6.png" type="Texture" id=10]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim7.png" type="Texture" id=11]
-[ext_resource path="res://Animation/Drone/Walk/Drone1anim8.png" type="Texture" id=12]
-
-
+[ext_resource path="res://Objects/Hypno Particles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Drone/DroneFace.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/kitty.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/numbersheethuge.png" type="Texture" id=5]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim1.png" type="Texture" id=6]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=7]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=8]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=9]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim5.png" type="Texture" id=10]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim6.png" type="Texture" id=11]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim7.png" type="Texture" id=12]
+[ext_resource path="res://Animation/Drone/Walk/Drone1anim8.png" type="Texture" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "WalkRight",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "WalkUp",
 "speed": 5.0
@@ -35,16 +34,20 @@ extents = Vector3( 1.14105, 3.18944, 0.440836 )
 extents = Vector3( 1, 3.21773, 1 )
 
 [node name="PlayerDrone" type="KinematicBody"]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
 script = ExtResource( 1 )
+
+[node name="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115523, 1.15791, 0 )
 
 [node name="Face" type="Spatial" parent="."]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2, 0.1 )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Emotion" type="Sprite3D" parent="Face"]
 visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="ID" type="Spatial" parent="Face"]
 editor/display_folded = true
@@ -52,22 +55,22 @@ transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 1, -0.099, 0, 0 )
 
 [node name="Digit1" type="Sprite3D" parent="Face/ID"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, -0.626956, 0, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 10
 
 [node name="Digit2" type="Sprite3D" parent="Face/ID"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, -0.200949, 0, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 10
 
 [node name="Digit3" type="Sprite3D" parent="Face/ID"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, 0.215227, 0, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 10
 
 [node name="Digit4" type="Sprite3D" parent="Face/ID"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, 0.634424, 0, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 10
 
 [node name="Body" type="AnimatedSprite3D" parent="."]
