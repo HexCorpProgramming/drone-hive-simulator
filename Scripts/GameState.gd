@@ -23,8 +23,9 @@ func handle_state_change(selected):
 		0:
 			print("WALKING mode active.")
 			ClickSelect.set_item(null)
+			SceneTools.get_playercamera().current = true
 			
 		1:
 			print("EDITING mode active.")
-			#
+			SceneTools.get_editcamera().current = true
 			

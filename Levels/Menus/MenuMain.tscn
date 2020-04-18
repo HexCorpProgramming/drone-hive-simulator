@@ -7,6 +7,7 @@
 [node name="Background" type="Node2D"]
 
 [node name="Main Menu" type="Node2D" parent="."]
+editor/display_folded = true
 z_index = 1
 
 [node name="StarGameButton" type="Button" parent="Main Menu"]
