@@ -1,104 +1,109 @@
 extends Spatial
 
-#For calculating wall the translation:scale ratio, translation always = scale + 0.3
+export var default_x = 15
+export var default_y = 15
 
-const OFFSET = Vector3(0,0,0)
-var tileArray = []
-var rowWidths = []
+#The tiles and walls are scaled cubes by default, which means they can tesselate by knowing their scale.
+#If you ever decide to use something other than default cubes, Hex be with you.
+export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
+export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
+
+#2D arrays are really annoying in Godot. The only way to use them right now is the ol' "array in an array" trick.
+#Arrays in Godot are sized dynamically,
+#So there's not actually a limit to how many tiles can be appended to each row.
+#This is a good thing, since we won't have to add a new empty element and resize every array every time we add a column of tiles.
+var tiles = []
 
 func _ready():
+	create_default_tiles()
 	
-	randomize()
-	var mapHeight = randi()%5+10 #Height goes from top to bottom.
-	var mapWidth = randi()%5+10	 #Width goes from left to right.
-
-	print("Map height is: ", str(mapHeight))
-	print("Map width is: ", str(mapWidth))
+func create_default_tiles():
+	#Delete any pre-existing tiles.
+	for node in get_children():
+		node.queue_free()
 	
-	generate_empty_array(tileArray, mapHeight)
-	print("Tile array generated (empty).")
-	generate_tiles(tileArray, mapHeight, mapWidth)
-	print("Tile array populated.")
-	instance_tile_array(tileArray, mapHeight, mapWidth)
-	print("Tile array instantiated.")
-	instance_walls(mapHeight, mapWidth)
-	print("Tile walls instantiated.")
+	#Reset the tile array
+	tiles.clear()
+	
+	add_rows(default_x, default_y)
+	add_tiles(Vector2(0,0), Vector2(3,3))
 
 	
-func generate_empty_array(tileArray, mapHeight):
-	for y in range(mapHeight):
-		tileArray.append([])
+	get_all_tiles()
+	
+func get_tile(x,y):
+	if !valid(x,y):
+		print("Invalid co-ords.")
+		return null
+	return tiles[x][y]
+	
+func add_tile(x,y):
+	if !valid(x,y):
+		return
+	var new_tile = tile_source.instance()
+	new_tile.name = str(x)+","+str(y)
+	#Default cubes can tesselate really well by scale alone. Scale is essentially radius, so scale * 2 is diameter.
+	new_tile.translation = Vector3(new_tile.scale.x * 2 * x, 0, new_tile.scale.z * 2 * y)
+	add_child(new_tile)
+	tiles[x][y] = new_tile
+	
+func add_rows(size, rows = 1):
+	#Size and rows will be +1 as a gutter so we don't go out of bounds
+	#Validate
+	if rows == 0:
+		print("Row must be > 0.")
+	#Setup row.
+	for i in range(0, rows+1):
+		var row = []
+		for i in range(0, size+1):
+			row.append(null)
+		tiles.append(row)
+	print("Added ", rows+1, " row(s).")
+	
+func delete_tile(x,y):
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	if tile != null and tile.has_method("queue_free"):
+		tile.queue_free()
+		tiles[x][y] = null
+	
+func delete_tiles(to, from):
+	if !valid(from.x, from.y):
+		return
+	if !valid(to.x, to.y):
+		return
+	if (from.x == to.x and from.y == to.y):
+		print("delete_tiles parameters cannot be identical.")
+		return
+	for y in range(from.y, to.y):
+		for x in range(from.x, to.x):
+			delete_tile(x,y)
+	
+func add_tiles(to, from):
+	if !valid(from.x, from.y):
+		print("beep")
+		return
+	if !valid(to.x, to.y):
+		print("boop")
+		return
+	if (from.x == to.x and from.y == to.y):
+		print("add_tiles parameters cannot be identical.")
+		return
+	for y in range(from.y, to.y):
+		print("beep")
+		for x in range(from.x, to.x):
+			print("boop")
+			add_tile(x,y)
 
-func generate_tiles(tileArray, mapHeight, mapWidth):
+func get_all_tiles():
+	var flattened_list = []
+	for row in tiles:
+		for tile in row:
+			if tile != null:
+				flattened_list.append(tile)
+	print("TOTAL COUNT OF TILES: ",flattened_list.size())
+	return flattened_list
 	
-	#Purpose: Populates the tileArray with instanced tile objects given a specific map height and width.
-	
-	for y in range(mapHeight):
-		var rowToAdd = []
-		for x in range(mapWidth):
-			var tile = load("res://Objects/Tiles/BasicTile.tscn").instance()
-			rowToAdd.append(tile)
-		tileArray[y] = rowToAdd
-		rowWidths.append(rowToAdd.size())
-
-func cull_tiles():
-	#Generate new height and width to delete from.
-	#Update rowWidths with new row widths.
-	pass
-
-func instance_tile_array(tileArray, mapHeight, mapWidth):
-	
-	#Use: 
-	
-	for y in range(mapHeight):
-		for x in range(mapWidth):
-			var tile = tileArray[y][x]
-			tile.set_name("tile " + str(y) + "," + (str(x)))
-			add_child(tile)
-			var currentTile = get_node("tile " + str(y) + "," + (str(x)))
-			currentTile.translation.x = OFFSET.x + (currentTile.scale.x*x*2)
-			currentTile.translation.z = OFFSET.z + (currentTile.scale.z*y*2)
-
-func assign_object_positions():
-	pass
-
-func instance_walls(mapHeight, mapWidth):
-	
-	#Use: Find the tiles that are on the map edges and add a wall object as a child node of the tile node.
-	
-	for y in range(mapHeight):
-		add_wall_to_tile(tileArray[y][mapWidth - 1], "EAST")
-		add_wall_to_tile(tileArray[y][0], "WEST")
-	for x in range(mapWidth):
-		add_wall_to_tile(tileArray[mapHeight - 1][x], "SOUTH")
-		add_wall_to_tile(tileArray[0][x], "NORTH")
-
-func add_wall_to_tile(tile, direction):
-	
-	var wall = load("res://Objects/Tiles/BasicWall.tscn").instance()
-	
-	match direction:
-		"EAST":
-			wall.set_name("East")
-			wall.translation = tile.translation + Vector3(2.3,4,0)
-			wall.rotation_degrees.y = 180
-			add_child(wall)
-		"WEST":
-			wall.set_name("West")
-			wall.translation = tile.translation + Vector3(-2.3,4,0)
-			wall.rotation_degrees.y = 180
-			add_child(wall)
-		"NORTH":
-			wall.set_name("North")
-			wall.translation = tile.translation + Vector3(0,4,-2.3)
-			add_child(wall)
-		"SOUTH":
-			wall.set_name("South")
-			wall.get_child(0).get_child(0).visible = false; #make the mesh invisible.
-			wall.translation = tile.translation + Vector3(0,4,2.3)
-		_:
-			print("Invalid direction. Check your function calls for typos.")
-			return false
-	
-	
-	pass
+func valid(x,y):
+	return x <= tiles.size() and y <= tiles[x].size()
