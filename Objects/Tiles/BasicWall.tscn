@@ -18,15 +18,17 @@ surfaces/0 = {
 "vertex_count": 32
 }
 
-[node name="Wall" type="StaticBody" groups=[
+[node name="Spatial" type="Spatial"]
+
+[node name="Wall" type="StaticBody" parent="." groups=[
 "Wall",
 "Tile",
 ]]
-transform = Transform( 7.64274e-015, 8.74228e-009, 2, 4, -8.74228e-009, 0, 1.74846e-007, 0.2, -8.74228e-008, 0, 0, 0 )
+transform = Transform( -1.74846e-007, -0.2, 0, 4, -8.74228e-009, 0, 0, 0, 2, 2.2, 4.3, 0 )
 
-[node name="Collision" type="CollisionShape" parent="."]
+[node name="Collision" type="CollisionShape" parent="Wall"]
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Collision"]
+[node name="MeshInstance" type="MeshInstance" parent="Wall/Collision"]
 mesh = SubResource( 2 )
 material/0 = null

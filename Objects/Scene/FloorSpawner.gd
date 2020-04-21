@@ -2,11 +2,14 @@ extends Spatial
 
 export var default_x = 15
 export var default_y = 15
+export var tile_scale = 4
 
 #The tiles and walls are scaled cubes by default, which means they can tesselate by knowing their scale.
 #If you ever decide to use something other than default cubes, Hex be with you.
 export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
 export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
+
+enum direction {EAST, NORTH, WEST, SOUTH}
 
 #2D arrays are really annoying in Godot. The only way to use them right now is the ol' "array in an array" trick.
 #Arrays in Godot are sized dynamically,
@@ -30,6 +33,8 @@ func create_default_tiles():
 	add_tiles(0,0,15,15)
 	delete_tiles(1,1,14,14)
 	get_all_tiles()
+	add_wall_to_tile(0,0,direction.NORTH)
+	add_wall_to_tile(0,0,direction.WEST)
 	
 func get_tile(x,y):
 	if !valid(x,y):
@@ -54,7 +59,7 @@ func add_tile(x,y):
 	var new_tile = tile_source.instance()
 	new_tile.name = str(x)+","+str(y)
 	#Default cubes can tesselate really well by scale alone. Scale is essentially radius, so scale * 2 is diameter.
-	new_tile.translation = Vector3(new_tile.scale.x * 2 * x, 0, new_tile.scale.z * 2 * y)
+	new_tile.translation = Vector3(tile_scale * x, 0, tile_scale * y)
 	add_child(new_tile)
 	tiles[x][y] = new_tile
 	
@@ -97,6 +102,20 @@ func delete_tiles(from_x, from_y, to_x, to_y):
 		for x in range(from_x, to_x):
 			print("boop")
 			delete_tile(x,y)
+	
+func add_wall_to_tile(x,y,direction):
+	
+	#0: East
+	#90: North
+	#180: West
+	#270: South
+	
+	var tile = get_tile(x,y)
+	var new_wall = wall_source.instance()
+	new_wall.translation = tile.translation
+	new_wall.rotation_degrees.y = direction * 90
+	tile.add_child(new_wall)
+	
 	
 func add_rows(size, rows = 1):
 	#Size and rows will be +1 as a gutter so we don't go out of bounds
