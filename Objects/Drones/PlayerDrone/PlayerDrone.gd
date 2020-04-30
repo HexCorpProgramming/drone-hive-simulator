@@ -9,6 +9,8 @@ func _ready():
 
 #Override
 func _handle_input():
+	if GameState.get_state() != 0: #(Walking state)
+		return[false,false,false,false,false,false]
 	return [
 	Input.is_action_pressed("ui_up"),
 	Input.is_action_pressed("ui_down"),

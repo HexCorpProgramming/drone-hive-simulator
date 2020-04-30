@@ -5,7 +5,7 @@ onready var sceneControl = get_node("/root/Level/SceneControl/")
 
 func _ready():
 	
-	match(sceneControl.level):
+	match(SceneTools.level):
 		0: #LevelBox
 			print("Current level is LevelBox.")
 			var IDToggle = get_node("../../UI/IDToggle")
