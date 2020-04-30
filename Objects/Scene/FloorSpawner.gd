@@ -8,6 +8,7 @@ export var tile_scale = 4
 #If you ever decide to use something other than default cubes, Hex be with you.
 export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
 export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
+var spawner_source = load("res://Objects/Constructibles/SubjectSpawner/Spawner.tscn")
 
 enum direction {EAST, NORTH, WEST, SOUTH}
 
@@ -31,10 +32,9 @@ func create_default_tiles():
 	#Add the tiles
 	add_rows(default_x, default_y)
 	add_tiles(0,0,15,15)
-	delete_tiles(1,1,14,14)
-	get_all_tiles()
-	add_wall_to_tile(0,0,direction.NORTH)
-	add_wall_to_tile(0,0,direction.WEST)
+	add_walls_to_tiles(true)
+	delete_walls_from_tile(1,1)
+	add_spawner(0,8)
 	
 func get_tile(x,y):
 	if !valid(x,y):
@@ -47,8 +47,8 @@ func get_all_tiles():
 	for row in tiles:
 		for tile in row:
 			if tile != null:
-				flattened_list.append(tile)
-	print("TOTAL COUNT OF TILES: ",flattened_list.size())
+				flattened_list.append(tile)	
+	print("Total tilecount: ",flattened_list.size())
 	return flattened_list
 	
 func add_tile(x,y):
@@ -63,21 +63,26 @@ func add_tile(x,y):
 	add_child(new_tile)
 	tiles[x][y] = new_tile
 	
+func add_spawner(x,y):
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	delete_walls_from_tile(x,y)
+	var new_spawner = spawner_source.instance()
+	tile.add_child(new_spawner)
+	
 func add_tiles(from_x, from_y, to_x, to_y):
 	if !valid(from_x, from_y):
-		print("beep")
 		return
 	if !valid(to_x, to_y):
-		print("boop")
 		return
 	if (from_x == to_x and from_y == to_y):
 		print("add_tiles parameters cannot be identical.")
 		return
 	for y in range(from_y, to_y):
-		print("beep")
 		for x in range(from_x, to_x):
-			print("boop")
 			add_tile(x,y)
+			print("Added tile at X[",str(x),"] Y[",str(y),"]")
 	
 func delete_tile(x,y):
 	if !valid(x,y):
@@ -89,32 +94,54 @@ func delete_tile(x,y):
 	
 func delete_tiles(from_x, from_y, to_x, to_y):
 	if !valid(from_x, from_y):
-		print("beep")
 		return
 	if !valid(to_x, to_y):
-		print("boop")
 		return
 	if (from_x == to_x and from_y == to_y):
 		print("add_tiles parameters cannot be identical.")
 		return
 	for y in range(from_y, to_y):
-		print("beep")
 		for x in range(from_x, to_x):
-			print("boop")
 			delete_tile(x,y)
 	
 func add_wall_to_tile(x,y,direction):
 	
-	#0: East
-	#90: North
-	#180: West
-	#270: South
+	#0 / 0: East
+	#90 / 1: North
+	#180 / 2: West
+	#270 / 3: South
 	
 	var tile = get_tile(x,y)
+	if tile == null:
+		print("Tried adding wall to null tile.")
+		return
 	var new_wall = wall_source.instance()
-	new_wall.translation = tile.translation
 	new_wall.rotation_degrees.y = direction * 90
 	tile.add_child(new_wall)
+	
+func delete_walls_from_tile(x,y):
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	if tile.get_child_count() == 1:
+		print("Tile has no walls.")
+		return
+	else:
+		for wall in range(1,tile.get_child_count()):
+			tile.get_child(wall).queue_free()
+	
+	
+func add_walls_to_tiles(lazy=true):
+	if lazy:
+		print("Adding walls to tiles.")
+		for tile_x in range(0,default_x):
+			add_wall_to_tile(tile_x,0,1)
+			add_wall_to_tile(tile_x,default_y-1,3)
+		for tile_y in range(0,default_y):
+			add_wall_to_tile(0,tile_y,2)
+			add_wall_to_tile(default_x-1,tile_y,0)
+	else:
+		print("Strict wall-adding not implemented.")
 	
 	
 func add_rows(size, rows = 1):
@@ -128,7 +155,7 @@ func add_rows(size, rows = 1):
 		for i in range(0, size+1):
 			row.append(null)
 		tiles.append(row)
-	print("Added ", rows+1, " row(s).")
+	print("Added ", rows, " row(s) to tilemap (+1 as a gutter).")
 	
 func valid(x,y):
 	return x <= tiles.size() and y <= tiles[x].size()
