@@ -36,6 +36,10 @@ func create_default_tiles():
 	delete_walls_from_tile(1,1)
 	add_spawner(0,8)
 	
+	add_spawner(0,1)
+	
+	add_spawner(3,0)
+	
 func get_tile(x,y):
 	if !valid(x,y):
 		print("Invalid co-ords.")
@@ -64,11 +68,20 @@ func add_tile(x,y):
 	tiles[x][y] = new_tile
 	
 func add_spawner(x,y):
+	
+	#Spawners can only be added on the left or the top.
+	
+	if !(x == 0 and y != 0 or x != 0 and y == 0):
+		print("Invalid co ords")
+		return
+	
 	if !valid(x,y):
 		return
 	var tile = get_tile(x,y)
 	delete_walls_from_tile(x,y)
 	var new_spawner = spawner_source.instance()
+	if y == 0:
+		new_spawner.rotation_degrees.y = -90
 	tile.add_child(new_spawner)
 	
 func add_tiles(from_x, from_y, to_x, to_y):
