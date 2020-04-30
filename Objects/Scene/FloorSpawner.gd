@@ -36,10 +36,6 @@ func create_default_tiles():
 	delete_walls_from_tile(1,1)
 	add_spawner(0,8)
 	
-	add_spawner(0,1)
-	
-	add_spawner(3,0)
-	
 func get_tile(x,y):
 	if !valid(x,y):
 		print("Invalid co-ords.")
@@ -130,6 +126,8 @@ func add_wall_to_tile(x,y,direction):
 		return
 	var new_wall = wall_source.instance()
 	new_wall.rotation_degrees.y = direction * 90
+	if direction == 3:
+		new_wall.get_child(0).get_child(0).get_child(0).visible = false
 	tile.add_child(new_wall)
 	
 func delete_walls_from_tile(x,y):
