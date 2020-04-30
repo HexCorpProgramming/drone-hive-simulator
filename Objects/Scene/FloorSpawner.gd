@@ -1,104 +1,172 @@
 extends Spatial
 
-#For calculating wall the translation:scale ratio, translation always = scale + 0.3
+export var default_x = 15
+export var default_y = 15
+export var tile_scale = 4
 
-const OFFSET = Vector3(0,0,0)
-var tileArray = []
-var rowWidths = []
+#The tiles and walls are scaled cubes by default, which means they can tesselate by knowing their scale.
+#If you ever decide to use something other than default cubes, Hex be with you.
+export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
+export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
+var spawner_source = load("res://Objects/Constructibles/SubjectSpawner/Spawner.tscn")
+
+enum direction {EAST, NORTH, WEST, SOUTH}
+
+#2D arrays are really annoying in Godot. The only way to use them right now is the ol' "array in an array" trick.
+#Arrays in Godot are sized dynamically,
+#So there's not actually a limit to how many tiles can be appended to each row.
+#This is a good thing, since we won't have to add a new empty element and resize every array every time we add a column of tiles.
+var tiles = []
 
 func _ready():
+	create_default_tiles()
 	
-	randomize()
-	var mapHeight = randi()%5+10 #Height goes from top to bottom.
-	var mapWidth = randi()%5+10	 #Width goes from left to right.
-
-	print("Map height is: ", str(mapHeight))
-	print("Map width is: ", str(mapWidth))
+func create_default_tiles():
+	#Delete any pre-existing tiles.
+	for node in get_children():
+		node.queue_free()
 	
-	generate_empty_array(tileArray, mapHeight)
-	print("Tile array generated (empty).")
-	generate_tiles(tileArray, mapHeight, mapWidth)
-	print("Tile array populated.")
-	instance_tile_array(tileArray, mapHeight, mapWidth)
-	print("Tile array instantiated.")
-	instance_walls(mapHeight, mapWidth)
-	print("Tile walls instantiated.")
-
+	#Reset the tile array
+	tiles.clear()
 	
-func generate_empty_array(tileArray, mapHeight):
-	for y in range(mapHeight):
-		tileArray.append([])
-
-func generate_tiles(tileArray, mapHeight, mapWidth):
+	#Add the tiles
+	add_rows(default_x, default_y)
+	add_tiles(0,0,15,15)
+	add_walls_to_tiles(true)
+	delete_walls_from_tile(1,1)
+	add_spawner(0,8)
 	
-	#Purpose: Populates the tileArray with instanced tile objects given a specific map height and width.
+func get_tile(x,y):
+	if !valid(x,y):
+		print("Invalid co-ords.")
+		return null
+	return tiles[x][y]
 	
-	for y in range(mapHeight):
-		var rowToAdd = []
-		for x in range(mapWidth):
-			var tile = load("res://Objects/Tiles/BasicTile.tscn").instance()
-			rowToAdd.append(tile)
-		tileArray[y] = rowToAdd
-		rowWidths.append(rowToAdd.size())
-
-func cull_tiles():
-	#Generate new height and width to delete from.
-	#Update rowWidths with new row widths.
-	pass
-
-func instance_tile_array(tileArray, mapHeight, mapWidth):
+func get_all_tiles():
+	var flattened_list = []
+	for row in tiles:
+		for tile in row:
+			if tile != null:
+				flattened_list.append(tile)	
+	print("Total tilecount: ",flattened_list.size())
+	return flattened_list
 	
-	#Use: 
+func add_tile(x,y):
+	if !valid(x,y):
+		return
+	if get_tile(x,y) != null:
+		return
+	var new_tile = tile_source.instance()
+	new_tile.name = str(x)+","+str(y)
+	#Default cubes can tesselate really well by scale alone. Scale is essentially radius, so scale * 2 is diameter.
+	new_tile.translation = Vector3(tile_scale * x, 0, tile_scale * y)
+	add_child(new_tile)
+	tiles[x][y] = new_tile
 	
-	for y in range(mapHeight):
-		for x in range(mapWidth):
-			var tile = tileArray[y][x]
-			tile.set_name("tile " + str(y) + "," + (str(x)))
-			add_child(tile)
-			var currentTile = get_node("tile " + str(y) + "," + (str(x)))
-			currentTile.translation.x = OFFSET.x + (currentTile.scale.x*x*2)
-			currentTile.translation.z = OFFSET.z + (currentTile.scale.z*y*2)
-
-func assign_object_positions():
-	pass
-
-func instance_walls(mapHeight, mapWidth):
+func add_spawner(x,y):
 	
-	#Use: Find the tiles that are on the map edges and add a wall object as a child node of the tile node.
+	#Spawners can only be added on the left or the top.
 	
-	for y in range(mapHeight):
-		add_wall_to_tile(tileArray[y][mapWidth - 1], "EAST")
-		add_wall_to_tile(tileArray[y][0], "WEST")
-	for x in range(mapWidth):
-		add_wall_to_tile(tileArray[mapHeight - 1][x], "SOUTH")
-		add_wall_to_tile(tileArray[0][x], "NORTH")
-
-func add_wall_to_tile(tile, direction):
+	if !(x == 0 and y != 0 or x != 0 and y == 0):
+		print("Invalid co ords")
+		return
 	
-	var wall = load("res://Objects/Tiles/BasicWall.tscn").instance()
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	delete_walls_from_tile(x,y)
+	var new_spawner = spawner_source.instance()
+	if y == 0:
+		new_spawner.rotation_degrees.y = -90
+	tile.add_child(new_spawner)
 	
-	match direction:
-		"EAST":
-			wall.set_name("East")
-			wall.translation = tile.translation + Vector3(2.3,4,0)
-			wall.rotation_degrees.y = 180
-			add_child(wall)
-		"WEST":
-			wall.set_name("West")
-			wall.translation = tile.translation + Vector3(-2.3,4,0)
-			wall.rotation_degrees.y = 180
-			add_child(wall)
-		"NORTH":
-			wall.set_name("North")
-			wall.translation = tile.translation + Vector3(0,4,-2.3)
-			add_child(wall)
-		"SOUTH":
-			wall.set_name("South")
-			wall.get_child(0).get_child(0).visible = false; #make the mesh invisible.
-			wall.translation = tile.translation + Vector3(0,4,2.3)
-		_:
-			print("Invalid direction. Check your function calls for typos.")
-			return false
+func add_tiles(from_x, from_y, to_x, to_y):
+	if !valid(from_x, from_y):
+		return
+	if !valid(to_x, to_y):
+		return
+	if (from_x == to_x and from_y == to_y):
+		print("add_tiles parameters cannot be identical.")
+		return
+	for y in range(from_y, to_y):
+		for x in range(from_x, to_x):
+			add_tile(x,y)
+			print("Added tile at X[",str(x),"] Y[",str(y),"]")
+	
+func delete_tile(x,y):
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	if tile != null and tile.has_method("queue_free"):
+		tile.queue_free()
+		tiles[x][y] = null
+	
+func delete_tiles(from_x, from_y, to_x, to_y):
+	if !valid(from_x, from_y):
+		return
+	if !valid(to_x, to_y):
+		return
+	if (from_x == to_x and from_y == to_y):
+		print("add_tiles parameters cannot be identical.")
+		return
+	for y in range(from_y, to_y):
+		for x in range(from_x, to_x):
+			delete_tile(x,y)
+	
+func add_wall_to_tile(x,y,direction):
+	
+	#0 / 0: East
+	#90 / 1: North
+	#180 / 2: West
+	#270 / 3: South
+	
+	var tile = get_tile(x,y)
+	if tile == null:
+		print("Tried adding wall to null tile.")
+		return
+	var new_wall = wall_source.instance()
+	new_wall.rotation_degrees.y = direction * 90
+	if direction == 3:
+		new_wall.get_child(0).get_child(0).get_child(0).visible = false
+	tile.add_child(new_wall)
+	
+func delete_walls_from_tile(x,y):
+	if !valid(x,y):
+		return
+	var tile = get_tile(x,y)
+	if tile.get_child_count() == 1:
+		print("Tile has no walls.")
+		return
+	else:
+		for wall in range(1,tile.get_child_count()):
+			tile.get_child(wall).queue_free()
 	
 	
-	pass
+func add_walls_to_tiles(lazy=true):
+	if lazy:
+		print("Adding walls to tiles.")
+		for tile_x in range(0,default_x):
+			add_wall_to_tile(tile_x,0,1)
+			add_wall_to_tile(tile_x,default_y-1,3)
+		for tile_y in range(0,default_y):
+			add_wall_to_tile(0,tile_y,2)
+			add_wall_to_tile(default_x-1,tile_y,0)
+	else:
+		print("Strict wall-adding not implemented.")
+	
+	
+func add_rows(size, rows = 1):
+	#Size and rows will be +1 as a gutter so we don't go out of bounds
+	#Validate
+	if rows == 0:
+		print("Row must be > 0.")
+	#Setup row.
+	for i in range(0, rows+1):
+		var row = []
+		for i in range(0, size+1):
+			row.append(null)
+		tiles.append(row)
+	print("Added ", rows, " row(s) to tilemap (+1 as a gutter).")
+	
+func valid(x,y):
+	return x <= tiles.size() and y <= tiles[x].size()

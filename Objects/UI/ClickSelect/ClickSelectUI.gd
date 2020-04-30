@@ -49,7 +49,7 @@ func _input(event):
 			print("floor found.")
 			var spawned_item = picked_item.instance()
 			add_child(spawned_item)
-			spawned_item.translation = found_floor.collider.translation
+			spawned_item.translation = found_floor.collider.get_global_transform().origin
 	if Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 		
