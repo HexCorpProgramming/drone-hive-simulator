@@ -34,7 +34,7 @@ extents = Vector3( 1.14105, 3.18944, 0.440836 )
 extents = Vector3( 1, 3.21773, 1 )
 
 [node name="PlayerDrone" type="KinematicBody"]
-transform = Transform( 0.6, 0, 0, 0, 0.2, 0, 0, 0, 0.6, 0, 0, 0 )
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
