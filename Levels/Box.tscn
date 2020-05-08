@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Levels/AbsolutelyNotAnEssentialScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/PauseMenu/Pause.gd" type="Script" id=7]
 [ext_resource path="res://Textures/hexcorpanimated.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/PauseMenu/MainMenuButton.gd" type="Script" id=9]
+[ext_resource path="res://Objects/Constructibles/FactoryCore/FactoryCore.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -35,6 +36,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 8.83992 )
 script = ExtResource( 3 )
 
 [node name="UI" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="IDToggle" type="CheckBox" parent="UI"]
 margin_left = 710.0
@@ -117,5 +119,7 @@ script = ExtResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="Factory Core" parent="." instance=ExtResource( 10 )]
 
 [editable path="PlayerDrone"]

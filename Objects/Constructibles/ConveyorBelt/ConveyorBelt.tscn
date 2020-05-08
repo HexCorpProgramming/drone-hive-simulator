@@ -33,7 +33,9 @@ surfaces/1 = {
 "vertex_count": 32
 }
 
-[node name="Conveyor Belt" type="Spatial"]
+[node name="Conveyor Belt" type="Spatial" groups=[
+"Tickable",
+]]
 transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 script = ExtResource( 1 )
 
@@ -48,3 +50,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22, 0 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 material/1 = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
