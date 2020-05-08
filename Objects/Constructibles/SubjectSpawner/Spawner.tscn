@@ -13,7 +13,9 @@ transform = Transform( 2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="SubjectDropper" type="Spatial" parent="."]
+[node name="SubjectDropper" type="Spatial" parent="." groups=[
+"Tickable",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, 0 )
 script = ExtResource( 1 )
 
