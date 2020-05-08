@@ -24,6 +24,8 @@ func set_item(item):
 		item_preview = picked_item.instance()
 		add_child(item_preview)
 		item_preview.visible = false
+		print("LOOKHERE")
+		item_preview.find_node("Body").input_ray_pickable = false
 		item_preview.translation = Vector3(0,50,0)
 	
 func _ready():
@@ -72,8 +74,6 @@ func handle_drop_target():
 func handle_item_preview():
 	var result = raycast_from_camera_to_mouse()
 	if result:
-		print(result.collider.translation)
-		print(result.collider.get_global_transform().origin)
 		$DropTarget.visible = true
 		item_preview.visible = true
 		item_preview.translation = lerp(item_preview.translation, result.collider.get_global_transform().origin + vertical_offset, 0.1)
@@ -83,7 +83,7 @@ func raycast_from_camera_to_mouse():
 	var from = get_viewport().get_camera().project_ray_origin(mouse_position)
 	var normal = get_viewport().get_camera().project_ray_normal(mouse_position)
 	var to = from + normal * 100
-	return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to)
+	return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to, get_tree().get_nodes_in_group("Constructible"))
 	
 func raycast_from_object_to_ground(object, avoid = null):
 	 return $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0), [avoid], 1)
