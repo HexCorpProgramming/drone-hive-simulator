@@ -1,8 +1,15 @@
 extends KinematicBody
 
+#Expedition stats
+var personable = 0
+var hardworking = 0
+var creative = 0
+
 func _ready():
-	#print("I'm a subject and I sure do hope I don't get turned into a drone!")
-	pass
+	#Randomize expedition stats
+	personable = randi() % 11
+	hardworking = randi() % 11
+	creative = randi() % 11
 	
 func _process(delta):
 	var movement = Vector3(0,-7,0)
