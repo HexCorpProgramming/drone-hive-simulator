@@ -16,7 +16,7 @@ func _input(event):
 		if cast:
 			if cast.collider.is_in_group("Subject"):
 				print("We got one boys")
-				$UI.update_stat_text(cast.collider.personable, cast.collider.hardworking, cast.collider.creative)
+				$UI.update_stat_text(cast.collider.personable, cast.collider.hardworking, cast.collider.creative, cast.collider.recruit_name)
 
 func raycast_from_camera_to_mouse():
 	var mouse_position = get_viewport().get_mouse_position()

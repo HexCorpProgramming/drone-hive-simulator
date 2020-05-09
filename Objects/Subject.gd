@@ -4,11 +4,15 @@ extends KinematicBody
 var personable = 0
 var hardworking = 0
 var creative = 0
+var recruit_name = null
 
 func _ready():
 	
 	#Ensure randomocity.
 	randomize()
+	
+	#Get a name
+	recruit_name = SubjectNames.get_name()
 	
 	#Randomize expedition stats
 	personable = randi() % 11
