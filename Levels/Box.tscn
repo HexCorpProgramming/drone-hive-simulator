@@ -37,6 +37,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 8.83992 )
 script = ExtResource( 3 )
 
 [node name="UI" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 600.0
 script = ExtResource( 4 )
@@ -101,6 +102,7 @@ valign = 1
 uppercase = true
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="Pause" type="Container" parent="Pause Menu"]
 pause_mode = 2

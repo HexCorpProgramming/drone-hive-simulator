@@ -1,7 +1,6 @@
 extends Spatial
 export var headBob = 0.1
 onready var droneBody = get_node("../Body")
-onready var sceneControl = get_node("/root/Level/SceneControl/")
 
 func _ready():
 	
