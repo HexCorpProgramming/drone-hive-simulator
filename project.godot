@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ControllableObject",
+"class": "ControllableDrone",
+"language": "GDScript",
+"path": "res://Scripts/Drone/ControllableDrone.gd"
+}, {
 "base": "Spatial",
 "class": "ControllableObject",
 "language": "GDScript",
 "path": "res://Scripts/Abstract/ControllableObject.gd"
-}, {
-"base": "ControllableObject",
-"class": "Drone",
-"language": "GDScript",
-"path": "res://Scripts/Drone/Drone.gd"
 }, {
 "base": "Spatial",
 "class": "InteractableObject",
@@ -30,8 +30,8 @@ _global_script_classes=[ {
 "path": "res://Scripts/Abstract/PickupableObject.gd"
 } ]
 _global_script_class_icons={
+"ControllableDrone": "",
 "ControllableObject": "",
-"Drone": "",
 "InteractableObject": "",
 "PickupableObject": ""
 }

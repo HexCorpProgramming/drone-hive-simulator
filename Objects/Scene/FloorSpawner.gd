@@ -8,7 +8,7 @@ export var tile_scale = 4
 #If you ever decide to use something other than default cubes, Hex be with you.
 export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
 export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
-var spawner_source = load("res://Objects/Constructibles/SubjectSpawner/Spawner.tscn")
+var spawner_source = load("res://Objects/Constructibles/RecruitSpawner/Spawner.tscn")
 
 enum direction {EAST, NORTH, WEST, SOUTH}
 

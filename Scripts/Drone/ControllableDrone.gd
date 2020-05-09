@@ -1,5 +1,5 @@
 extends ControllableObject
-class_name Drone
+class_name ControllableDrone
 
 export var droneID = "0006"
 #Has to be used on a kinematic body

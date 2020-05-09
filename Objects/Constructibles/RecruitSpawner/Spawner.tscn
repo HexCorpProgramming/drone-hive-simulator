@@ -1,19 +1,20 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Objects/Constructibles/SubjectSpawner/SubjectDropper.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Constructibles/RecruitSpawner/RecruitSpawner.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Tiles/BasicTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=1]
 
 [node name="Spawner" type="Spatial"]
 
 [node name="Target" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 4 )
+visible = false
+mesh = SubResource( 1 )
 material/0 = null
 
-[node name="SubjectDropper" type="Spatial" parent="." groups=[
+[node name="RecruitDropper" type="Spatial" parent="." groups=[
 "Tickable",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, 0 )

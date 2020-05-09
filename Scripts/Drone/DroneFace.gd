@@ -2,22 +2,6 @@ extends Spatial
 export var headBob = 0.1
 onready var droneBody = get_node("../Body")
 
-func _ready():
-	
-	match(SceneTools.level):
-		0: #LevelBox
-			print("Current level is LevelBox.")
-			var IDToggle = get_node("../../UI/IDToggle")
-			var IDAssign = get_node("../../UI/IDAssign")
-			IDToggle.connect("toggled",self,"on_button_Toggled")
-			IDAssign.connect("text_changed",self,"assign_id")
-			print("LevelBox UI elements assigned to PlayerDrone's face.")
-			
-		_: #Default
-			print("The PlayerDrone is in an unfamiliar level. Failed to associate UI elements.")
-			print(get_owner().get_parent().get_name())
-
-
 func _process(delta):
 	
 	#This if statement checks the walk animation frame and, if the drone is currently bobbing, it makes the face bob in time with the rest of the drone.
