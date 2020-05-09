@@ -6,6 +6,10 @@ var hardworking = 0
 var creative = 0
 
 func _ready():
+	
+	#Ensure randomocity.
+	randomize()
+	
 	#Randomize expedition stats
 	personable = randi() % 11
 	hardworking = randi() % 11

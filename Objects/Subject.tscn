@@ -6,7 +6,9 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.14105, 3.18944, 0.440836 )
 
-[node name="Body" type="KinematicBody"]
+[node name="Body" type="KinematicBody" groups=[
+"Subject",
+]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
