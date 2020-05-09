@@ -6,6 +6,7 @@ var item_preview = null
 onready var PlayerDrone = load("res://Objects/Drones/PlayerDrone/PlayerDrone.tscn")
 
 var vertical_offset = Vector3(0,7,0)
+var max_height = 9
 
 const floor_tile = preload("res://Objects/Tiles/BasicTile.tscn")
 
@@ -32,11 +33,18 @@ func _ready():
 	visible = false
 	
 func _process(delta):
-	if picked_item:
+	if picked_item and GameState.get_state() == 1: #Edit mode
 		handle_item_preview()
 		handle_drop_target()
+		$Indicator.visible = true
+		$Indicator.rotation_degrees = item_preview.rotation_degrees
+		$Indicator.translation = item_preview.translation
+		item_preview.translation.y = min(item_preview.translation.y, max_height)
+	else:
+		$Indicator.visible = false
 		
 func _input(event):
+	if GameState.get_state() != 1: return
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
 		print("Mouse clicked!")
 		var mouse_over_geometry = raycast_from_camera_to_mouse()
@@ -50,10 +58,20 @@ func _input(event):
 		if found_floor and found_floor.collider.is_in_group("Floor"): 
 			print("floor found.")
 			var spawned_item = picked_item.instance()
+			spawned_item.rotation_degrees.y = item_preview.rotation_degrees.y
 			add_child(spawned_item)
 			spawned_item.translation = found_floor.collider.get_global_transform().origin
-	if Input.is_action_just_pressed("clickdrop_cancel_item"):
+	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
+	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
+		print("Rotating >")
+		item_preview.translation.y += 3
+		item_preview.rotation_degrees.y += -90
+	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_counterclockwise"):
+		print("Rotating <")
+		item_preview.translation.y += 3
+		item_preview.rotation_degrees.y += 90
+		
 		
 func handle_drop_target():
 	var drop_target_location = raycast_from_object_to_ground(item_preview)

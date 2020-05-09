@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectWrapper.gd" type="Script" id=1]
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectUI.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBeltAlt.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Constructibles/StoragePod/StoragePod.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=11]
+[ext_resource path="res://Objects/UI/ClickSelect/Indicator.gd" type="Script" id=12]
 
 [node name="Canvas" type="CanvasLayer"]
 layer = 3
@@ -77,3 +79,11 @@ margin_bottom = 106.0
 item_source = ExtResource( 10 )
 
 [node name="WorldGetter" type="Spatial" parent="ClickSelect"]
+
+[node name="Indicator" type="Spatial" parent="ClickSelect"]
+
+[node name="Sprite" type="Sprite3D" parent="ClickSelect/Indicator"]
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 5, 0, 0 )
+axis = 1
+texture = ExtResource( 11 )
+script = ExtResource( 12 )
