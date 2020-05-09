@@ -36,7 +36,12 @@ func _process(delta):
 	if picked_item and GameState.get_state() == 1: #Edit mode
 		handle_item_preview()
 		handle_drop_target()
+		$Indicator.visible = true
+		$Indicator.rotation_degrees = item_preview.rotation_degrees
+		$Indicator.translation = item_preview.translation
 		item_preview.translation.y = min(item_preview.translation.y, max_height)
+	else:
+		$Indicator.visible = false
 		
 func _input(event):
 	if GameState.get_state() != 1: return
@@ -61,11 +66,11 @@ func _input(event):
 	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
 		print("Rotating >")
 		item_preview.translation.y += 3
-		item_preview.rotation_degrees.y += 90
+		item_preview.rotation_degrees.y += -90
 	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_counterclockwise"):
 		print("Rotating <")
 		item_preview.translation.y += 3
-		item_preview.rotation_degrees.y += -90
+		item_preview.rotation_degrees.y += 90
 		
 		
 func handle_drop_target():
