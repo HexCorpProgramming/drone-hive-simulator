@@ -9,5 +9,5 @@ func _ready():
 func timer_test():
 	for component in get_tree().get_nodes_in_group("Tickable"):
 		component.tick()
-	print("Factory tick.")
+	#print("Factory tick.")
 	$Timer.start(tick_length)
