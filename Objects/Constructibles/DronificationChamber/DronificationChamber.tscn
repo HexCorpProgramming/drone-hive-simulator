@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Constructibles/DronificationChamber/Chamber.material" type="Material" id=2]
@@ -34,17 +34,36 @@ surfaces/1 = {
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 0.3, 1 )
 
-[sub_resource type="Animation" id=3]
-length = 2.08333
+[sub_resource type="Animation" id=5]
+resource_name = "Close"
+length = 2.0
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Body/Skeleton:Doors")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = true
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 0.013806, 0, 0, 0, 1, 1, 1, 1, 0.125, 1, 0, 0, 0.0536489, 0, 0, 0, 1, 1, 1, 1, 0.166667, 1, 0, 0, 0.11716, 0, 0, 0, 1, 1, 1, 1, 0.208333, 1, 0, 0, 0.201974, 0, 0, 0, 1, 1, 1, 1, 2.08333, 1, 0, 0, 2.72665, 0, 0, 0, 1, 1, 1, 1 )
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 2.72665, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[node name="Dronification Chamber" type="Spatial"]
+[sub_resource type="Animation" id=3]
+resource_name = "Open"
+length = 2.0
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Body/Skeleton:Doors")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0, 0, 2.72665, 0, 0, 0, 1, 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 2.05396, 1.09762 )
+
+[node name="Dronification Chamber" type="Spatial" groups=[
+"Tickable",
+]]
 transform = Transform( 1.885, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 script = ExtResource( 1 )
 
@@ -52,7 +71,6 @@ script = ExtResource( 1 )
 "Constructible",
 ]]
 transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, 0.15, 0 )
-script = ExtResource( 1 )
 
 [node name="Skeleton" type="Skeleton" parent="Body"]
 bones_in_world_transform = true
@@ -73,8 +91,29 @@ material/0 = ExtResource( 2 )
 material/1 = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape" parent="Body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318166, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.235255, 0 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 3 )
+playback_speed = 2.0
+anims/Close = SubResource( 5 )
+anims/Open = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ApproachingCollider" type="Area" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2172, 2.23861, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ApproachingCollider"]
+shape = SubResource( 4 )
+
+[node name="InternalArea" type="Area" parent="."]
+transform = Transform( 0.530504, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InternalArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81095, 0 )
+shape = SubResource( 6 )
+
+[node name="OutputPosition" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )

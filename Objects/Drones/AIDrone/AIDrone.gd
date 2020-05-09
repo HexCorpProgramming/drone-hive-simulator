@@ -1,4 +1,4 @@
-extends Drone
+extends ControllableDrone
 
 #Override
 func _ready():
