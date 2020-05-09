@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Objects/Subject.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Recruit.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Subjects/HumanFullScaled.png" type="Texture" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.14105, 3.18944, 0.440836 )
 
 [node name="Body" type="KinematicBody" groups=[
-"Subject",
 "Recruit",
+"Subject",
 ]]
 transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
 script = ExtResource( 1 )

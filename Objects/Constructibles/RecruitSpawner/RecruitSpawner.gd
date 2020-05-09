@@ -2,7 +2,7 @@ extends Spatial
 
 var delay = 5
 var tick = 0
-var subject_source = load("res://Objects/Subject.tscn")
+var subject_source = load("res://Objects/Recruit.tscn")
 
 func _ready():
 	print("Spawner spawned. Ready to spawn.")

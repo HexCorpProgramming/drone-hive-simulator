@@ -1,7 +1,7 @@
 extends Node
 
 # Declare member variables here. Examples:
-var droneID = "1211"
+var droneID = "7442"
 
 func change_id(ID):
 	ID = prepend_id_with_zeros(ID)
