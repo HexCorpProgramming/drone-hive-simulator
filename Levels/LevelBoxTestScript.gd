@@ -17,7 +17,7 @@ func _input(event):
 			if cast.collider.is_in_group("Subject"):
 				print("We got one boys")
 				if cast.collider.is_in_group("Recruit"):
-					$UI.update_stat_text_subject(cast.collider.personable, cast.collider.hardworking, cast.collider.creative, cast.collider.recruit_name)
+					$UI.update_stat_text_recruit(cast.collider.personable, cast.collider.hardworking, cast.collider.creative, cast.collider.recruit_name)
 				if cast.collider.is_in_group("Drone"):
 					$UI.update_stat_text_drone(cast.collider.emotional_intelligence, cast.collider.productivity, cast.collider.innovative, cast.collider.charge, cast.collider.drone_id)
 					
