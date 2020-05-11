@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Levels/AbsolutelyNotAnEssentialScript.gd" type="Script" id=1]
+[ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Drones/AIDrone/AIDrone.gd" type="Script" id=3]
 [ext_resource path="res://Levels/BoxUIScript.gd" type="Script" id=4]
