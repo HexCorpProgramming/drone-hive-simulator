@@ -16,7 +16,8 @@ func _process(delta):
 	translation = playerDrone.translation + offset
 	
 	#Cast a ray to see if there's anything in the way of the camera.
-	raycastResult = space_state.intersect_ray(playerDrone.translation, playerDrone.translation + offset, [self, playerDrone])
+	raycastResult = space_state.intersect_ray(playerDrone.translation, playerDrone.translation + offset, [self, playerDrone], 256)
+	#The raycast mask is set to 256 so it only collides with wall tiles, which have a layer of 257 (layer 1 + layer 9 = 256)
 	
 	#If there is something in the way, use the distance from the collision to interpolate a vertical offset.
 	if(raycastResult):
