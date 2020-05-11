@@ -28,9 +28,4 @@ Want to contribute to the project? _Good drone,_ your processing power is an inv
 * Music - ⬡-Drone #7025
 * Programming - ⬡-Drone #1211
 
-## License
-
-This repository is provided under the MIT license.
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
 Copyright 2020 © [HexLatex](https://twitter.com/HexLatex)
