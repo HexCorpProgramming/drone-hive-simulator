@@ -28,9 +28,6 @@ transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 4, 0 )
 [node name="Body" parent="PlayerDrone" index="2"]
 frame = 1
 
-[node name="DirectionalLight" parent="PlayerDrone" index="6"]
-visible = false
-
 [node name="UI" type="Control" parent="."]
 editor/display_folded = true
 margin_right = 1024.0

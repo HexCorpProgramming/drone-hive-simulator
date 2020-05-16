@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Objects/Drones/PlayerDrone/TruePlayerDrone.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Hypno Particles.tscn" type="PackedScene" id=2]
@@ -30,10 +30,10 @@ animations = [ {
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1.14105, 3.18944, 0.440836 )
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 1, 3.21773, 1 )
-
-[node name="PlayerDrone" type="KinematicBody"]
+[node name="PlayerDrone" type="KinematicBody" groups=[
+"Drone",
+"Player",
+]]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
 script = ExtResource( 1 )
 
@@ -76,30 +76,5 @@ hframes = 10
 frames = SubResource( 1 )
 animation = "WalkRight"
 
-[node name="PlayerCollision" type="CollisionShape" parent="."]
+[node name="Collision" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
-
-[node name="CameraTarget" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 10, 16 )
-
-[node name="OmniLight" type="OmniLight" parent="."]
-light_color = Color( 1, 0.4, 1, 1 )
-light_energy = 2.16
-
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 6, 0 )
-light_color = Color( 1, 0.4, 1, 1 )
-light_energy = 0.22
-light_indirect_energy = 0.0
-light_specular = 0.1
-light_bake_mode = 0
-
-[node name="GroundRay" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, -3.4, 0 )
-
-[node name="InteractionZone" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="InteractionZone"]
-shape = SubResource( 3 )

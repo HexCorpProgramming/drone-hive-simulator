@@ -24,6 +24,8 @@ onready var body = $Body
 
 func _ready():
 	
+	body.frame = 0
+	
 	for animation in body.frames.get_animation_names():
 		body.frames.set_animation_speed(animation, animation_speed)
 	
@@ -34,7 +36,7 @@ func _process(delta):
 	
 	movement = _get_inputs()
 	_handle_animation()
-	move_and_slide(movement * delta)
+	move_and_slide(gravity + movement * delta)
 
 	
 func _get_inputs():
@@ -74,20 +76,23 @@ func _handle_animation():
 		#Only stop animating when the drone is at a standstill frame.
 		body.playing = false
 		body.frame = 0
-	
-	if direction == "RIGHT":
-		body.animation = "WalkRight"
-		face.visible = true
+		
+		
+	if movement.x < 0:
+		body.rotation_degrees.y = 180 
+		face.translation = Vector3(-0.4, 2, 0.1)
+		digits.translation = Vector3(0.099, 0, 0)	
+	elif movement.x > 0:
 		body.rotation_degrees.y = 0
 		face.translation = Vector3(0.4, 2, 0.1)
 		digits.translation = Vector3(-0.099, 0, 0)
-	elif direction == "UP":
+	
+	if movement.z < 0:
 		body.animation = "WalkUp"
 		face.visible = false
-	elif direction == "LEFT":
-		body.rotation_degrees.y = 180 
-		face.translation = Vector3(-0.4, 2, 0.1)
-		digits.translation = Vector3(0.099, 0, 0)
-	elif direction == "DOWN":
+	elif movement.z > 0:
 		body.animation = "WalkRight"
 		face.visible = true
+	
+
+
