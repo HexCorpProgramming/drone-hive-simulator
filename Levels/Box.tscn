@@ -1,16 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Drones/AIDrone/AIDrone.gd" type="Script" id=3]
-[ext_resource path="res://Levels/BoxUIScript.gd" type="Script" id=4]
-[ext_resource path="res://Font/BloodDroneFont.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Sprites/play.png" type="Texture" id=6]
-[ext_resource path="res://Levels/StateButton.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/PauseMenu/Pause.gd" type="Script" id=8]
-[ext_resource path="res://Textures/hexcorpanimated.png" type="Texture" id=9]
-[ext_resource path="res://Scripts/PauseMenu/MainMenuButton.gd" type="Script" id=10]
-[ext_resource path="res://Objects/Constructibles/FactoryCore/FactoryCore.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Levels/BoxUIScript.gd" type="Script" id=3]
+[ext_resource path="res://Font/BloodDroneFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Sprites/play.png" type="Texture" id=5]
+[ext_resource path="res://Levels/StateButton.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/PauseMenu/Pause.gd" type="Script" id=7]
+[ext_resource path="res://Textures/hexcorpanimated.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/PauseMenu/MainMenuButton.gd" type="Script" id=9]
+[ext_resource path="res://Objects/Constructibles/FactoryCore/FactoryCore.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -32,15 +31,11 @@ frame = 1
 [node name="DirectionalLight" parent="PlayerDrone" index="6"]
 visible = false
 
-[node name="AIDrone" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 8.83992 )
-script = ExtResource( 3 )
-
 [node name="UI" type="Control" parent="."]
 editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 600.0
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
 [node name="IDToggle" type="CheckBox" parent="UI"]
 visible = false
@@ -49,7 +44,7 @@ margin_top = 5.36035
 margin_right = 867.0
 margin_bottom = 53.3604
 rect_scale = Vector2( 2, 2 )
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 pressed = true
 text = "Show ID"
 
@@ -67,7 +62,7 @@ margin_left = 17.0
 margin_top = 9.0
 margin_right = 97.0
 margin_bottom = 89.0
-icon = ExtResource( 6 )
+icon = ExtResource( 5 )
 
 [node name="State Control Buttons" type="Control" parent="UI"]
 margin_right = 40.0
@@ -80,7 +75,7 @@ margin_top = 120.47
 margin_right = 24.17
 margin_bottom = 140.47
 text = "Walking"
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Editing Button" type="Button" parent="UI/State Control Buttons"]
 anchor_right = 1.0
@@ -89,7 +84,7 @@ margin_top = 147.94
 margin_right = 24.17
 margin_bottom = 167.94
 text = "Editing"
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 relevant_state = "EDITING"
 
 [node name="StatLabel" type="Label" parent="UI"]
@@ -108,7 +103,7 @@ editor/display_folded = true
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="Background" type="TextureRect" parent="Pause Menu/Pause"]
 visible = false
@@ -118,7 +113,7 @@ anchor_bottom = 1.0
 margin_top = -185.0
 margin_bottom = -185.0
 rect_scale = Vector2( 1.9, 1.9 )
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 
 [node name="BackToMainMenu" type="Button" parent="Pause Menu/Pause"]
 anchor_left = 0.5
@@ -130,11 +125,11 @@ margin_top = 93.0
 margin_right = 85.5
 margin_bottom = 141.0
 text = "Back to Main Menu"
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Factory Core" parent="." instance=ExtResource( 11 )]
+[node name="Factory Core" parent="." instance=ExtResource( 10 )]
 
 [editable path="PlayerDrone"]
