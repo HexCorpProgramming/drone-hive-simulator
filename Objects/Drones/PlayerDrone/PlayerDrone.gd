@@ -32,7 +32,6 @@ func _ready():
 	
 	for animation in body.frames.get_animation_names():
 		body.frames.set_animation_speed(animation, animation_speed)
-	
 	print("PlayerDrone ready.")
 	toggle_display()
 	
