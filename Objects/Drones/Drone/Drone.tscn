@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Objects/Drones/Drone.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Drones/Drone/Drone.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/kitty.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/numbersheethuge.png" type="Texture" id=3]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim5.png" type="Texture" id=4]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim2.png" type="Texture" id=9]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=10]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=11]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
