@@ -13,18 +13,22 @@ extends Drone
 #toggle_display() and set_drone_id(id)
 
 var movement = Vector3(0,0,0)
+var jump_velocity = Vector3(0,0,0)
 export var movement_speed = 400
 export var animation_speed = 5
+export var jump_force = 25
 var is_moving = false
-var moving_right = true
-var moving_up = false
-var direction = null
+var is_jumping = false
+
+onready var jump_curve = load("res://Objects/Drones/PlayerDrone/JumpCurve.tres")
 
 onready var body = $Body
 
 func _ready():
 	
 	body.frame = 0
+	
+	$Jump.connect("timeout",self,"jump_done")
 	
 	for animation in body.frames.get_animation_names():
 		body.frames.set_animation_speed(animation, animation_speed)
@@ -36,35 +40,30 @@ func _process(delta):
 	
 	movement = _get_inputs()
 	_handle_animation()
-	move_and_slide(gravity + movement * delta)
 
 	
+	if GameState.current_state == 0: #Walking
+		jump_velocity = _handle_jumping()
+		move_and_slide(gravity + jump_velocity + (movement * delta))
+
 func _get_inputs():
 	
-	var new_movement = Vector3(0,0,0)
-	
-	moving_up = false
-	moving_right = false
+	var new_movement = Vector3(0,movement.y,0) #Preserve jumping
+
 	
 	if Input.is_action_pressed("ui_up"):
-		moving_up = true
-		direction = "UP"
 		new_movement += Vector3(0,0,-1)
 	if Input.is_action_pressed("ui_down"):
-		moving_up = false
-		direction = "DOWN"
 		new_movement += Vector3(0,0,1)
 	if Input.is_action_pressed("ui_left"):
-		direction = "LEFT"
 		new_movement += Vector3(-1,0,0)
 	if Input.is_action_pressed("ui_right"):
-		direction = "RIGHT"
 		new_movement += Vector3(1,0,0)
 		
-	if new_movement == Vector3(0,0,0):
+	if new_movement.x == 0 and new_movement.z == 0:
 		#Interpolate instead of returning nothing.
 		is_moving = false
-		return lerp(movement, Vector3(0,0,0), 0.2)
+		return lerp(movement, Vector3(0,movement.y,0), 0.2)
 		
 	is_moving = true
 	return new_movement.normalized() * movement_speed
@@ -93,6 +92,16 @@ func _handle_animation():
 	elif movement.z > 0:
 		body.animation = "WalkRight"
 		face.visible = true
+
+func _handle_jumping():
+	if Input.is_action_just_pressed("ui_jump") and $Ray.is_colliding():
+		is_jumping = true
+		$Jump.start()
+	if is_jumping:
+		var jumping = jump_curve.interpolate($Jump.time_left)
+		return Vector3(0, jumping * jump_force, 0)
+	else:
+		return Vector3(0,-7,0)
 	
-
-
+func jump_done():
+	is_jumping = false
