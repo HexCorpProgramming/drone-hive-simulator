@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Constructibles/StoragePod/StoragePod.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Constructibles/StoragePod/PodMaterial.material" type="Material" id=2]
@@ -80,7 +80,11 @@ tracks/7/imported = true
 tracks/7/enabled = true
 tracks/7/keys = PoolRealArray( 0.0416666, 1, 0, 0, 2.43982, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 2.42026, 0, 0, 0, 1, 1, 1, 1, 0.125, 1, 0, 0, 2.36441, 0, 0, 0, 1, 1, 1, 1, 0.166667, 1, 0, 0, 2.27655, 0, 0, 0, 1, 1, 1, 1, 0.25, 1, 0, 0, 2.02186, 0, 0, 0, 1, 1, 1, 1, 0.791667, 1, 0, 0, 0.0195637, 0, 0, 0, 1, 1, 1, 1, 0.833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2.5, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2.54167, 1, 0, 0, 0.0134986, 0, 0, 0, 1, 1, 1, 1, 2.58333, 1, 0, 0, 0.0522832, 0, 0, 0, 1, 1, 1, 1, 2.625, 1, 0, 0, 0.113787, 0, 0, 0, 1, 1, 1, 1, 2.70833, 1, 0, 0, 0.294687, 0, 0, 0, 1, 1, 1, 1, 4.16667, 1, 0, 0, 2.43982, 0, 0, 0, 1, 1, 1, 1 )
 
-[node name="Storage Pod" type="Spatial"]
+[sub_resource type="BoxShape" id=4]
+
+[node name="Storage Pod" type="Spatial" groups=[
+"Tickable",
+]]
 transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.9, 0, 0.3, 0 )
 script = ExtResource( 1 )
 
@@ -148,3 +152,10 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 3 )
+
+[node name="DroneDectector" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37936, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DroneDectector"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127639, 0 )
+shape = SubResource( 4 )
