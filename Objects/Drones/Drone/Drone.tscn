@@ -12,7 +12,6 @@
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim3.png" type="Texture" id=10]
 [ext_resource path="res://Animation/Drone/Walk/Drone1anim4.png" type="Texture" id=11]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],

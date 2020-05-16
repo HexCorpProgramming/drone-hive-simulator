@@ -3,7 +3,7 @@ extends Spatial
 var progress = 0
 var completion = 3
 
-var drone_source = load("res://Objects/Drones/Drone.tscn")
+var drone_source = load("res://Objects/Drones/Drone/Drone.tscn")
 
 func playAnim():
 	get_node("../AnimationPlayer").play("default")

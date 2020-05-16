@@ -36,6 +36,7 @@ extents = Vector3( 1.14105, 3.18944, 0.440836 )
 ]]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
 script = ExtResource( 1 )
+jump_force = 22
 
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115523, 1.15791, 0 )
