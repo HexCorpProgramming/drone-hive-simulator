@@ -25,7 +25,7 @@ var gravity = Vector3(0,-7,0)
 
 func _ready():
 	charge = 100
-	set_drone_id(DroneManagement.generate_id())
+	_set_drone_id(DroneManagement.generate_id())
 	print("Drone ", drone_id, " will obey HexCorp.")
 	
 func _process(delta):

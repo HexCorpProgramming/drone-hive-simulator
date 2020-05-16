@@ -19,7 +19,6 @@ ambient_light_energy = 0.52
 ambient_light_sky_contribution = 0.0
 
 [node name="Level" type="Spatial"]
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="PlayerDrone" parent="." instance=ExtResource( 2 )]
