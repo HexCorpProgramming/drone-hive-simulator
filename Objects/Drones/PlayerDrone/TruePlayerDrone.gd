@@ -4,7 +4,7 @@ extends Drone
 #drone_id, emotional_intelligence, productivity, innovative, charge
 
 #These components:
-#face, emotion, digit1, digit2, digit3, digit4
+#face, emotion, digits, digit1, digit2, digit3, digit4
 
 #Gravity:
 #gravity = Vector3(0,-7,0)
@@ -77,13 +77,16 @@ func _handle_animation():
 	
 	if direction == "RIGHT":
 		body.animation = "WalkRight"
-		#Rotate sprite here (ID, face, etc).
+		body.rotation_degrees.y = 0
+		face.translation = Vector3(0.4, 2, 0.1)
+		digits.translation = Vector3(-0.099, 0, 0)
 	elif direction == "UP":
 		body.animation = "WalkUp"
-		#Hide facial features.
+		face.visible = false
 	elif direction == "LEFT":
-		#Rotate sprite here.
-		pass
+		body.rotation_degrees.y = 180 
+		face.translation = Vector3(-0.4, 2, 0.1)
+		digits.translation = Vector3(0.099, 0, 0)
 	elif direction == "DOWN":
 		body.animation = "WalkRight"
-		#Show facial features.
+		face.visible = true

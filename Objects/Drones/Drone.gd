@@ -15,6 +15,7 @@ var charge = 100
 #Drone components (comdronenets)
 onready var face = $Face
 onready var emotion = $Face/Emotion
+onready var digits = $Face/ID
 onready var digit1 = $Face/ID/Digit1
 onready var digit2 = $Face/ID/Digit2
 onready var digit3 = $Face/ID/Digit3
