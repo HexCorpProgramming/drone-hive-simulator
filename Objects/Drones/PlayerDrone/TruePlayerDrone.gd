@@ -77,6 +77,7 @@ func _handle_animation():
 	
 	if direction == "RIGHT":
 		body.animation = "WalkRight"
+		face.visible = true
 		body.rotation_degrees.y = 0
 		face.translation = Vector3(0.4, 2, 0.1)
 		digits.translation = Vector3(-0.099, 0, 0)
