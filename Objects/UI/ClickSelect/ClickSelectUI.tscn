@@ -22,6 +22,7 @@ margin_left = 270.248
 margin_top = 5.03374
 margin_right = 570.248
 margin_bottom = 105.034
+mouse_default_cursor_shape = 16
 script = ExtResource( 2 )
 
 [node name="DropTarget" type="Sprite3D" parent="ClickSelect"]
@@ -36,7 +37,6 @@ NEUTRAL_COLOR = Color( 0.745098, 0.745098, 0.745098, 1 )
 [node name="PanelContainer" type="PanelContainer" parent="ClickSelect"]
 margin_right = 266.0
 margin_bottom = 104.0
-mouse_filter = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ClickSelect/PanelContainer"]
 margin_left = 7.0
@@ -47,6 +47,7 @@ margin_bottom = 97.0
 [node name="HBoxContainer" type="HBoxContainer" parent="ClickSelect/PanelContainer/ScrollContainer"]
 margin_right = 541.0
 margin_bottom = 106.0
+mouse_filter = 0
 size_flags_horizontal = 3
 
 [node name="NullButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
