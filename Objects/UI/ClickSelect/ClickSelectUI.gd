@@ -21,8 +21,13 @@ func set_item(item):
 		item_preview = null
 	print("Click select item update to: ", item)
 	picked_item = item
-	if item:
+	
+	if item is PackedScene:
 		item_preview = picked_item.instance()
+	elif item:
+		item_preview = picked_item
+		
+	if item:
 		add_child(item_preview)
 		item_preview.visible = false
 		item_preview.find_node("Body").input_ray_pickable = false
@@ -55,8 +60,11 @@ func _unhandled_input(event):
 		if found_floor:
 			print(found_floor.collider)
 		if found_floor and found_floor.collider.is_in_group("Floor"): 
-			print("floor found.")
-			var spawned_item = picked_item.instance()
+			var spawned_item
+			if picked_item is PackedScene:
+				spawned_item = picked_item.instance()
+			else:
+				spawned_item = item_preview.duplicate()
 			spawned_item.rotation_degrees.y = item_preview.rotation_degrees.y
 			add_child(spawned_item)
 			spawned_item.translation = found_floor.collider.get_global_transform().origin
@@ -68,7 +76,7 @@ func _unhandled_input(event):
 			print(cast.collider)
 			if cast.collider.is_in_group("Constructible"):
 				print("Item find successful.")
-				cast.collider.get_parent().queue_free()
+				set_item(cast.collider.get_parent())
 			else:
 				print("Not in group.")
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
