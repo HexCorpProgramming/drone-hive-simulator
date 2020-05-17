@@ -1,17 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectWrapper.gd" type="Script" id=1]
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectUI.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=3]
 [ext_resource path="res://Objects/UI/ClickSelect/DropTarget.gd" type="Script" id=4]
 [ext_resource path="res://Objects/UI/ClickSelect/ClickSelectButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/play.png" type="Texture" id=6]
-[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBeltAlt.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Objects/Constructibles/StoragePod/StoragePod.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Sprites/arrow.png" type="Texture" id=11]
-[ext_resource path="res://Objects/UI/ClickSelect/Indicator.gd" type="Script" id=12]
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Constructibles/StoragePod/StoragePod.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=9]
+[ext_resource path="res://Objects/UI/ClickSelect/Indicator.gd" type="Script" id=10]
 
 [node name="Canvas" type="CanvasLayer"]
 layer = 3
@@ -35,49 +33,37 @@ script = ExtResource( 4 )
 NEUTRAL_COLOR = Color( 0.745098, 0.745098, 0.745098, 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="ClickSelect"]
-margin_right = 266.0
+margin_right = 400.0
 margin_bottom = 104.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ClickSelect/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 259.0
+margin_right = 393.0
 margin_bottom = 97.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ClickSelect/PanelContainer/ScrollContainer"]
-margin_right = 541.0
+margin_right = 374.0
 margin_bottom = 106.0
 mouse_filter = 0
 size_flags_horizontal = 3
 
-[node name="NullButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_right = 77.0
-margin_bottom = 106.0
-icon = ExtResource( 6 )
-
 [node name="ConveyorButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 81.0
-margin_right = 193.0
+margin_right = 112.0
+margin_bottom = 106.0
+item_source = ExtResource( 6 )
+
+[node name="ChamberButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 116.0
+margin_right = 228.0
 margin_bottom = 106.0
 item_source = ExtResource( 7 )
 
-[node name="ConveyorDownButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 197.0
-margin_right = 309.0
+[node name="PodButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 232.0
+margin_right = 344.0
 margin_bottom = 106.0
 item_source = ExtResource( 8 )
-
-[node name="ChamberButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 313.0
-margin_right = 425.0
-margin_bottom = 106.0
-item_source = ExtResource( 9 )
-
-[node name="PodButton" parent="ClickSelect/PanelContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 429.0
-margin_right = 541.0
-margin_bottom = 106.0
-item_source = ExtResource( 10 )
 
 [node name="WorldGetter" type="Spatial" parent="ClickSelect"]
 
@@ -86,5 +72,5 @@ item_source = ExtResource( 10 )
 [node name="Sprite" type="Sprite3D" parent="ClickSelect/Indicator"]
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 5, 0, 0 )
 axis = 1
-texture = ExtResource( 11 )
-script = ExtResource( 12 )
+texture = ExtResource( 9 )
+script = ExtResource( 10 )

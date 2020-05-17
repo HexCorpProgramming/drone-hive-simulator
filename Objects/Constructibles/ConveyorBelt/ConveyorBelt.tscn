@@ -1,42 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Objects/Constructibles/ConveyorBelt/Conveyor.material" type="Material" id=1]
-[ext_resource path="res://Objects/Constructibles/ConveyorBelt/Belt.material" type="Material" id=2]
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Spatial
-
-var move = false
-
-func _ready():
-	$Timer.connect(\"timeout\",self,\"stop_moving\")
-	$Body/Collision/Mesh.set_surface_material(1, $Body/Collision/Mesh.get_surface_material(1).duplicate())
-
-func _process(delta):
-	if move:
-		$Body/Collision/Mesh.get_surface_material(1).uv1_offset.y += 0.01
-	
-func tick():
-	
-	move = true
-	#print(\"This conveyor belt is being ticked.\")
-	$Timer.start(1)
-	var object_to_push = $PushArea.get_overlapping_bodies()
-	if len(object_to_push) == 0:
-		return
-	object_to_push = object_to_push[0]
-	
-	var target_pos = $PushTarget.get_global_transform().origin
-	target_pos.y = object_to_push.get_global_transform().origin.y
-	
-	$Tween.interpolate_property(object_to_push, \"translation\", object_to_push.translation, target_pos, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	#print(\"My object to push is \", object_to_push.name)
-	#print(\"The basis is \", transform.basis.x)
-	
-func stop_moving():
-	move = false
-	"
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/Conveyor.material" type="Material" id=2]
+[ext_resource path="res://Objects/Constructibles/ConveyorBelt/Belt.material" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.15, 0.22, 1 )
@@ -75,7 +41,7 @@ extents = Vector3( 0.8, 0.5, 0.8 )
 "Tickable",
 ]]
 transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-script = SubResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Body" type="StaticBody" parent="." groups=[
 "Constructible",
@@ -88,8 +54,8 @@ shape = SubResource( 1 )
 [node name="Mesh" type="MeshInstance" parent="Body/Collision"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22, 0 )
 mesh = SubResource( 2 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 2 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 
