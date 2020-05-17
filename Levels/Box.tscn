@@ -22,7 +22,6 @@ ambient_light_sky_contribution = 0.0
 script = ExtResource( 1 )
 
 [node name="PlayerDrone" parent="." instance=ExtResource( 2 )]
-editor/display_folded = true
 transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 4, 0 )
 
 [node name="Body" parent="PlayerDrone" index="2"]
@@ -33,6 +32,9 @@ margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="IDToggle" type="CheckBox" parent="UI"]
 visible = false
@@ -73,6 +75,9 @@ margin_right = 24.17
 margin_bottom = 140.47
 text = "Walking"
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Editing Button" type="Button" parent="UI/State Control Buttons"]
 anchor_right = 1.0
@@ -102,6 +107,9 @@ anchor_bottom = 1.0
 rect_scale = Vector2( 0.995608, 1.01265 )
 mouse_filter = 1
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="TextureRect" parent="Pause Menu/Pause"]
 visible = false

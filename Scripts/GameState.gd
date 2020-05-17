@@ -25,7 +25,7 @@ func handle_state_change(current_state):
 	match current_state:
 		0:
 			print("WALKING mode active.")
-			ClickSelect.set_item(null)
+			ClickSelect.set_item(null, "")
 			SceneTools.get_playercamera().current = true
 			ClickSelect.set_visible(false)
 			

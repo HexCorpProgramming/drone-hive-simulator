@@ -4,13 +4,15 @@
 [ext_resource path="res://Objects/UI/ClickSelect/Dispenser.gd" type="Script" id=2]
 
 [node name="Button" type="Button"]
-editor/display_folded = true
-margin_right = 76.0
-margin_bottom = 70.0
+margin_right = 112.0
+margin_bottom = 106.0
 action_mode = 0
 icon = ExtResource( 1 )
 flat = true
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WorldGetter" type="Spatial" parent="."]
 visible = false
