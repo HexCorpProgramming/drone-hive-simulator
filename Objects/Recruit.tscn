@@ -22,7 +22,8 @@ shape = SubResource( 1 )
 [node name="Hair" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, 1, 0, 0, 0.03 )
 texture = ExtResource( 2 )
-hframes = 5
+hframes = 6
+frame = 5
 
 [node name="Top" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, 1, 0, 0, 0.02 )

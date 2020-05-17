@@ -12,7 +12,7 @@ func _ready():
 	
 	#Get a name
 	recruit_name = SubjectNames.get_name()
-	$Hair.frame = randi() % 5
+	$Hair.frame = randi() % 6
 	$Top.frame = randi() % 6
 	$Bottom.frame = randi() % 6
 	
