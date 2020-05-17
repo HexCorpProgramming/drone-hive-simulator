@@ -7,6 +7,7 @@ func _ready():
 	$Timer.start(tick_length)
 	
 func factory_tick():
+	print("Tick.")
 	for component in get_tree().get_nodes_in_group("Tickable"):
 		component.tick()
 	$Timer.start(tick_length)

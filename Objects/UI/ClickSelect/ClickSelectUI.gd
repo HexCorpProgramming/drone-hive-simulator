@@ -1,7 +1,6 @@
 extends Control
 
 var picked_item = null
-var item_preview = null
 
 onready var PlayerDrone = load("res://Objects/Drones/PlayerDrone/PlayerDrone.tscn")
 
@@ -15,23 +14,24 @@ func add_button():
 	$PanelContainer/ScrollContainer/HBoxContainer.add_child(button)
 	
 func set_item(item):
+	
+	print("Setting item: ", item)
+	
 	$DropTarget.visible = false
-	if item_preview:
-		item_preview.queue_free()
-		item_preview = null
-	print("Click select item update to: ", item)
+	if picked_item: #If there is already an item.
+		picked_item.queue_free() #Delete it.
+		picked_item = null #Like really fuckin wipe that suckaduck clean.
 	picked_item = item
 	
 	if item is PackedScene:
-		item_preview = picked_item.instance()
-	elif item:
-		item_preview = picked_item
+		picked_item = item.instance()
+	elif item: #Anything other than null.
+		picked_item = item
 		
-	if item:
-		add_child(item_preview)
-		item_preview.visible = false
-		item_preview.find_node("Body").input_ray_pickable = false
-		item_preview.translation = Vector3(0,50,0)
+	if item: #Only do this stuff if not null.
+		add_child(picked_item)
+		picked_item.visible = false
+		picked_item.translation = Vector3(0,50,0)
 	
 func _ready():
 	visible = false
@@ -41,9 +41,9 @@ func _process(delta):
 		handle_item_preview()
 		handle_drop_target()
 		$Indicator.visible = true
-		$Indicator.rotation_degrees = item_preview.rotation_degrees
-		$Indicator.translation = item_preview.translation
-		item_preview.translation.y = min(item_preview.translation.y, max_height)
+		$Indicator.rotation_degrees = picked_item.rotation_degrees
+		$Indicator.translation = picked_item.translation
+		picked_item.translation.y = min(picked_item.translation.y, max_height)
 	else:
 		$Indicator.visible = false
 		
@@ -56,16 +56,12 @@ func _unhandled_input(event):
 			print("But the mouse isn't over the floor so we won't spawn an item.")
 			set_item(null)
 			return
-		var found_floor = raycast_from_object_to_ground(item_preview)
+		var found_floor = raycast_from_object_to_ground(picked_item)
 		if found_floor:
 			print(found_floor.collider)
 		if found_floor and found_floor.collider.is_in_group("Floor"): 
-			var spawned_item
-			if picked_item is PackedScene:
-				spawned_item = picked_item.instance()
-			else:
-				spawned_item = item_preview.duplicate()
-			spawned_item.rotation_degrees.y = item_preview.rotation_degrees.y
+			var spawned_item = picked_item.duplicate(6)
+			spawned_item.rotation_degrees.y = picked_item.rotation_degrees.y
 			add_child(spawned_item)
 			spawned_item.translation = found_floor.collider.get_global_transform().origin
 	elif Input.is_action_just_pressed("clickselect_drop_item") and not picked_item:
@@ -81,18 +77,18 @@ func _unhandled_input(event):
 				print("Not in group.")
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
-	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
+	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
 		print("Rotating >")
-		item_preview.translation.y += 3
-		item_preview.rotation_degrees.y += -90
-	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_counterclockwise"):
+		picked_item.translation.y += 3
+		picked_item.rotation_degrees.y += -90
+	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_counterclockwise"):
 		print("Rotating <")
-		item_preview.translation.y += 3
-		item_preview.rotation_degrees.y += 90
+		picked_item.translation.y += 3
+		picked_item.rotation_degrees.y += 90
 		
 		
 func handle_drop_target():
-	var drop_target_location = raycast_from_object_to_ground(item_preview)
+	var drop_target_location = raycast_from_object_to_ground(picked_item)
 	if drop_target_location:
 		$DropTarget.translation = drop_target_location.position + Vector3(0,0.1,0)
 		if drop_target_location.collider.is_in_group("Floor"):
@@ -101,7 +97,7 @@ func handle_drop_target():
 			var avoid_this_drone = drop_target_location.collider
 			$DropTarget.visible = true
 			$DropTarget.valid = false
-			$DropTarget.translation = raycast_from_object_to_ground(item_preview, avoid_this_drone).position + Vector3(0,0.1,0) #i hate this code t. 5890
+			$DropTarget.translation = raycast_from_object_to_ground(picked_item, avoid_this_drone).position + Vector3(0,0.1,0) #i hate this code t. 5890
 		else:
 			$DropTarget.valid = false
 	else:
@@ -111,8 +107,8 @@ func handle_item_preview():
 	var result = raycast_from_camera_to_mouse()
 	if result:
 		$DropTarget.visible = true
-		item_preview.visible = true
-		item_preview.translation = lerp(item_preview.translation, result.collider.get_global_transform().origin + vertical_offset, 0.1)
+		picked_item.visible = true
+		picked_item.translation = lerp(picked_item.translation, result.collider.get_global_transform().origin + vertical_offset, 0.1)
 		
 func raycast_from_camera_to_mouse(ignore_constructibles = true):
 	var mouse_position = get_viewport().get_mouse_position()
@@ -124,4 +120,4 @@ func raycast_from_camera_to_mouse(ignore_constructibles = true):
 	else:
 		return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to)
 func raycast_from_object_to_ground(object, avoid = null):
-	 return $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0), [avoid], 1)
+	 return $WorldGetter.get_world().direct_space_state.intersect_ray(picked_item.translation, picked_item.translation - Vector3(0,50,0), [avoid], 1)

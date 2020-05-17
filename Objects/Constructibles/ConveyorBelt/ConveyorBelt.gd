@@ -10,6 +10,7 @@ func _process(delta):
 		$Body/Collision/Mesh.get_surface_material(1).uv1_offset.y += 0.01
 	
 func tick():
+	print("Tiiiick.")
 	move = true
 	#print("This conveyor belt is being ticked.")
 	$Timer.start(1)
