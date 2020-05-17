@@ -34,13 +34,13 @@ NEUTRAL_COLOR = Color( 0.745098, 0.745098, 0.745098, 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="ClickSelect"]
 margin_right = 400.0
-margin_bottom = 104.0
+margin_bottom = 108.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ClickSelect/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 393.0
-margin_bottom = 97.0
+margin_bottom = 101.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ClickSelect/PanelContainer/ScrollContainer"]
 margin_right = 374.0

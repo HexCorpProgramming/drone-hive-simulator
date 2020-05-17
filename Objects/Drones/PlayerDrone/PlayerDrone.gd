@@ -36,12 +36,9 @@ func _ready():
 	toggle_display()
 	
 func _process(delta):
-	
-	movement = _get_inputs()
-	_handle_animation()
-
-	
 	if GameState.current_state == 0: #Walking
+		movement = _get_inputs()
+		_handle_animation()
 		jump_velocity = _handle_jumping()
 		move_and_slide(gravity + jump_velocity + (movement * delta))
 
