@@ -43,9 +43,9 @@ func _process(delta):
 	else:
 		$Indicator.visible = false
 		
-func _input(event):
+func _unhandled_input(event):
 	if GameState.get_state() != 1: return
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed and picked_item:
+	if Input.is_action_just_pressed("clickselect_drop_item") and picked_item:
 		print("Mouse clicked!")
 		var mouse_over_geometry = raycast_from_camera_to_mouse()
 		if not mouse_over_geometry:
