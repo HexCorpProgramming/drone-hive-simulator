@@ -25,7 +25,6 @@ func set_item(item):
 		item_preview = picked_item.instance()
 		add_child(item_preview)
 		item_preview.visible = false
-		print("LOOKHERE")
 		item_preview.find_node("Body").input_ray_pickable = false
 		item_preview.translation = Vector3(0,50,0)
 	
@@ -61,6 +60,17 @@ func _unhandled_input(event):
 			spawned_item.rotation_degrees.y = item_preview.rotation_degrees.y
 			add_child(spawned_item)
 			spawned_item.translation = found_floor.collider.get_global_transform().origin
+	elif Input.is_action_just_pressed("clickselect_drop_item") and not picked_item:
+		print("Deleting")
+		var cast = raycast_from_camera_to_mouse(false)
+		if cast:
+			print("Cast successful.")
+			print(cast.collider)
+			if cast.collider.is_in_group("Constructible"):
+				print("Item find successful.")
+				cast.collider.get_parent().queue_free()
+			else:
+				print("Not in group.")
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 	elif item_preview and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
@@ -96,12 +106,14 @@ func handle_item_preview():
 		item_preview.visible = true
 		item_preview.translation = lerp(item_preview.translation, result.collider.get_global_transform().origin + vertical_offset, 0.1)
 		
-func raycast_from_camera_to_mouse():
+func raycast_from_camera_to_mouse(ignore_constructibles = true):
 	var mouse_position = get_viewport().get_mouse_position()
 	var from = get_viewport().get_camera().project_ray_origin(mouse_position)
 	var normal = get_viewport().get_camera().project_ray_normal(mouse_position)
 	var to = from + normal * 100
-	return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to, get_tree().get_nodes_in_group("Constructible"))
-	
+	if ignore_constructibles:
+		return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to, get_tree().get_nodes_in_group("Constructible"))
+	else:
+		return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to)
 func raycast_from_object_to_ground(object, avoid = null):
 	 return $WorldGetter.get_world().direct_space_state.intersect_ray(item_preview.translation, item_preview.translation - Vector3(0,50,0), [avoid], 1)
