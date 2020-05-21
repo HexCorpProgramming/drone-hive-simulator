@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Sprites/arrow.png" type="Texture" id=14]
 [ext_resource path="res://Objects/UI/ConstructiblesMenu/DropTarget.gd" type="Script" id=15]
 [ext_resource path="res://Sprites/play.png" type="Texture" id=16]
+[ext_resource path="res://Levels/DescriptionText.gd" type="Script" id=17]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -99,12 +100,13 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label" type="Label" parent="UI/BottomBar"]
+[node name="DescriptionText" type="Label" parent="UI/BottomBar"]
 margin_right = 518.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "description text goes here"
+script = ExtResource( 17 )
 
 [node name="ModeSwitch" type="Button" parent="UI/BottomBar"]
 margin_left = 520.0
@@ -160,6 +162,7 @@ environment = SubResource( 1 )
 
 [node name="Factory Core" parent="." instance=ExtResource( 10 )]
 [connection signal="item_selected" from="UI/ConstructiblesMenu" to="UI/ConstructiblesMenu" method="_on_ConstructiblesMenu_item_selected"]
+[connection signal="selected_item_description" from="UI/ConstructiblesMenu" to="UI/BottomBar/DescriptionText" method="_on_ConstructiblesMenu_selected_item_description"]
 [connection signal="mode_changed" from="UI/BottomBar/ModeSwitch" to="UI/ConstructiblesMenu" method="_on_ModeSwitch_mode_changed"]
 [connection signal="pressed" from="UI/BottomBar/ModeSwitch" to="UI/BottomBar/ModeSwitch" method="_on_ModeSwitch_pressed"]
 

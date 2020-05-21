@@ -1,5 +1,7 @@
 extends ItemList
 
+signal selected_item_description(text)
+
 var picked_item = null
 
 var vertical_offset = Vector3(0,7,0)
@@ -13,6 +15,12 @@ var constructibles = [
 	"res://Objects/Constructibles/StoragePod/StoragePod.tscn"
 ]
 
+var descriptions = [
+	"Use this to transport items and recruits from A to B.",
+	"Bring recruits here to turn them into cute, mindless drones.",
+	"Recharging is extremely important for drone maintenance."
+]
+
 func _ready():
 	visible = false
 
@@ -24,6 +32,7 @@ func _on_ModeSwitch_mode_changed(new_mode):
 
 func _on_ConstructiblesMenu_item_selected(index):
 	set_item(load(constructibles[index]))
+	emit_signal("selected_item_description", descriptions[index])
 
 func set_item(item):
 	print("Setting item: ", item)
