@@ -38,7 +38,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ClickSelect="*res://Objects/UI/ClickSelect/ClickSelectUI.tscn"
 PlayerSettings="*res://Objects/Scene/PlayerSettings.gd"
 GameState="*res://Scripts/GameState.gd"
 SceneTools="*res://Objects/Scene/SceneControl.tscn"

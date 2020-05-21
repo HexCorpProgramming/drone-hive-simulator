@@ -16,4 +16,5 @@ func _ready():
 	self.connect("pressed",self,"on_pressed")
 
 func on_pressed():
-	ClickSelect.set_item(item_source, item_description)
+	pass
+	# TODO: set item to be placed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://Textures/hexcorpanimated.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/PauseMenu/MainMenuButton.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Constructibles/FactoryCore/FactoryCore.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Levels/ConstructiblesMenu.gd" type="Script" id=11]
+[ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=12]
+[ext_resource path="res://Objects/UI/ClickSelect/Indicator.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=14]
+[ext_resource path="res://Objects/UI/ClickSelect/DropTarget.gd" type="Script" id=15]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -43,7 +48,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="MenuButton" type="MenuButton" parent="UI/TopBar"]
+[node name="Menu" type="MenuButton" parent="UI/TopBar"]
 margin_right = 48.0
 margin_bottom = 20.0
 text = "Menu"
@@ -58,9 +63,29 @@ size_flags_horizontal = 11
 items = [ "conveyor belt", ExtResource( 4 ), false, "conversion chamber", ExtResource( 5 ), false ]
 allow_rmb_select = true
 fixed_icon_size = Vector2( 50, 50 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="DropTarget" type="Sprite3D" parent="UI/ConstructiblesMenu"]
+transform = Transform( 1.8, 0, 0, 0, 1, 0, 0, 0, 1.8, 0, 1, 0 )
+visible = false
+modulate = Color( 1, 0.0235294, 0.0235294, 1 )
+axis = 1
+texture = ExtResource( 12 )
+script = ExtResource( 15 )
+NEUTRAL_COLOR = Color( 0.745098, 0.745098, 0.745098, 1 )
+
+[node name="WorldGetter" type="Spatial" parent="UI/ConstructiblesMenu"]
+
+[node name="Indicator" type="Spatial" parent="UI/ConstructiblesMenu"]
+
+[node name="Sprite" type="Sprite3D" parent="UI/ConstructiblesMenu/Indicator"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 0 )
+axis = 1
+texture = ExtResource( 14 )
+script = ExtResource( 13 )
 
 [node name="BottomBar" type="HBoxContainer" parent="UI"]
 anchor_left = 0.2
@@ -70,7 +95,7 @@ anchor_bottom = 1.0
 custom_constants/separation = 2
 alignment = 2
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="UI/BottomBar"]
@@ -133,6 +158,8 @@ script = ExtResource( 9 )
 environment = SubResource( 1 )
 
 [node name="Factory Core" parent="." instance=ExtResource( 10 )]
+[connection signal="item_selected" from="UI/ConstructiblesMenu" to="UI/ConstructiblesMenu" method="_on_ConstructiblesMenu_item_selected"]
+[connection signal="mode_changed" from="UI/BottomBar/ModeSwitch" to="UI/ConstructiblesMenu" method="_on_ModeSwitch_mode_changed"]
 [connection signal="pressed" from="UI/BottomBar/ModeSwitch" to="UI/BottomBar/ModeSwitch" method="_on_ModeSwitch_pressed"]
 
 [editable path="PlayerDrone"]
