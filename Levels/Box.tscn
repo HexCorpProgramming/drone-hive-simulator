@@ -93,8 +93,8 @@ valign = 1
 uppercase = true
 
 [node name="ResourcesLabel" type="Label" parent="UI"]
-margin_left = 500.0
-margin_right = 600.0
+margin_left = 700.0
+margin_right = 837.0
 margin_bottom = 100.0
 text = "Show resources here."
 

@@ -1,4 +1,8 @@
 extends Spatial
+
+var money_cost = 3
+var nanite_cost = 3
+
 func playAnim():
 	get_node("../AnimationPlayer").play("default")
 	

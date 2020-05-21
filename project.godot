@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody",
+"class": "Constructible",
+"language": "GDScript",
+"path": "res://Scripts/Abstract/Constructible.gd"
+}, {
+"base": "KinematicBody",
 "class": "Drone",
 "language": "GDScript",
 "path": "res://Objects/Drones/Drone/Drone.gd"
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Abstract/PickupableObject.gd"
 } ]
 _global_script_class_icons={
+"Constructible": "",
 "Drone": "",
 "InteractableObject": "",
 "PickupableObject": ""

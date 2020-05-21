@@ -3,6 +3,9 @@ extends Spatial
 var progress = 0
 var completion = 3
 
+var money_cost = 1
+var nanite_cost = 1
+
 var drone_source = load("res://Objects/Drones/Drone/Drone.tscn")
 
 func playAnim():
