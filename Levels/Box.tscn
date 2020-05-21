@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
@@ -12,9 +12,10 @@
 [ext_resource path="res://Objects/Constructibles/FactoryCore/FactoryCore.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Levels/ConstructiblesMenu.gd" type="Script" id=11]
 [ext_resource path="res://Sprites/hexlogo.png" type="Texture" id=12]
-[ext_resource path="res://Objects/UI/ClickSelect/Indicator.gd" type="Script" id=13]
+[ext_resource path="res://Objects/UI/ConstructiblesMenu/Indicator.gd" type="Script" id=13]
 [ext_resource path="res://Sprites/arrow.png" type="Texture" id=14]
-[ext_resource path="res://Objects/UI/ClickSelect/DropTarget.gd" type="Script" id=15]
+[ext_resource path="res://Objects/UI/ConstructiblesMenu/DropTarget.gd" type="Script" id=15]
+[ext_resource path="res://Sprites/play.png" type="Texture" id=16]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -60,7 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 11
-items = [ "conveyor belt", ExtResource( 4 ), false, "conversion chamber", ExtResource( 5 ), false ]
+items = [ "Conveyor Belt", ExtResource( 4 ), false, "Conversion Chamber", ExtResource( 5 ), false, "Storage Pod", ExtResource( 16 ), false ]
 allow_rmb_select = true
 fixed_icon_size = Vector2( 50, 50 )
 script = ExtResource( 11 )

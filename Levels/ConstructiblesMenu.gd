@@ -7,7 +7,11 @@ var max_height = 9
 
 const floor_tile = preload("res://Objects/Tiles/BasicTile.tscn")
 
-var constructibles = ["res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn", "res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn"]
+var constructibles = [
+	"res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn", 
+	"res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn", 
+	"res://Objects/Constructibles/StoragePod/StoragePod.tscn"
+]
 
 func _ready():
 	visible = false

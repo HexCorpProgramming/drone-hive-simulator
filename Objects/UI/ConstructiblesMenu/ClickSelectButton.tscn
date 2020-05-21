@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Sprites/kitty.png" type="Texture" id=1]
-[ext_resource path="res://Objects/UI/ClickSelect/Dispenser.gd" type="Script" id=2]
+[ext_resource path="res://Objects/UI/ConstructiblesMenu/Dispenser.gd" type="Script" id=2]
 
 [node name="Button" type="Button"]
 margin_right = 112.0
