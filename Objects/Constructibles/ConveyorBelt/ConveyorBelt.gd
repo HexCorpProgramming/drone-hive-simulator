@@ -2,6 +2,9 @@ extends Spatial
 
 var move = false
 
+var money_cost = 20
+var nanite_cost = 10
+
 func _ready():
 	$Timer.connect("timeout",self,"stop_moving")
 	$Body/Collision/Mesh.set_surface_material(1, $Body/Collision/Mesh.get_surface_material(1).duplicate())

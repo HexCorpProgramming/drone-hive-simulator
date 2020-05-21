@@ -89,9 +89,14 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -216.0
 margin_bottom = 14.0
-text = "HEWWO"
 valign = 1
 uppercase = true
+
+[node name="ResourcesLabel" type="Label" parent="UI"]
+margin_left = 500.0
+margin_right = 600.0
+margin_bottom = 100.0
+text = "Show resources here."
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 
