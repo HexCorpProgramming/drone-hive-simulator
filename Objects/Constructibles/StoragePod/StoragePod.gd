@@ -1,7 +1,8 @@
-extends Spatial
+extends Constructible
 
-var money_cost = 3
-var nanite_cost = 3
+func _ready():
+	money_cost = 3
+	nanite_cost = 3
 
 func playAnim():
 	get_node("../AnimationPlayer").play("default")
