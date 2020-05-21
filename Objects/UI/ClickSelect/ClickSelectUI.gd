@@ -76,9 +76,9 @@ func _unhandled_input(event):
 			print(cast.collider)
 			if cast.collider.is_in_group("Constructible"):
 				#Refund the cost of the item.
-				PlayerResources.money += cast.collider.get_parent().money_cost
-				PlayerResources.nanites += cast.collider.get_parent().nanite_cost
-				set_item(cast.collider.get_parent())
+				PlayerResources.money += cast.collider.money_cost
+				PlayerResources.nanites += cast.collider.nanite_cost
+				set_item(cast.collider)
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):

@@ -1,4 +1,4 @@
-extends KinematicBody
+extends StaticBody
 class_name Constructible
 
 var money_cost = 0
