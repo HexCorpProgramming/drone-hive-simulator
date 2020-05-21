@@ -12,6 +12,7 @@ func tick():
 		drone = drone[0]
 		if not drone.is_in_group("Drone"): return
 		DroneManagement.register_stored_drone(drone)
+		$AnimationPlayer.play("default")
 		print("Drone ", drone.drone_id, " stored. Successfully.")
 		drone.queue_free()
 		print("All drones in storage:")
