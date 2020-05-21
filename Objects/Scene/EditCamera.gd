@@ -13,7 +13,7 @@ var init_translation = Vector3(0,30,0)
 func _process(delta):
 	camera_speed = min(camera_speed, max_speed)
 	
-	if GameState.get_state() != 1: #(Edit mode)
+	if GameState.current_state != GameState.STATES.EDITING: #(Edit mode)
 		return
 	if Input.is_action_pressed("ui_left"):
 		camera_speed += increment

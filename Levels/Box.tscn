@@ -3,9 +3,9 @@
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Levels/BoxUIScript.gd" type="Script" id=3]
-[ext_resource path="res://Font/BloodDroneFont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Sprites/play.png" type="Texture" id=5]
-[ext_resource path="res://Levels/StateButton.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/kitty.png" type="Texture" id=5]
+[ext_resource path="res://Levels/ModeSwitch.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/PauseMenu/Pause.gd" type="Script" id=7]
 [ext_resource path="res://Textures/hexcorpanimated.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/PauseMenu/MainMenuButton.gd" type="Script" id=9]
@@ -36,67 +36,60 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IDToggle" type="CheckBox" parent="UI"]
-visible = false
-margin_left = 710.0
-margin_top = 5.36035
-margin_right = 867.0
-margin_bottom = 53.3604
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = ExtResource( 4 )
-pressed = true
-text = "Show ID"
-
-[node name="IDAssign" type="LineEdit" parent="UI"]
-visible = false
-margin_left = 867.0
-margin_top = 139.0
-margin_right = 944.0
-margin_bottom = 163.0
-max_length = 4
-placeholder_text = "ENTER ID"
-
-[node name="Button" type="Button" parent="UI"]
-margin_left = 17.0
-margin_top = 9.0
-margin_right = 97.0
-margin_bottom = 89.0
-icon = ExtResource( 5 )
-
-[node name="State Control Buttons" type="Control" parent="UI"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Walking Button" type="Button" parent="UI/State Control Buttons"]
+[node name="TopBar" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
-margin_left = 2.17
-margin_top = 120.47
-margin_right = 24.17
-margin_bottom = 140.47
-text = "Walking"
-script = ExtResource( 6 )
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="MenuButton" type="MenuButton" parent="UI/TopBar"]
+margin_right = 48.0
+margin_bottom = 20.0
+text = "Menu"
+
+[node name="ConstructiblesMenu" type="ItemList" parent="UI"]
+anchor_left = 0.8
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 11
+items = [ "conveyor belt", ExtResource( 4 ), false, "conversion chamber", ExtResource( 5 ), false ]
+allow_rmb_select = true
+fixed_icon_size = Vector2( 50, 50 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="BottomBar" type="HBoxContainer" parent="UI"]
+anchor_left = 0.2
+anchor_top = 0.9
+anchor_right = 0.8
+anchor_bottom = 1.0
+custom_constants/separation = 2
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Editing Button" type="Button" parent="UI/State Control Buttons"]
-anchor_right = 1.0
-margin_left = 2.17
-margin_top = 147.94
-margin_right = 24.17
-margin_bottom = 167.94
-text = "Editing"
-script = ExtResource( 6 )
-relevant_state = "EDITING"
+[node name="Label" type="Label" parent="UI/BottomBar"]
+margin_right = 518.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "description text goes here"
 
-[node name="StatLabel" type="Label" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -216.0
-margin_bottom = 14.0
-text = "HEWWO"
-valign = 1
-uppercase = true
+[node name="ModeSwitch" type="Button" parent="UI/BottomBar"]
+margin_left = 520.0
+margin_right = 614.0
+margin_bottom = 60.0
+custom_constants/hseparation = 0
+text = "Switch mode"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 
@@ -104,7 +97,10 @@ uppercase = true
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_scale = Vector2( 0.995608, 1.01265 )
+margin_left = -0.478989
+margin_top = 1.44235
+margin_right = -0.479004
+margin_bottom = 1.44238
 mouse_filter = 1
 script = ExtResource( 7 )
 __meta__ = {
@@ -137,5 +133,6 @@ script = ExtResource( 9 )
 environment = SubResource( 1 )
 
 [node name="Factory Core" parent="." instance=ExtResource( 10 )]
+[connection signal="pressed" from="UI/BottomBar/ModeSwitch" to="UI/BottomBar/ModeSwitch" method="_on_ModeSwitch_pressed"]
 
 [editable path="PlayerDrone"]

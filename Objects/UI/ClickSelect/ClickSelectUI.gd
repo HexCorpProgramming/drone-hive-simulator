@@ -37,7 +37,7 @@ func _ready():
 	visible = false
 	
 func _process(delta):
-	if picked_item and GameState.get_state() == 1: #Edit mode
+	if picked_item and GameState.current_state == GameState.STATES.EDITING: #Edit mode
 		handle_item_preview()
 		handle_drop_target()
 		$Indicator.visible = true
@@ -48,7 +48,8 @@ func _process(delta):
 		$Indicator.visible = false
 		
 func _unhandled_input(event):
-	if GameState.get_state() != 1: return
+	if GameState.current_state != GameState.STATES.EDITING:
+		return
 	if Input.is_action_just_pressed("clickselect_drop_item") and picked_item:
 		print("Mouse clicked!")
 		var mouse_over_geometry = raycast_from_camera_to_mouse()
