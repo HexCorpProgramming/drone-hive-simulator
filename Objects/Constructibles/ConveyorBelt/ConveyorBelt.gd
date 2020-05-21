@@ -11,7 +11,6 @@ func _ready():
 
 func _process(delta):
 	if move:
-		print("AWA")
 		$Collision/Mesh.get_surface_material(1).uv1_offset.y += 0.01
 	
 func tick():

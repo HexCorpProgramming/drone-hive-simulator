@@ -10,6 +10,7 @@ func tick():
 	var drone = $DroneDectector.get_overlapping_bodies()
 	if len(drone) != 0:
 		drone = drone[0]
+		if not drone.is_in_group("Drone"): return
 		DroneManagement.register_stored_drone(drone)
 		print("Drone ", drone.drone_id, " stored. Successfully.")
 		drone.queue_free()
