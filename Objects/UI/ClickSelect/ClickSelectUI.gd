@@ -48,6 +48,7 @@ func _process(delta):
 		$Indicator.visible = false
 		
 func _unhandled_input(event):
+	
 	if GameState.get_state() != 1: return
 	if Input.is_action_just_pressed("clickselect_drop_item") and picked_item:
 		print("Mouse clicked!")
@@ -64,6 +65,9 @@ func _unhandled_input(event):
 				print("A deal is made")
 				PlayerResources.money -= picked_item.money_cost
 				PlayerResources.nanites -= picked_item.nanite_cost
+				
+				PlayerResources.handle_particles()
+				
 				var spawned_item = picked_item.duplicate(6)
 				spawned_item.rotation_degrees.y = picked_item.rotation_degrees.y
 				add_child(spawned_item)
@@ -78,6 +82,8 @@ func _unhandled_input(event):
 				#Refund the cost of the item.
 				PlayerResources.money += cast.collider.money_cost
 				PlayerResources.nanites += cast.collider.nanite_cost
+			
+				
 				set_item(cast.collider)
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
