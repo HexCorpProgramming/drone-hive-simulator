@@ -66,4 +66,4 @@ shape = SubResource( 3 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="PushTarget" type="Spatial" parent="."]
-transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, 4.025, 0, 0 )
+transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0 )
