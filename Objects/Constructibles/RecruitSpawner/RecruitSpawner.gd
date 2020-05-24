@@ -6,6 +6,7 @@ var subject_source = load("res://Objects/Recruit.tscn")
 
 func _ready():
 	print("Spawner spawned. Ready to spawn.")
+	get_node("../ToggleButton").connect("input_event",self,"toggle_spawn")
 	
 func tick():
 	tick += 1
@@ -14,3 +15,6 @@ func tick():
 		new_subject.translation = get_global_transform().origin
 		get_tree().get_root().add_child(new_subject)
 		tick = 0
+		
+func toggle_spawn(event):
+	if event 
