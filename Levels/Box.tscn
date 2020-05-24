@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Levels/LevelBoxTestScript.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Drones/PlayerDrone/PlayerDrone.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Objects/UI/ConstructiblesMenu/DropTarget.gd" type="Script" id=15]
 [ext_resource path="res://Sprites/play.png" type="Texture" id=16]
 [ext_resource path="res://Levels/DescriptionText.gd" type="Script" id=17]
+[ext_resource path="res://Objects/UI/HexCorpTheme.tres" type="Theme" id=18]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -38,6 +39,7 @@ frame = 1
 margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
+theme = ExtResource( 18 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -52,7 +54,7 @@ __meta__ = {
 
 [node name="Menu" type="MenuButton" parent="UI/TopBar"]
 margin_right = 48.0
-margin_bottom = 20.0
+margin_bottom = 26.0
 text = "Menu"
 
 [node name="ConstructiblesMenu" type="ItemList" parent="UI"]
@@ -61,6 +63,7 @@ anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
+focus_mode = 0
 size_flags_horizontal = 11
 items = [ "Conveyor Belt", ExtResource( 4 ), false, "Conversion Chamber", ExtResource( 5 ), false, "Storage Pod", ExtResource( 16 ), false ]
 allow_rmb_select = true
@@ -89,18 +92,25 @@ axis = 1
 texture = ExtResource( 14 )
 script = ExtResource( 13 )
 
-[node name="BottomBar" type="HBoxContainer" parent="UI"]
+[node name="BottomBarPanel" type="Panel" parent="UI"]
 anchor_left = 0.2
 anchor_top = 0.9
 anchor_right = 0.8
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomBar" type="HBoxContainer" parent="UI/BottomBarPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_constants/separation = 2
 alignment = 2
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="DescriptionText" type="Label" parent="UI/BottomBar"]
+[node name="DescriptionText" type="Label" parent="UI/BottomBarPanel/BottomBar"]
 margin_right = 518.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
@@ -108,11 +118,13 @@ size_flags_vertical = 7
 text = "description text goes here"
 script = ExtResource( 17 )
 
-[node name="ModeSwitch" type="Button" parent="UI/BottomBar"]
+[node name="ModeSwitch" type="Button" parent="UI/BottomBarPanel/BottomBar"]
 margin_left = 520.0
 margin_right = 614.0
 margin_bottom = 60.0
+focus_mode = 0
 custom_constants/hseparation = 0
+enabled_focus_mode = 0
 text = "Switch mode"
 script = ExtResource( 6 )
 __meta__ = {
@@ -162,8 +174,8 @@ environment = SubResource( 1 )
 
 [node name="Factory Core" parent="." instance=ExtResource( 10 )]
 [connection signal="item_selected" from="UI/ConstructiblesMenu" to="UI/ConstructiblesMenu" method="_on_ConstructiblesMenu_item_selected"]
-[connection signal="selected_item_description" from="UI/ConstructiblesMenu" to="UI/BottomBar/DescriptionText" method="_on_ConstructiblesMenu_selected_item_description"]
-[connection signal="mode_changed" from="UI/BottomBar/ModeSwitch" to="UI/ConstructiblesMenu" method="_on_ModeSwitch_mode_changed"]
-[connection signal="pressed" from="UI/BottomBar/ModeSwitch" to="UI/BottomBar/ModeSwitch" method="_on_ModeSwitch_pressed"]
+[connection signal="selected_item_description" from="UI/ConstructiblesMenu" to="UI/BottomBarPanel/BottomBar/DescriptionText" method="_on_ConstructiblesMenu_selected_item_description"]
+[connection signal="mode_changed" from="UI/BottomBarPanel/BottomBar/ModeSwitch" to="UI/ConstructiblesMenu" method="_on_ModeSwitch_mode_changed"]
+[connection signal="pressed" from="UI/BottomBarPanel/BottomBar/ModeSwitch" to="UI/BottomBarPanel/BottomBar/ModeSwitch" method="_on_ModeSwitch_pressed"]
 
 [editable path="PlayerDrone"]
