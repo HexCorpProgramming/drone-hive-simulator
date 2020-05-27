@@ -45,21 +45,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopBar" type="HBoxContainer" parent="UI"]
+[node name="TopBarPanel" type="Panel" parent="UI"]
 anchor_right = 1.0
-margin_bottom = 20.0
+anchor_bottom = 0.04
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Menu" type="MenuButton" parent="UI/TopBar"]
+[node name="TopBar" type="HBoxContainer" parent="UI/TopBarPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="MenuButton" parent="UI/TopBarPanel/TopBar"]
 margin_right = 48.0
 margin_bottom = 26.0
 text = "Menu"
 
 [node name="ConstructiblesMenu" type="ItemList" parent="UI"]
 anchor_left = 0.8
-anchor_top = 0.1
+anchor_top = 0.04
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
