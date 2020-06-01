@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/droneHoomanBottom6.png-1a1a36e255af1b490ce1737c5add4f8f.stex"
+path="res://.import/hexlatex.png-9dbf15695b66dcb4fb784be0ff59001c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Subjects/HoomanParts/droneHoomanBottom6.png"
-dest_files=[ "res://.import/droneHoomanBottom6.png-1a1a36e255af1b490ce1737c5add4f8f.stex" ]
+source_file="res://Sprites/Recruits/hexlatex.png"
+dest_files=[ "res://.import/hexlatex.png-9dbf15695b66dcb4fb784be0ff59001c.stex" ]
 
 [params]
 

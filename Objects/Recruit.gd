@@ -7,12 +7,14 @@ var creative = 0
 var recruit_name = null
 
 func _ready():
-	
 	#Ensure randomocity.
 	randomize()
 	
 	#Get a name
 	recruit_name = SubjectNames.get_name()
+	$Hair.frame = randi() % 6
+	$Top.frame = randi() % 6
+	$Bottom.frame = randi() % 6
 	
 	#Randomize expedition stats
 	personable = randi() % 11

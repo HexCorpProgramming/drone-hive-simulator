@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/droneHoomanHair2.png-416ca8439fbcf8052e9524b16218499c.stex"
+path="res://.import/7442.png-f20d3bde8f617cc0687d1d156ee1c079.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Subjects/HoomanParts/droneHoomanHair2.png"
-dest_files=[ "res://.import/droneHoomanHair2.png-416ca8439fbcf8052e9524b16218499c.stex" ]
+source_file="res://Sprites/Recruits/7442.png"
+dest_files=[ "res://.import/7442.png-f20d3bde8f617cc0687d1d156ee1c079.stex" ]
 
 [params]
 
