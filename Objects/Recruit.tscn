@@ -4,14 +4,14 @@
 [ext_resource path="res://Sprites/Recruits/cutie_hair.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Recruits/hexlatex.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Recruits/7442.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Recruits/base_scaled.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Recruits/base_recruit.png" type="Texture" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.14105, 3.18944, 0.440836 )
 
 [node name="Body" type="KinematicBody" groups=[
-"Subject",
 "Recruit",
+"Subject",
 ]]
 transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
 script = ExtResource( 1 )
