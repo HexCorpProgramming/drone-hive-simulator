@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "StaticBody",
+"class": "Constructible",
+"language": "GDScript",
+"path": "res://Scripts/Abstract/Constructible.gd"
+}, {
 "base": "KinematicBody",
 "class": "Drone",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Abstract/PickupableObject.gd"
 } ]
 _global_script_class_icons={
+"Constructible": "",
 "Drone": "",
 "InteractableObject": "",
 "PickupableObject": ""
@@ -44,6 +50,7 @@ GameState="*res://Scripts/GameState.gd"
 SceneTools="*res://Objects/Scene/SceneControl.tscn"
 SubjectNames="*res://Scripts/SubjectNames.gd"
 DroneManagement="*res://Scripts/DroneManagement.gd"
+PlayerResources="*res://Scripts/Resources.gd"
 
 [debug]
 

@@ -1,4 +1,9 @@
-extends Spatial
+extends Constructible
+
+func _ready():
+	money_cost = 3
+	nanite_cost = 3
+
 func playAnim():
 	get_node("../AnimationPlayer").play("default")
 	
@@ -6,7 +11,9 @@ func tick():
 	var drone = $DroneDectector.get_overlapping_bodies()
 	if len(drone) != 0:
 		drone = drone[0]
+		if not drone.is_in_group("Drone"): return
 		DroneManagement.register_stored_drone(drone)
+		$AnimationPlayer.play("default")
 		print("Drone ", drone.drone_id, " stored. Successfully.")
 		drone.queue_free()
 		print("All drones in storage:")

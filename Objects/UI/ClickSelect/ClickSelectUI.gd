@@ -48,6 +48,7 @@ func _process(delta):
 		$Indicator.visible = false
 		
 func _unhandled_input(event):
+	
 	if GameState.get_state() != 1: return
 	if Input.is_action_just_pressed("clickselect_drop_item") and picked_item:
 		print("Mouse clicked!")
@@ -59,11 +60,18 @@ func _unhandled_input(event):
 		var found_floor = raycast_from_object_to_ground(picked_item)
 		if found_floor:
 			print(found_floor.collider)
-		if found_floor and found_floor.collider.is_in_group("Floor"): 
-			var spawned_item = picked_item.duplicate(6)
-			spawned_item.rotation_degrees.y = picked_item.rotation_degrees.y
-			add_child(spawned_item)
-			spawned_item.translation = found_floor.collider.get_global_transform().origin
+		if found_floor and found_floor.collider.is_in_group("Floor"):
+			if picked_item.money_cost <= PlayerResources.money and picked_item.nanite_cost <= PlayerResources.nanites:
+				print("A deal is made")
+				PlayerResources.money -= picked_item.money_cost
+				PlayerResources.nanites -= picked_item.nanite_cost
+				
+				PlayerResources.handle_particles()
+				
+				var spawned_item = picked_item.duplicate(6)
+				spawned_item.rotation_degrees.y = picked_item.rotation_degrees.y
+				add_child(spawned_item)
+				spawned_item.translation = found_floor.collider.get_global_transform().origin
 	elif Input.is_action_just_pressed("clickselect_drop_item") and not picked_item:
 		print("Deleting")
 		var cast = raycast_from_camera_to_mouse(false)
@@ -71,10 +79,12 @@ func _unhandled_input(event):
 			print("Cast successful.")
 			print(cast.collider)
 			if cast.collider.is_in_group("Constructible"):
-				print("Item find successful.")
-				set_item(cast.collider.get_parent())
-			else:
-				print("Not in group.")
+				#Refund the cost of the item.
+				PlayerResources.money += cast.collider.money_cost
+				PlayerResources.nanites += cast.collider.nanite_cost
+			
+				
+				set_item(cast.collider)
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
