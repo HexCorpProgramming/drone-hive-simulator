@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Constructibles/RecruitSpawner/RecruitSpawner.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Tiles/BasicTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Constructibles/RecruitSpawner/ToggleButton.gd" type="Script" id=4]
 
 [sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="CubeMesh" id=3]
 
 [node name="Spawner" type="Spatial"]
 
@@ -31,3 +36,23 @@ transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, 0 )
 
 [node name="Conveyor Belt2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1.75, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, 0 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( -4.37114e-008, 0.791224, 0.611527, 0, -0.611527, 0.791224, 1, 3.45855e-008, 2.67307e-008, 0, 7, 0 )
+light_color = Color( 1, 0.4, 1, 1 )
+light_energy = 16.0
+spot_range = 10.0
+spot_angle = 20.0
+spot_angle_attenuation = 3.24901
+
+[node name="ToggleButton" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -4 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ToggleButton"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ToggleButton/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null

@@ -10,8 +10,8 @@
 extents = Vector3( 1.14105, 3.18944, 0.440836 )
 
 [node name="Body" type="KinematicBody" groups=[
-"Recruit",
 "Subject",
+"Recruit",
 ]]
 transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
 script = ExtResource( 1 )
