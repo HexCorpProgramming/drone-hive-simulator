@@ -25,13 +25,13 @@ var gravity = Vector3(0,-7,0)
 
 func _ready():
 	charge = 100
-	_set_drone_id(DroneManagement.generate_id())
+	set_drone_id(DroneManagement.generate_id())
 	print("Drone ", drone_id, " will obey HexCorp.")
 	
 func _process(delta):
 	move_and_slide(gravity)
 	
-func _set_drone_id(id):
+func set_drone_id(id):
 	#Update the drone_id variable and update the visor.
 	drone_id = str(id)
 	digit1.frame = int(drone_id.substr(0,1))
