@@ -1,6 +1,7 @@
 extends Timer
 
 var drone_id = "0000"
+var expedition_type = null
 signal expedition_timer_complete
 
 func _ready():
@@ -10,5 +11,5 @@ func _ready():
 	
 func timeout_with_id():
 	print("Timer for ", str(drone_id), " completed")
-	emit_signal("expedition_timer_complete",drone_id)
+	emit_signal("expedition_timer_complete",drone_id,expedition_type)
 	queue_free()

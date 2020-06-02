@@ -57,6 +57,7 @@ func register_expedition_drone(drone) -> bool:
 	#and light a candle in its honor
 	var new_timer = expedition_timer.instance()
 	new_timer.drone_id = drone_stats.drone_id
+	new_timer.expedition_type = "fundraising" #do NOT leave this hard coded here. accept it as a param in the method header
 	new_timer.wait_time = 5
 	add_child(new_timer)
 	
@@ -98,7 +99,7 @@ func _get_stats_from_drone(drone):
 	drone_stats.charge = drone.charge
 	return drone_stats
 	
-func expedition_complete(drone_id):
+func expedition_complete(drone_id = "0000", expedition_type = null):
 	print("Drone ", str(drone_id), " expedition complete.")
 	
 	#We find an available inflow to deposit this drone.
@@ -106,3 +107,14 @@ func expedition_complete(drone_id):
 	if len(inflows) != 0:
 		var inflow = inflows[0]
 		inflow.drone_queue.append(drone_id)
+		
+	match expedition_type:
+		"recruitment":
+			print("Not implemented")
+		"scavenging":
+			print("Not implemented")
+		"fundraising":
+			PlayerResources.money += 66
+			PlayerResources.nanites += 33
+		_:
+			print("No expedition_type specified.")
