@@ -15,7 +15,6 @@ func tick():
 		DroneManagement.register_stored_drone(drone)
 		$AnimationPlayer.play("default")
 		print("Drone ", drone.drone_id, " stored. Successfully.")
-		drone.queue_free()
 		print("All drones in storage:")
 		for stored_drone in DroneManagement.stored_drones:
 			print(stored_drone.drone_id + " [" + 
