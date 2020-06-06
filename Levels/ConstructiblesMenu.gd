@@ -76,6 +76,7 @@ func _unhandled_input(event):
 			print("But the mouse isn't over the floor so we won't spawn an item.")
 			set_item(null)
 			emit_signal("selected_item_description", "")
+			unselect_all()
 			return
 		var found_floor = raycast_from_object_to_ground(picked_item)
 		if found_floor:
@@ -108,6 +109,7 @@ func _unhandled_input(event):
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
 		emit_signal("selected_item_description", "")
+		unselect_all()
 	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
 		print("Rotating >")
 		picked_item.translation.y += 3
