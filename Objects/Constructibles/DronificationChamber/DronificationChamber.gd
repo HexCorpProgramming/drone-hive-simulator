@@ -1,4 +1,4 @@
-extends Spatial
+extends Constructible
 
 var progress = 0
 var completion = 3
@@ -9,6 +9,8 @@ func playAnim():
 	get_node("../AnimationPlayer").play("default")
 	
 func _ready():
+	money_cost = 1
+	nanite_cost = 1
 	$ApproachingCollider.connect("body_entered",self,"on_object_approach")
 	$ApproachingCollider.connect("body_exited",self,"on_object_leave")
 	$Tween.connect("tween_all_completed",self,"drone_conversion_completed")

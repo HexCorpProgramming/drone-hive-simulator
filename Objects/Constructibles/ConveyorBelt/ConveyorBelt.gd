@@ -1,14 +1,16 @@
-extends Spatial
+extends Constructible
 
 var move = false
 
 func _ready():
+	money_cost = 5
+	nanite_cost = 3
 	$Timer.connect("timeout",self,"stop_moving")
-	$Body/Collision/Mesh.set_surface_material(1, $Body/Collision/Mesh.get_surface_material(1).duplicate())
+	$Collision/Mesh.set_surface_material(1, $Collision/Mesh.get_surface_material(1).duplicate())
 
 func _process(delta):
 	if move:
-		$Body/Collision/Mesh.get_surface_material(1).uv1_offset.y += 0.01
+		$Collision/Mesh.get_surface_material(1).uv1_offset.y += 0.01
 	
 func tick():
 	

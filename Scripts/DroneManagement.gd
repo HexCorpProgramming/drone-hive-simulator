@@ -11,6 +11,8 @@ var all_drone_ids = []
 var expedition_drones = []
 var stored_drones = []
 
+onready var expedition_timer = load("res://Objects/ExpeditionTimer.tscn")
+
 func _ready():
 	for id in range(0,10000):
 		all_drone_ids.append(null)
@@ -48,6 +50,17 @@ func register_expedition_drone(drone) -> bool:
 	
 	var drone_stats = _get_stats_from_drone(drone)
 	expedition_drones.append(drone_stats)
+	
+	#yeet the drone from this mortal coil
+	drone.queue_free()
+	
+	#and light a candle in its honor
+	var new_timer = expedition_timer.instance()
+	new_timer.drone_id = drone_stats.drone_id
+	new_timer.expedition_type = "fundraising" #do NOT leave this hard coded here. accept it as a param in the method header
+	new_timer.wait_time = 5
+	add_child(new_timer)
+	
 	return true
 
 func retrieve_expedition_drone(drone_id) -> DroneStats:
@@ -66,6 +79,7 @@ func register_stored_drone(drone) -> bool:
 	
 	var drone_stats = _get_stats_from_drone(drone)
 	stored_drones.append(drone_stats)
+	drone.queue_free()
 	return true
 	
 func retrieve_stored_drone(drone_id):
@@ -84,3 +98,23 @@ func _get_stats_from_drone(drone):
 	drone_stats.innovative = drone.innovative
 	drone_stats.charge = drone.charge
 	return drone_stats
+	
+func expedition_complete(drone_id = "0000", expedition_type = null):
+	print("Drone ", str(drone_id), " expedition complete.")
+	
+	#We find an available inflow to deposit this drone.
+	var inflows = get_tree().get_nodes_in_group("Inflow")
+	if len(inflows) != 0:
+		var inflow = inflows[0]
+		inflow.drone_queue.append(drone_id)
+		
+	match expedition_type:
+		"recruitment":
+			print("Not implemented")
+		"scavenging":
+			print("Not implemented")
+		"fundraising":
+			PlayerResources.money += 66
+			PlayerResources.nanites += 33
+		_:
+			print("No expedition_type specified.")

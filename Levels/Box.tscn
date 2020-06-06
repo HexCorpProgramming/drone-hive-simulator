@@ -138,6 +138,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ResourcesLabel" type="Label" parent="UI"]
+margin_left = 700.0
+margin_right = 837.0
+margin_bottom = 100.0
+text = "Show resources here."
+
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 
 [node name="Pause" type="Container" parent="Pause Menu"]

@@ -8,7 +8,9 @@ export var tile_scale = 4
 #If you ever decide to use something other than default cubes, Hex be with you.
 export (PackedScene) var  tile_source = load("res://Objects/Tiles/BasicTile.tscn")
 export (PackedScene) var  wall_source = load("res://Objects/Tiles/BasicWall.tscn")
-var spawner_source = load("res://Objects/Constructibles/RecruitSpawner/Spawner.tscn")
+onready var expedition_out_source = load("res://Objects/Constructibles/ExpeditionOutlet/ExpeditionOutlet.tscn")
+onready var expedition_in_source = load("res://Objects/Constructibles/ExpeditionInflow/ExpeditionInflow.tscn")
+onready var spawner_source = load("res://Objects/Constructibles/RecruitSpawner/Spawner.tscn")
 
 enum direction {EAST, NORTH, WEST, SOUTH}
 
@@ -35,6 +37,8 @@ func create_default_tiles():
 	add_walls_to_tiles(true)
 	delete_walls_from_tile(1,1)
 	add_spawner(0,8)
+	add_expedition_outlet(3,0)
+	add_expedition_inflow(5,0)
 	
 func get_tile(x,y):
 	if !valid(x,y):
@@ -79,6 +83,22 @@ func add_spawner(x,y):
 	if y == 0:
 		new_spawner.rotation_degrees.y = -90
 	tile.add_child(new_spawner)
+	
+func add_expedition_outlet(x,y):
+	if !valid(x,y): return
+	
+	var tile = get_tile(x,y)
+	delete_walls_from_tile(x,y)
+	var new_outlet = expedition_out_source.instance()
+	tile.add_child(new_outlet)
+	
+func add_expedition_inflow(x,y):
+	if !valid(x,y): return
+	
+	var tile = get_tile(x,y)
+	delete_walls_from_tile(x,y)
+	var new_inflow = expedition_in_source.instance()
+	tile.add_child(new_inflow)
 	
 func add_tiles(from_x, from_y, to_x, to_y):
 	if !valid(from_x, from_y):
