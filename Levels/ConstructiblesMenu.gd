@@ -1,20 +1,41 @@
-extends Control
+extends ItemList
+
+signal selected_item_description(text)
 
 var picked_item = null
-
-onready var PlayerDrone = load("res://Objects/Drones/PlayerDrone/PlayerDrone.tscn")
 
 var vertical_offset = Vector3(0,7,0)
 var max_height = 9
 
 const floor_tile = preload("res://Objects/Tiles/BasicTile.tscn")
 
-func add_button():
-	var button = load("res://Objects/UI/ClickSelect/ClickSelectButton.tscn").instance()
-	$PanelContainer/ScrollContainer/HBoxContainer.add_child(button)
-	
+var constructibles = [
+	"res://Objects/Constructibles/ConveyorBelt/ConveyorBelt.tscn", 
+	"res://Objects/Constructibles/DronificationChamber/DronificationChamber.tscn", 
+	"res://Objects/Constructibles/StoragePod/StoragePod.tscn"
+]
+
+var descriptions = [
+	"Use this to transport items and recruits from A to B.",
+	"Bring recruits here to turn them into cute, mindless drones.",
+	"Recharging is extremely important for drone maintenance."
+]
+
+func _ready():
+	visible = false
+
+func _on_ModeSwitch_mode_changed(new_mode):
+	if new_mode == GameState.STATES.EDITING:
+		visible = true
+	else:
+		visible = false
+
+func _on_ConstructiblesMenu_item_selected(index):
+	print("selected item " + str(index))
+	set_item(load(constructibles[index]))
+	emit_signal("selected_item_description", descriptions[index])
+
 func set_item(item):
-	
 	print("Setting item: ", item)
 	
 	$DropTarget.visible = false
@@ -32,12 +53,10 @@ func set_item(item):
 		add_child(picked_item)
 		picked_item.visible = false
 		picked_item.translation = Vector3(0,50,0)
-	
-func _ready():
-	visible = false
+
 	
 func _process(delta):
-	if picked_item and GameState.get_state() == 1: #Edit mode
+	if picked_item and GameState.current_state == GameState.STATES.EDITING: #Edit mode
 		handle_item_preview()
 		handle_drop_target()
 		$Indicator.visible = true
@@ -48,14 +67,16 @@ func _process(delta):
 		$Indicator.visible = false
 		
 func _unhandled_input(event):
-	
-	if GameState.get_state() != 1: return
+	if GameState.current_state != GameState.STATES.EDITING:
+		return
 	if Input.is_action_just_pressed("clickselect_drop_item") and picked_item:
 		print("Mouse clicked!")
 		var mouse_over_geometry = raycast_from_camera_to_mouse()
 		if not mouse_over_geometry:
 			print("But the mouse isn't over the floor so we won't spawn an item.")
 			set_item(null)
+			emit_signal("selected_item_description", "")
+			unselect_all()
 			return
 		var found_floor = raycast_from_object_to_ground(picked_item)
 		if found_floor:
@@ -87,6 +108,8 @@ func _unhandled_input(event):
 				set_item(cast.collider)
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
+		emit_signal("selected_item_description", "")
+		unselect_all()
 	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
 		print("Rotating >")
 		picked_item.translation.y += 3
@@ -131,3 +154,6 @@ func raycast_from_camera_to_mouse(ignore_constructibles = true):
 		return $WorldGetter.get_world().direct_space_state.intersect_ray(from, to)
 func raycast_from_object_to_ground(object, avoid = null):
 	 return $WorldGetter.get_world().direct_space_state.intersect_ray(picked_item.translation, picked_item.translation - Vector3(0,50,0), [avoid], 1)
+
+
+

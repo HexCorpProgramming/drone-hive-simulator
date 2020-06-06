@@ -9,7 +9,7 @@ func _process(delta):
 				cast.collider.playAnim()
 
 func _input(event):
-	if GameState.get_state() != 0: #Walking
+	if GameState.current_state != GameState.STATES.WALKING: #Walking
 		return
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
 		var cast = raycast_from_camera_to_mouse()

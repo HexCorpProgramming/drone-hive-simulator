@@ -14,7 +14,7 @@ func _process(delta):
 	
 	label = get_tree().get_root().find_node("ResourcesLabel", true, false)
 	if label:
-		label.text = "Money: %s\nNanites: %s" % [money, nanites]
+		label.text = "Money: %s      Nanites: %s" % [money, nanites]
 		
 func handle_particles():
 	if label:
