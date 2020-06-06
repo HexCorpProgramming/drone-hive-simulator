@@ -31,6 +31,7 @@ func _on_ModeSwitch_mode_changed(new_mode):
 		visible = false
 
 func _on_ConstructiblesMenu_item_selected(index):
+	print("selected item " + str(index))
 	set_item(load(constructibles[index]))
 	emit_signal("selected_item_description", descriptions[index])
 
@@ -74,6 +75,7 @@ func _unhandled_input(event):
 		if not mouse_over_geometry:
 			print("But the mouse isn't over the floor so we won't spawn an item.")
 			set_item(null)
+			emit_signal("selected_item_description", "")
 			return
 		var found_floor = raycast_from_object_to_ground(picked_item)
 		if found_floor:
@@ -105,6 +107,7 @@ func _unhandled_input(event):
 				set_item(cast.collider)
 	elif Input.is_action_just_pressed("clickdrop_cancel_item"):
 		set_item(null)
+		emit_signal("selected_item_description", "")
 	elif picked_item and Input.is_action_just_pressed("clickselect_rotate_clockwise"):
 		print("Rotating >")
 		picked_item.translation.y += 3
