@@ -183,7 +183,7 @@ func add_rows(size, rows = 1):
 	#Setup row.
 	for i in range(0, rows+1):
 		var row = []
-		for i in range(0, size+1):
+		for j in range(0, size+1):
 			row.append(null)
 		tiles.append(row)
 	print("Added ", rows, " row(s) to tilemap (+1 as a gutter).")

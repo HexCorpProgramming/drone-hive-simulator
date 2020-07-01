@@ -25,7 +25,9 @@ var gravity = Vector3(0,-7,0)
 
 func _ready():
 	charge = 100
-	set_drone_id(DroneManagement.generate_id())
+	if drone_id == "0000": #If a drone ID has not yet been set,
+		drone_id = DroneManagement.generate_id() #Generate one randomly.
+	set_drone_id(drone_id)
 	print("Drone ", drone_id, " will obey HexCorp.")
 	
 func _process(delta):
