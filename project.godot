@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "PickupableObject",
 "language": "GDScript",
 "path": "res://Scripts/Abstract/PickupableObject.gd"
+}, {
+"base": "KinematicBody",
+"class": "Recruit",
+"language": "GDScript",
+"path": "res://Objects/Recruit.gd"
 } ]
 _global_script_class_icons={
 "Constructible": "",
 "Drone": "",
 "InteractableObject": "",
-"PickupableObject": ""
+"PickupableObject": "",
+"Recruit": ""
 }
 
 [application]

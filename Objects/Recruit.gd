@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name Recruit
 
 #Expedition stats
 var personable = 0
